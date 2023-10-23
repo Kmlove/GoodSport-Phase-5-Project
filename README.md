@@ -44,9 +44,26 @@ GoodSport is a sports team management app that will allow users to be added to a
 - Team has a club_id, age_group, and a unique name
 - Event has a team_id, coach_id, type and start_time
 - Club has a name that is unique
+- All emails must contain an '@' symbol
 
 ## Wireframe
+![GoodSport Landing Page Wireframe](./images/GoodSport%20Wireframe.png)
+
 ## Stretch Goals
 - Tab for workout videos and drills that players can do
 - An interapp message feature
 - Users (Coaches and Players) can RSVP to events
+
+## API Routes
+- GET '/user'
+- GET '/user/int:id'
+- PATCH '/user/int:id'
+- DELETE '/user/int:id'
+- POST '/event'
+- GET '/event'
+- GET '/event/int:id'
+- PATCH '/event/int:id'
+- DELETE '/event/int:id'
+- POST '/team'
+- GET '/team'
+- GET '/team/int:id'
