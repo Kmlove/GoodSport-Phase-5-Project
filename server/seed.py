@@ -8,8 +8,7 @@ from datetime import datetime
 from faker import Faker
 
 # Local imports
-from app import app
-from config import db
+from config import db, app
 from models import *
 
 def create_clubs():
