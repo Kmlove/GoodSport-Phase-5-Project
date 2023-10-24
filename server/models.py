@@ -1,8 +1,24 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
+from sqlalchemy.ext.hybrid import hybrid_property
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import MetaData
+from app import bcrypt
 
-from config import db
+# Define metadata, instantiate db
+convention = {
+    "ix": "ix_%(column_0_label)s",
+    "uq": "uq_%(table_name)s_%(column_0_name)s",
+    "ck": "ck_%(table_name)s_%(constraint_name)s",
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+    "pk": "pk_%(table_name)s"
+}
+
+metadata = MetaData(naming_convention=convention)
+
+db = SQLAlchemy(metadata=metadata)
+
 
 # Models go here!
 class Team(db.Model, SerializerMixin):
@@ -81,6 +97,21 @@ class Coach(db.Model, SerializerMixin):
 
     # serialize rules
     serialize_rules = ('-events.coach', '-club.coaches')
+
+    # password hash and validations
+    @hybrid_property
+    def password_hash(self):
+        return self._password_hash
+    @password_hash.setter
+    def password_hash(self, password):
+        if type(password) is str and len(password) > 6:
+            password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+            self._password_hash = password_hash.decode('utf-8')
+        else:
+            raise ValueError('Password Invalid')
+        
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
 
     # validations
     @validates('coach_name')
