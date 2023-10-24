@@ -17,10 +17,12 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_bcrypt import Bcrypt
 
-from models import db
+# from models import db
+
+from config import app, db
 
 # Instantiate app, set attributes
-app = Flask(__name__)
+# app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
@@ -37,7 +39,7 @@ api = Api(app)
 CORS(app)
 
 # Instantiate Bcrypt with app instance
-bcrypt = Bcrypt(app)
+# bcrypt = Bcrypt(app)
 
 # Views go here!
 

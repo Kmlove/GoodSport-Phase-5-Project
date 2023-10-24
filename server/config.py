@@ -42,14 +42,17 @@ convention = {
 
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
-migrate = Migrate(app, db)
-db.init_app(app)
+# migrate = Migrate(app, db)
+# db.init_app(app)
 
-# Instantiate REST API
-api = Api(app)
+# # Instantiate REST API
+# api = Api(app)
 
-# Instantiate CORS
-CORS(app)
+# # Instantiate CORS
+# CORS(app)
 
-# instantiate Bcrypt with app instance
+# # instantiate Bcrypt with app instance
+# bcrypt = Bcrypt(app)
+
+app = Flask(__name__)
 bcrypt = Bcrypt(app)

@@ -55,7 +55,7 @@ def create_teams(clubs):
     )
 
     t3 = Team(
-        club_id = clubs[2].id,
+        club = clubs[2],
         team_name = 'Warriors',
         sport = 'Basketball',
         age_group = 'U16',
@@ -63,7 +63,7 @@ def create_teams(clubs):
     )
 
     t4 = Team(
-        club_id = clubs[3].id,
+        club = clubs[3],
         team_name = 'Ravens',
         sport = 'Basketball',
         age_group = 'U16',
@@ -114,7 +114,7 @@ def create_players(teams):
         player = Player(
             team = teams[1],
             player_name = fake.name_female(),
-            birthday = fake.date_of_birth(),
+            birthday = fake.date_between_dates(date_start=datetime(2009, 1, 1), date_end=datetime(2009, 12, 31)),
             parent_name = fake.name(),
             parent_email = fake.email(),
             password_hash = fake.password()
