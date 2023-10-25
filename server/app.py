@@ -38,7 +38,7 @@ class Coaches(Resource):
             )
             db.session.add(new_coach)
             db.session.commit()
-            new_coach_dict = new_coach.to_dict(rules=('-events', '-_password_hash', '-club'))
+            new_coach_dict = new_coach.to_dict(rules=('-_password_hash', '-club', '-events'))
             return make_response(new_coach_dict, 201)
         except ValueError as error:
             response = jsonify({"Validation Error": [str(error)]})
@@ -51,7 +51,9 @@ class CoachesById(Resource):
 
         if not coach:
             return make_response({"error": ["Coach Not Found"]}, 404)
-        return make_response(coach.to_dict(), 200)
+        
+        coach_to_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+        return make_response(coach_to_dict, 200)
     
     def patch(self, id):
         coach = Coach.query.filter_by(id=id).first()
@@ -64,7 +66,7 @@ class CoachesById(Resource):
                 setattr(coach, attr, request.json[attr])
             db.session.add(coach)
             db.session.commit()
-            coach_dict = coach.to_dict(rules=('-events', '-_password_hash', '-club'))
+            coach_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
             return make_response(coach_dict, 202)
         except ValueError as error:
             response = jsonify({"Validation Error": [str(error)]})
@@ -109,7 +111,7 @@ class Players(Resource):
             return make_response(response, 400)
 api.add_resource(Players, '/players')
 
-class PlayerssById(Resource):
+class PlayersById(Resource):
     def get(self, id):
         player = Player.query.filter_by(id=id).first()
 
@@ -145,7 +147,68 @@ class PlayerssById(Resource):
         db.session.delete(player)
         db.session.commit()
         return make_response({}, 204)
-api.add_resource(PlayerssById, '/players/<int:id>')
+api.add_resource(PlayersById, '/players/<int:id>')
+
+class Teams(Resource):
+    def get(self):
+        teams = [team.to_dict(rules=('-events', '-players', '-club')) for team in Team.query.all()]
+        return make_response(teams, 200)
+    
+    def post(self):
+        try:
+            new_team = Team(
+                club_id = request.json['club_id'],
+                team_name = request.json['team_name'],
+                sport = request.json['sport'],
+                age_group = request.json['age_group'],
+                gender = request.json['gender']
+            )
+            db.session.add(new_team)
+            db.session.commit()
+            new_team_dict = new_team.to_dict(rules=('-events', '-players', '-club_id'))
+            return make_response(new_team_dict, 201)
+        except ValueError as error:
+            response = jsonify({"Validation Error": [str(error)]})
+            return make_response(response, 400)
+api.add_resource(Teams, '/teams')
+
+class TeamsById(Resource):
+    def get(self, id):
+        team = Team.query.filter_by(id=id).first()
+
+        if not team:
+            return make_response({"error": ["Team Not Found"]}, 404)
+        
+        team_to_dict = team.to_dict(rules=('-club', '-events.coach', '-events.team_id', '-players._password_hash', '-players.team_id', '-players.is_admin'))
+        return make_response(team_to_dict, 200)
+    
+    def patch(self, id):
+        team = Team.query.filter_by(id=id).first()
+
+        if not team:
+            return make_response({"error": ["Team Not Found"]}, 404)
+        
+        try:
+            for attr in request.json:
+                setattr(team, attr, request.json[attr])
+            db.session.add(team)
+            db.session.commit()
+            team_dict = team.to_dict(rules=('-club', '-events.coach', '-events.team_id', '-players._password_hash', '-players.team_id', '-players.is_admin'))
+            return make_response(team_dict, 202)
+        except ValueError as error:
+            response = jsonify({"Validation Error": [str(error)]})
+            return make_response(response, 400)
+        
+    def delete(self, id):
+        team = Team.query.filter_by(id=id).first()
+
+        if not team:
+            return make_response({"error": ["Team Not Found"]}, 404)
+        
+        db.session.delete(team)
+        db.session.commit()
+        return make_response({}, 204)
+api.add_resource(TeamsById, '/teams/<int:id>')
 
 class Clubs(Resource):
     def get(self):

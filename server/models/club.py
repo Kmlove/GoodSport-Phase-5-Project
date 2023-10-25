@@ -16,7 +16,7 @@ class Club(db.Model, SerializerMixin):
 
     # serialize rules
     # serialize_rules = ('-teams.club', '-coaches.club', '-team.players', '-team.events')
-    serialize_only = ('id', 'club_name', 'teams.team_name')
+    serialize_only = ('id', 'club_name', 'teams.team_name', 'teams.id', 'coaches.coach_name', 'coaches.id')
 
     def __repr__(self):
         return f"<{self.id}: {self.club_name}>"

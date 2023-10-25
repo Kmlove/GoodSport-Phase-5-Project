@@ -39,5 +39,14 @@ class Team(db.Model, SerializerMixin):
         else:
             return value
         
+    @validates('club_id')
+    def validate_club_id(self, key, value):
+        if not value:
+            raise ValueError('Coach must belong to a club')
+        elif type(value) is not int or value < 1:
+            raise ValueError('club_id must be an int greater than 0')
+        else:
+            return value
+        
     def __repr__(self):
         return f"<{self.id}: {self.team_name}, {self.sport}>"
