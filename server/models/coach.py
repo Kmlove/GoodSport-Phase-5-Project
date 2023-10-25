@@ -30,7 +30,7 @@ class Coach(db.Model, SerializerMixin):
         return self._password_hash
     @password_hash.setter
     def password_hash(self, password):
-        if type(password) is str and len(password) > 6:
+        if password and type(password) is str and len(password) > 6:
             password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
             self._password_hash = password_hash.decode('utf-8')
         else:
@@ -60,6 +60,8 @@ class Coach(db.Model, SerializerMixin):
     def validate_club_id(self, key, value):
         if not value:
             raise ValueError('Coach must belong to a club')
+        elif type(value) is not int or value < 1:
+            raise ValueError('club_id must be an int greater than 0')
         else:
             return value
         
