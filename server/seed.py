@@ -8,9 +8,12 @@ from datetime import datetime
 from faker import Faker
 
 # Local imports
-from app import app
-from config import db
-from models import *
+from config import db, app
+from models.team import Team
+from models.event import Event
+from models.coach import Coach
+from models.player import Player
+from models.club import Club
 
 def create_clubs():
     clubs = []
