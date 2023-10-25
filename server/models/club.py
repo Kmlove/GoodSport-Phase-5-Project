@@ -15,7 +15,8 @@ class Club(db.Model, SerializerMixin):
     coaches = db.relationship('Coach', back_populates='club', cascade='all, delete-orphan')
 
     # serialize rules
-    serialize_rules = ('-teams.club', '-coaches.club')
+    # serialize_rules = ('-teams.club', '-coaches.club', '-team.players', '-team.events')
+    serialize_only = ('id', 'club_name', 'teams.team_name')
 
     def __repr__(self):
         return f"<{self.id}: {self.club_name}>"
