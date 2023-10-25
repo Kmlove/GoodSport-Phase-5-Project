@@ -62,3 +62,6 @@ class Coach(db.Model, SerializerMixin):
             raise ValueError('Coach must belong to a club')
         else:
             return value
+        
+    def __repr__(self):
+        return f"<{self.id}: {self.coach_name}>"

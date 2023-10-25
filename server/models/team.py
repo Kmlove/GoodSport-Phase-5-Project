@@ -38,3 +38,6 @@ class Team(db.Model, SerializerMixin):
             raise ValueError('Team must have an age group')
         else:
             return value
+        
+    def __repr__(self):
+        return f"<{self.id}: {self.team_name}, {self.sport}>"

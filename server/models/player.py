@@ -70,3 +70,6 @@ class Player(db.Model, SerializerMixin):
             raise ValueError('Player must belong to a team')
         else:
             return value
+        
+    def __repr__(self):
+        return f"<{self.id}: {self.player_name}>"

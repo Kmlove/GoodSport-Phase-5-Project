@@ -32,3 +32,6 @@ class Event(db.Model, SerializerMixin):
             raise ValueError('Event needs a coach, team, event type, date and start time')
         else:
             return value
+        
+    def __repr__(self):
+        return f"<{self.id}: {self.event_type}>"
