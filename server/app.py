@@ -210,6 +210,73 @@ class TeamsById(Resource):
         return make_response({}, 204)
 api.add_resource(TeamsById, '/teams/<int:id>')
 
+class Events(Resource):
+    def get(self):
+        events = [event.to_dict(rules=('-coach', '-team')) for event in Event.query.all()]
+        return make_response(events, 200)
+    
+    def post(self):
+        try:
+            # Parse the date string from request.json into a Python date object
+            date_str = request.json['date']
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+
+            new_event = Event(
+                team_id = request.json['team_id'],
+                coach_id = request.json['coach_id'],
+                event_type = request.json['event_type'],
+                date = date_obj,
+                start_time = request.json['start_time'],
+                duration = request.json['duration'],
+                location = request.json['location']
+            )
+            db.session.add(new_event)
+            db.session.commit()
+            new_event_dict = new_event.to_dict()
+            return make_response(new_event_dict, 201)
+        except ValueError as error:
+            response = jsonify({"Validation Error": [str(error)]})
+            return make_response(response, 400)
+api.add_resource(Events, '/events')
+
+class EventsById(Resource):
+    def get(self, id):
+        event = Event.query.filter_by(id=id).first()
+
+        if not event:
+            return make_response({"error": ["Event Not Found"]}, 404)
+        
+        event_to_dict = event.to_dict(rules=('-coach._password_hash', '-coach.club', '-team_id', '-coach.is_admin', '-coach_id', '-coach.email', '-team.club', '-team.players._password_hash', '-team.players.birthday', '-team.players.parent_name', '-team.players.parent_email', '-team.players.team_id', '-team.players.is_admin'))
+        return make_response(event_to_dict, 200)
+    
+    def patch(self, id):
+        event = Event.query.filter_by(id=id).first()
+
+        if not event:
+            return make_response({"error": ["Event Not Found"]}, 404)
+        
+        try:
+            for attr in request.json:
+                setattr(event, attr, request.json[attr])
+            db.session.add(event)
+            db.session.commit()
+            event_dict = event.to_dict(rules=('-coach._password_hash', '-coach.club', '-team_id', '-coach.is_admin', '-coach_id', '-coach.email', '-team.club', '-team.players._password_hash', '-team.players.birthday', '-team.players.parent_name', '-team.players.parent_email', '-team.players.team_id', '-team.players.is_admin'))
+            return make_response(event_dict, 202)
+        except ValueError as error:
+            response = jsonify({"Validation Error": [str(error)]})
+            return make_response(response, 400)
+        
+    def delete(self, id):
+        event = Event.query.filter_by(id=id).first()
+
+        if not event:
+            return make_response({"error": ["Event Not Found"]}, 404)
+        
+        db.session.delete(event)
+        db.session.commit()
+        return make_response({}, 204)
+api.add_resource(EventsById, '/events/<int:id>')
+
 class Clubs(Resource):
     def get(self):
         clubs = [club.to_dict() for club in Club.query.all()]
@@ -240,4 +307,3 @@ api.add_resource(ClubsById, '/clubs/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
-
