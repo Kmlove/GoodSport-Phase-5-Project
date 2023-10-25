@@ -26,10 +26,19 @@ class Event(db.Model, SerializerMixin):
     serialize_rules = ('-team.events', '-coach.events')
 
     # validations
-    @validates('team_id', 'coach_id', 'event_type', 'date', 'start_time')
-    def validate_ids(self, key, value):
+    @validates('event_type', 'date', 'start_time')
+    def validate_event(self, key, value):
         if not value:
             raise ValueError('Event needs a coach, team, event type, date and start time')
+        else:
+            return value
+        
+    @validates('team_id', 'coach_id')
+    def validate_ids(self, key, value):
+        if not value:
+            raise ValueError('Event must have a team and coach')
+        elif type(value) is not int or value < 1:
+            raise ValueError('team_id and coach_id must be an int greater than 0')
         else:
             return value
         
