@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Standard library imports
+from datetime import datetime
 
 # Remote library imports
 from flask import request, make_response, jsonify
@@ -78,6 +80,72 @@ class CoachesById(Resource):
         db.session.commit()
         return make_response({}, 204)
 api.add_resource(CoachesById, '/coaches/<int:id>')
+
+class Players(Resource):
+    def get(self):
+        players = [player.to_dict(rules=('-_password_hash', '-team')) for player in Player.query.all()]
+        return make_response(players, 200)
+    
+    def post(self):
+        try:
+            # Parse the date string from request.json into a Python date object
+            birthday_str = request.json['birthday']
+            birthday_obj = datetime.strptime(birthday_str, '%Y-%m-%d').date()
+
+            new_player = Player(
+                team_id = request.json['team_id'],
+                player_name = request.json['player_name'],
+                birthday = birthday_obj,
+                parent_name = request.json['parent_name'],
+                parent_email = request.json['parent_email'],
+                password_hash = request.json['password']
+            )
+            db.session.add(new_player)
+            db.session.commit()
+            new_player_dict = new_player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+            return make_response(new_player_dict, 201)
+        except ValueError as error:
+            response = jsonify({"Validation Error": [str(error)]})
+            return make_response(response, 400)
+api.add_resource(Players, '/players')
+
+class PlayerssById(Resource):
+    def get(self, id):
+        player = Player.query.filter_by(id=id).first()
+
+        if not player:
+            return make_response({"error": ["Player Not Found"]}, 404)
+        
+        player_to_dict = player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+        return make_response(player_to_dict, 200)
+    
+    def patch(self, id):
+        player = Player.query.filter_by(id=id).first()
+
+        if not player:
+            return make_response({"error": ["Player Not Found"]}, 404)
+        
+        try:
+            for attr in request.json:
+                setattr(player, attr, request.json[attr])
+            db.session.add(player)
+            db.session.commit()
+            player_dict = player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+            return make_response(player_dict, 202)
+        except ValueError as error:
+            response = jsonify({"Validation Error": [str(error)]})
+            return make_response(response, 400)
+        
+    def delete(self, id):
+        player = Player.query.filter_by(id=id).first()
+
+        if not player:
+            return make_response({"error": ["Player Not Found"]}, 404)
+        
+        db.session.delete(player)
+        db.session.commit()
+        return make_response({}, 204)
+api.add_resource(PlayerssById, '/players/<int:id>')
 
 class Clubs(Resource):
     def get(self):

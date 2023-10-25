@@ -68,6 +68,8 @@ class Player(db.Model, SerializerMixin):
     def validate_team_id(self, key, value):
         if not value:
             raise ValueError('Player must belong to a team')
+        elif type(value) is not int or value < 1:
+            raise ValueError('team_id must be an int greater than 0')
         else:
             return value
         
