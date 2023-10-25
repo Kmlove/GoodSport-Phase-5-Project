@@ -9,7 +9,11 @@ from faker import Faker
 
 # Local imports
 from config import db, app
-from models import *
+from models.team import Team
+from models.event import Event
+from models.coach import Coach
+from models.player import Player
+from models.club import Club
 
 def create_clubs():
     clubs = []
