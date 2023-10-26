@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  border: 1px solid black;
+  width: 96%;
+  margin: 15px auto;
+  height: 97vh;
+}
+
+.mainPageContainer {
+  height: calc(97vh - 100px);
+  display: flex;
+}
+
+.navBarContainer {
+  border-right: 1px solid black;
+  width: 200px;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.navBar {
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+}
+
+.navBar a {
+  display: block;
+  border-top: 1px solid black;
+  text-decoration: none;
+  padding: 5px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.navBarContainer img {
+  border-radius: 50%;
+  width: 150px;
+}

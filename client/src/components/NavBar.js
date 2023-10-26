@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 
 function NavBar(){
     return (
-        <div>
+        <div className="navBarContainer">
             <img src="https://www.lee-evans.co.uk/wp-content/uploads/2019/10/Headshot-Blank-300x300.jpg" alt="Headshot of Kimberly Love"/>
             <h3>Kimberly Love</h3>
-            <nav>
+            <nav className="navBar">
                 <NavLink to="/home">Home</NavLink>
                 <NavLink to="/teams">Teams</NavLink>
                 <NavLink to="/players">Players</NavLink>
