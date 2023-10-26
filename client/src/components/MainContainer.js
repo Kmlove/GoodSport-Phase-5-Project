@@ -8,7 +8,7 @@ import PlayersList from "./PlayersList";
 import Schedule from "./Schedule";
 import Account from "./Account";
 
-function MainContainer() {
+function MainContainer({handleLoginorSignUp}) {
     const [events, setEvents] = useState([])
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function MainContainer() {
                 <Route path="/teams" element={<TeamsList />} />
                 <Route path="/players" element={<PlayersList />} />
                 <Route path="/schedule" element={<Schedule events={eventsToDisplay} />} />
-                <Route path="/account" element={<Account />} />
+                <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
             </Routes>
         </div>
     </>

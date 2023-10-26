@@ -3,7 +3,7 @@
 from datetime import datetime
 
 # Remote library imports
-from flask import request, make_response, jsonify
+from flask import request, make_response, jsonify, session
 from flask_restful import Resource, Api
 
 # Local imports
@@ -39,6 +39,8 @@ class Coaches(Resource):
             db.session.add(new_coach)
             db.session.commit()
             new_coach_dict = new_coach.to_dict(rules=('-_password_hash', '-club', '-events'))
+            session['user_id'] = new_coach.id
+            session['is_admin'] = new_coach.is_admin
             return make_response(new_coach_dict, 201)
         except ValueError as error:
             response = jsonify({"Validation Error": [str(error)]})
@@ -105,6 +107,8 @@ class Players(Resource):
             db.session.add(new_player)
             db.session.commit()
             new_player_dict = new_player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+            session['user_id'] = new_player.id
+            session['is_admin'] = new_player.is_admin
             return make_response(new_player_dict, 201)
         except ValueError as error:
             response = jsonify({"Validation Error": [str(error)]})
@@ -304,6 +308,45 @@ class ClubsById(Resource):
         return make_response(club.to_dict(), 200)
 api.add_resource(ClubsById, '/clubs/<int:id>')
 
+class Login(Resource):
+    def post(self):
+        user = Coach.query.filter_by(email=request.json['email']).first()
+        if not user:
+            user = Player.query.filter_by(parent_email=request.json['email']).first()
+
+        password = request.json['password']
+
+        if user and user.authenticate(password):
+            session['user_id'] = user.id
+            session['is_admin'] = user.is_admin
+            return make_response(user.to_dict(), 200)
+        else: 
+            make_response("error", 400)
+
+api.add_resource(Login, '/login')
+
+class AutoLogin(Resource):
+    def get(self):
+        if session['user_id']:
+            if session['is_admin'] == True:
+                user = Coach.query.filter_by(id=session['user_id']).first()
+            elif session['is_admin'] == False:
+                user = Player.query.filter_by(id=session['user_id']).first()
+
+            if user:
+                return make_response(user.to_dict(rules=('-_password_hash',)), 200)
+            else:
+                return make_response({"Errors": "User not found"}, 404)
+        else:
+            return make_response({"Error": ["User Not Authorized"]}, 401)
+api.add_resource(AutoLogin, '/auto_login')
+
+class Logout(Resource):
+    def delete(self):
+        session.pop('user_id')
+        session.pop('is_admin')
+        return make_response({}, 204)
+api.add_resource(Logout, '/logout')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

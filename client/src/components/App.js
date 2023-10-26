@@ -5,16 +5,37 @@ import Login from "./Login";
 import MainContainer from "./MainContainer";
 
 function App() {
-  const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(true)
+  const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)
+  const [user, setUser] = useState(null)
+
+  function handleLoginorSignUp(){
+    setLoggedInOrSignedUp(!loggedInOrSignedUp)
+  }
+
+  function handleSetUser(user){
+    setUser(user)
+  }
+
+  useEffect(() => {
+    fetch('/auto_login')
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data)
+        handleLoginorSignUp()
+      })
+      .catch((error) => console.error('Error fetching posts:', error));
+  }, []);
 
   return (
     <div >
-      {/* <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes> */}
-
-      {loggedInOrSignedUp && <MainContainer /> }  
+      {loggedInOrSignedUp ? 
+        <MainContainer handleLoginorSignUp={handleLoginorSignUp}/> : 
+        (
+          <Routes>
+            <Route path="/" element={<Login handleLoginorSignUp={handleLoginorSignUp} handleSetUser={handleSetUser}/>} />
+            <Route path="/signup" element={<Signup handleLoginorSignUp={handleLoginorSignUp} handleSetUser={handleSetUser}/>} />
+          </Routes>
+        )}  
 
     </div>
   );
