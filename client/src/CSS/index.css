@@ -16,7 +16,8 @@ body {
 
 .navBarContainer {
   border-right: 1px solid black;
-  width: 200px;
+  /* width: 200px; */
+  width: 12%;
   text-align: center;
   padding-top: 50px;
 }
@@ -39,4 +40,9 @@ body {
 .navBarContainer img {
   border-radius: 50%;
   width: 150px;
+}
+
+.right {
+  border: 1px solid red;
+  width: 88%;
 }

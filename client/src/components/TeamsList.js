@@ -1,6 +1,8 @@
 function TeamsList() {
   return (
-    <div>TeamsList</div>
+    <div className="right">
+      TeamsList
+    </div>
   )
 }
 

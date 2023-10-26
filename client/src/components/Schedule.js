@@ -1,6 +1,11 @@
-function Schedule() {
+import EventCard from "./EventCard";
+
+function Schedule({events}) {
+
   return (
-    <div>Schedule</div>
+    <div className="right">
+      {events.map(event => <EventCard key={event.id} event={event}/> )}
+    </div>
   )
 }
 
