@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-function SignupCoach({handleSetUser, handleLoginorSignUp}) {
+function SignupCoach({handleSetUser, handleLoginorSignUp, clubs}) {
 
   const initialValue = {
     club_id: "",
@@ -12,13 +12,6 @@ function SignupCoach({handleSetUser, handleLoginorSignUp}) {
 
   const navigate = useNavigate()
   const [signupForm, setSignupForm] = useState(initialValue)
-  const [clubs, setClubs] = useState([])
-
-  useEffect(() => {
-    fetch('/clubs')
-    .then(res => res.json())
-    .then(clubs => setClubs(clubs))
-  }, [])
 
   function handleChange(e){
     const {name, value} = e.target

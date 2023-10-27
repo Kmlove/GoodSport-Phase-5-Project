@@ -30,6 +30,13 @@ function MainContainer({handleLoginorSignUp, user}) {
         setEvents([...events, new_event])
     }
 
+    // To sort 'events' array by the 'date' attribute in ascending order
+    function compareEventsByDate(eventA, eventB) {
+        const dateA = new Date(eventA.date);
+        const dateB = new Date(eventB.date);
+        return dateA - dateB;
+    }
+
     if(user === undefined){
         return <h3>Loading...</h3>
     } else {
@@ -37,11 +44,12 @@ function MainContainer({handleLoginorSignUp, user}) {
         let eventsToDisplay
     
         if(user.is_admin === true){
-            eventsToDisplay = events.filter(event => event.coach_id === user.id)
+            eventsToDisplay = events.filter(event => event.coach_id === user.id).sort(compareEventsByDate)
         } else if (user.is_admin === false){
-            eventsToDisplay = user.team.events
+            eventsToDisplay = user.team.events.sort(compareEventsByDate)
         }
-        
+
+
       return (
         <>
             <Header />

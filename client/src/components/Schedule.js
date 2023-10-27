@@ -8,10 +8,10 @@ function Schedule({events, user, teams}) {
 
   return (
     <div className="right">
-      {events.map(event => <ScheduleCard key={event.id} event={event} user={user} teams={teams}/> )}
-    
       {user.is_admin? 
         <button onClick={() => navigate('/event/new')}>Add An Event</button> : null}
+        
+      {events.map(event => <ScheduleCard key={event.id} event={event} user={user} teams={teams}/> )}
     </div>
   )
 }

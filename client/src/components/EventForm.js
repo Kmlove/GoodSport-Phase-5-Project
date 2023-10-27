@@ -1,14 +1,4 @@
-import {
-  Button,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Select,
-  TimePicker
-} from 'antd';
-
+import { Button, DatePicker, Form, Input, Select,TimePicker } from 'antd';
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
@@ -77,7 +67,7 @@ function EventForm({teams, user, addNewEvent}) {
   }
 
   function handleSubmit(e){
-    e.preventDefault()
+    // e.preventDefault()
 
     const curdate = newEventFormData.date
     const formattedDate = dayjs(curdate).format('YYYY-MM-DD')
@@ -98,8 +88,7 @@ function EventForm({teams, user, addNewEvent}) {
       addNewEvent(data)
       navigate(`/event/${data.id}`)
     })
-  }
-
+  } 
 
   return (
     <Form
@@ -110,31 +99,19 @@ function EventForm({teams, user, addNewEvent}) {
         span: 16,
       }}
       layout="horizontal"
-      initialValues={{
-        size: componentSize,
-      }}
-      onValuesChange={onFormLayoutChange}
-      size={componentSize}
+      size="large"
       style={{
         maxWidth: 600,
       }}
-      onSubmitCapture={handleSubmit}
+      onFinish={handleSubmit}
     >
-      <Form.Item label="Form Size" name="size">
-        <Radio.Group>
-          <Radio.Button value="small">Small</Radio.Button>
-          <Radio.Button value="default">Default</Radio.Button>
-          <Radio.Button value="large">Large</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
-
-      <Form.Item label="Team">
+      <Form.Item label="Team" >
         <Select name="team_id" onChange={handleTeamChange}>
           {teamsInClub.map(team => <Select.Option key={team.id} value={team.id}>{team.team_name}</Select.Option>)}
         </Select>
       </Form.Item>
 
-      <Form.Item label="Event Type">
+      <Form.Item label="Event Type" >
         <Select name="event_type" onChange={handleEventChange}>
           <Select.Option value="Practice">Practice</Select.Option>
           <Select.Option value="Game">Game</Select.Option>

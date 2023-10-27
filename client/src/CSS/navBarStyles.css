@@ -1,0 +1,27 @@
+.navBarContainer {
+    border-right: 1px solid black;
+    /* width: 200px; */
+    width: 12%;
+    text-align: center;
+    padding-top: 50px;
+}
+  
+.navBar {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+}
+  
+.navBar a {
+    display: block;
+    border-top: 1px solid black;
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    font-size: 20px;
+}
+  
+.navBarContainer img {
+    border-radius: 50%;
+    width: 150px;
+}
