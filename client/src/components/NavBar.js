@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import "../CSS/navBarStyles.css"
 
 function NavBar({user}){
     const {player_name, coach_name} = user

@@ -1,9 +1,16 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import SignupCoach from "./SignupCoach"
 import SignupPlayer from "./SignupPlayer"
 
 function Signup({handleLoginorSignUp, handleSetUser}) {
   const [isPlayer, setIsPlayer] = useState(false)
+  const [clubs, setClubs] = useState([])
+
+  useEffect(() => {
+    fetch('/clubs')
+    .then(res => res.json())
+    .then(clubs => setClubs(clubs))
+  }, [])
 
   return (
     <div>
@@ -16,10 +23,11 @@ function Signup({handleLoginorSignUp, handleSetUser}) {
       />
 
       {isPlayer ? 
-        <SignupPlayer /> : 
+        <SignupPlayer clubs={clubs}/> : 
         <SignupCoach 
           handleLoginorSignUp={handleLoginorSignUp} 
           handleSetUser={handleSetUser}
+          clubs={clubs}
         />
       }
     </div>

@@ -14,8 +14,8 @@ class Event(db.Model, SerializerMixin):
     coach_id = db.Column(db.Integer, db.ForeignKey('coaches.id'), nullable=False)
     event_type = db.Column(db.String)
     date = db.Column(db.Date)
-    start_time = db.Column(db.Integer)
-    duration = db.Column(db.Integer)
+    event_time = db.Column(db.String)
+    notes = db.Column(db.String)
     location = db.Column(db.String)
 
     # relationships
@@ -26,7 +26,7 @@ class Event(db.Model, SerializerMixin):
     serialize_rules = ('-team.events', '-coach.events')
 
     # validations
-    @validates('event_type', 'date', 'start_time')
+    @validates('event_type', 'date', 'event_time')
     def validate_event(self, key, value):
         if not value:
             raise ValueError('Event needs a coach, team, event type, date and start time')
