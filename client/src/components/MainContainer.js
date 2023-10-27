@@ -7,7 +7,7 @@ import TeamsList from "./TeamsList";
 import PlayersList from "./PlayersList";
 import Schedule from "./Schedule";
 import Account from "./Account";
-import App from "./App";
+import EventForm from "./EventForm"
 
 function MainContainer({handleLoginorSignUp, user}) {
     const [events, setEvents] = useState([])
@@ -47,6 +47,7 @@ function MainContainer({handleLoginorSignUp, user}) {
                     <Route path="/players" element={<PlayersList />} />
                     <Route path="/schedule" element={<Schedule teams={teams} events={eventsToDisplay} user={user}/>} />
                     <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
+                    <Route path="schedule/new" element={<EventForm user={user} teams={teams}/>}/>
                 </Routes>
             </div>
         </>
