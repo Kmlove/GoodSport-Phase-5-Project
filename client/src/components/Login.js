@@ -29,19 +29,22 @@ function Login({handleLoginorSignUp, handleSetUser}) {
     .then(res => res.json())
     .then(data => {
       handleSetUser(data)
-      handleLoginorSignUp()
+      handleLoginorSignUp(true)
       navigate('/home')
     })
   }
 
   return (
-    <form onSubmit={handleLoginSubmit}>
-      <label htmlFor="email" >Email</label>
-      <input name="email" id="email" type="email" value={loginForm.email} onChange={handleChange}/>
-      <label htmlFor="password">Password</label>
-      <input name="password" id="password" type="password" value={loginForm.password} onChange={handleChange}/>
-      <input type="submit" value="Log In"/>
-    </form>
+    <>
+      <form onSubmit={handleLoginSubmit}>
+        <label htmlFor="email" >Email</label>
+        <input name="email" id="email" type="email" value={loginForm.email} onChange={handleChange}/>
+        <label htmlFor="password">Password</label>
+        <input name="password" id="password" type="password" value={loginForm.password} onChange={handleChange}/>
+        <input type="submit" value="Log In"/>
+      </form>
+      <button onClick={() => navigate('/signup')}>Sign Up</button>
+    </>
   )
 }
 

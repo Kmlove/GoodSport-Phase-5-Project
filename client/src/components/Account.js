@@ -9,7 +9,7 @@ function Account({handleLoginorSignUp}) {
       method: "DELETE",
     })
     .then(() => {
-      handleLoginorSignUp()
+      handleLoginorSignUp(false)
       navigate('/')
     })
   }

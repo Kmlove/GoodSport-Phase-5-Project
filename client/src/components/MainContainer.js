@@ -8,8 +8,9 @@ import PlayersList from "./PlayersList";
 import Schedule from "./Schedule";
 import Account from "./Account";
 
-function MainContainer({handleLoginorSignUp}) {
+function MainContainer({handleLoginorSignUp, user}) {
     const [events, setEvents] = useState([])
+    console.log(user)
 
     useEffect(() => {
         fetch('/events')
@@ -17,23 +18,33 @@ function MainContainer({handleLoginorSignUp}) {
         .then(events => setEvents(events))
     }, [])
 
-    const eventsToDisplay = events.filter(event => event.coach_id = 1)
+    if(user === undefined){
+        return <h3>Loading...</h3>
+    } else {
+    
+        let eventsToDisplay
+        if(user.is_admin === true){
+            eventsToDisplay = events.filter(event => event.coach_id === user.id)
+        }
+        
+    
+      return (
+        <>
+            <Header />
+            <div className="mainPageContainer">
+                <NavBar />
+                <Routes>
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/teams" element={<TeamsList />} />
+                    <Route path="/players" element={<PlayersList />} />
+                    <Route path="/schedule" element={<Schedule events={eventsToDisplay} />} />
+                    <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
+                </Routes>
+            </div>
+        </>
+      )
+    }
 
-  return (
-    <>
-        <Header />
-        <div className="mainPageContainer">
-            <NavBar />
-            <Routes>
-                <Route path="/home" element={<Home />} />
-                <Route path="/teams" element={<TeamsList />} />
-                <Route path="/players" element={<PlayersList />} />
-                <Route path="/schedule" element={<Schedule events={eventsToDisplay} />} />
-                <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
-            </Routes>
-        </div>
-    </>
-  )
 }
 
 export default MainContainer

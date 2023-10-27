@@ -319,7 +319,13 @@ class Login(Resource):
         if user and user.authenticate(password):
             session['user_id'] = user.id
             session['is_admin'] = user.is_admin
-            return make_response(user.to_dict(), 200)
+            
+            if user.is_admin == True:
+                coach_to_dict = user.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+                return make_response(coach_to_dict, 200)
+            elif user.is_admin == False:
+                player_dict = user.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+                return make_response(player_dict, 200)
         else: 
             make_response("error", 400)
 
@@ -334,7 +340,12 @@ class AutoLogin(Resource):
                 user = Player.query.filter_by(id=session['user_id']).first()
 
             if user:
-                return make_response(user.to_dict(rules=('-_password_hash',)), 200)
+                if user.is_admin == True:
+                    coach_to_dict = user.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+                    return make_response(coach_to_dict, 200)
+                elif user.is_admin == False:
+                    player_dict = user.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+                    return make_response(player_dict, 200)
             else:
                 return make_response({"Errors": "User not found"}, 404)
         else:
@@ -343,8 +354,8 @@ api.add_resource(AutoLogin, '/auto_login')
 
 class Logout(Resource):
     def delete(self):
-        session.pop('user_id')
-        session.pop('is_admin')
+        session['user_id'] = None
+        session['is_admin'] = None
         return make_response({}, 204)
 api.add_resource(Logout, '/logout')
 
