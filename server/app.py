@@ -236,7 +236,7 @@ class Events(Resource):
             )
             db.session.add(new_event)
             db.session.commit()
-            new_event_dict = new_event.to_dict()
+            new_event_dict = new_event.to_dict(rules=('-coach._password_hash', '-coach.club', '-team_id', '-coach.is_admin', '-coach_id', '-coach.email', '-team.club', '-team.players._password_hash', '-team.players.birthday', '-team.players.parent_name', '-team.players.parent_email', '-team.players.team_id', '-team.players.is_admin'))
             return make_response(new_event_dict, 201)
         except ValueError as error:
             response = jsonify({"Validation Error": [str(error)]})

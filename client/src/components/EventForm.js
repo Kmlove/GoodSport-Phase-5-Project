@@ -11,9 +11,10 @@ import {
 
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
-function EventForm({teams, user}) {
-
+function EventForm({teams, user, addNewEvent}) {
+  const navigate = useNavigate()
   const { club } = user
   const [componentSize, setComponentSize] = useState('default');
   const onFormLayoutChange = ({ size }) => {
@@ -78,14 +79,25 @@ function EventForm({teams, user}) {
   function handleSubmit(e){
     e.preventDefault()
 
+    const curdate = newEventFormData.date
+    const formattedDate = dayjs(curdate).format('YYYY-MM-DD')
+
     const newEvent = {
       ...newEventFormData,
-      coach_id: user.id
+      coach_id: user.id,
+      date: formattedDate
     }
 
-    
-    console.log(newEvent)
-
+    fetch('/events', {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(newEvent)
+    })
+    .then(res => res.json())
+    .then(data => {
+      addNewEvent(data)
+      navigate('/schedule')
+    })
   }
 
 
