@@ -22,14 +22,17 @@ function App() {
         if (res.status === 401 || res.status === 404 || res.status === 500){
           return Promise.reject('User Not Authorized')
         }
+        else {
+          return res.json()
+        }
       })
       .then((data) => {
         setUser(data)
-        handleLoginorSignUp()
+        handleLoginorSignUp(true)
       })
       .catch((error) => console.error(error));
   }, []);
-  console.log(loggedInOrSignedUp)
+
   return (
     <div >
       {loggedInOrSignedUp ? 

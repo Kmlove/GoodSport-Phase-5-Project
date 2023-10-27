@@ -7,15 +7,22 @@ import TeamsList from "./TeamsList";
 import PlayersList from "./PlayersList";
 import Schedule from "./Schedule";
 import Account from "./Account";
+import App from "./App";
 
 function MainContainer({handleLoginorSignUp, user}) {
     const [events, setEvents] = useState([])
-    console.log(user)
+    const [teams, setTeams] = useState([])
 
     useEffect(() => {
         fetch('/events')
         .then(res => res.json())
         .then(events => setEvents(events))
+    }, [])
+
+    useEffect(() => {
+        fetch('/teams')
+        .then(res => res.json())
+        .then(teams => setTeams(teams))
     }, [])
 
     if(user === undefined){
@@ -25,19 +32,20 @@ function MainContainer({handleLoginorSignUp, user}) {
         let eventsToDisplay
         if(user.is_admin === true){
             eventsToDisplay = events.filter(event => event.coach_id === user.id)
+        } else if (user.is_admin === false){
+            eventsToDisplay = user.team.events
         }
         
-    
       return (
         <>
             <Header />
             <div className="mainPageContainer">
-                <NavBar />
+                <NavBar user={user}/>
                 <Routes>
                     <Route path="/home" element={<Home />} />
                     <Route path="/teams" element={<TeamsList />} />
                     <Route path="/players" element={<PlayersList />} />
-                    <Route path="/schedule" element={<Schedule events={eventsToDisplay} />} />
+                    <Route path="/schedule" element={<Schedule teams={teams} events={eventsToDisplay} user={user}/>} />
                     <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
                 </Routes>
             </div>
