@@ -145,55 +145,78 @@ def create_players(teams):
     return players
 
 def create_events(teams, coaches):
-    events_types = ["Practice", "Game", "Meeting"]
-    duration_options = [1, 1.5, 2]
+    events_types = ["Practice", "Game", "Meeting", "Other"]
 
     events = []
 
     for _ in range(10):
+        time1 = fake.time()
+        new_time1 = time1[:-3] + " pm"
+
+        time2 = fake.time()
+        new_time2 = time2[:-3] + " pm"
+
         event = Event(
             team = teams[0],
             coach = coaches[0],
             event_type = rc(events_types),
             date = fake.future_date(),
-            start_time = randint(1, 12),
-            duration = rc(duration_options),
+            event_time = new_time1 + " - " + new_time2,
+            notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(10):
+        time1 = fake.time()
+        new_time1 = time1[:-3] + " pm"
+
+        time2 = fake.time()
+        new_time2 = time2[:-3] + " pm"
+
         event = Event(
             team = teams[0],
             coach = coaches[3],
             event_type = rc(events_types),
             date = fake.future_date(),
-            start_time = randint(1, 12),
-            duration = rc(duration_options),
+            event_time = new_time1 + " - " + new_time2,
+            notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(6):
+        time1 = fake.time()
+        new_time1 = time1[:-3] + " pm"
+
+        time2 = fake.time()
+        new_time2 = time2[:-3] + " pm"
+
         event = Event(
             team = teams[1],
             coach = coaches[1],
             event_type = rc(events_types),
             date = fake.future_date(),
-            start_time = randint(1, 12),
-            duration = rc(duration_options),
+            event_time = new_time1 + " - " + new_time2,
+            notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(6):
+        time1 = fake.time()
+        new_time1 = time1[:-3] + " pm"
+
+        time2 = fake.time()
+        new_time2 = time2[:-3] + " pm"
+
         event = Event(
             team = teams[1],
             coach = coaches[2],
             event_type = rc(events_types),
             date = fake.future_date(),
-            start_time = randint(1, 12),
-            duration = rc(duration_options),
+            event_time = new_time1 + " - " + new_time2,
+            notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)

@@ -230,9 +230,9 @@ class Events(Resource):
                 coach_id = request.json['coach_id'],
                 event_type = request.json['event_type'],
                 date = date_obj,
-                start_time = request.json['start_time'],
-                duration = request.json['duration'],
-                location = request.json['location']
+                event_time = request.json['event_time'],
+                location = request.json['location'],
+                notes = request.json['notes']
             )
             db.session.add(new_event)
             db.session.commit()
