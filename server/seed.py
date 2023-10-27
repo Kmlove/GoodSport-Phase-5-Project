@@ -96,6 +96,14 @@ def create_coaches(clubs):
             password_hash = fake.password()
         )
         coaches.append(coach)
+
+    kim = Coach(
+        club = clubs[0],
+        coach_name = "Kim",
+        email = "kim1@email.com",
+        password_hash = "password1"
+    )
+    coaches.append(kim)
     
     return coaches
 
@@ -124,6 +132,16 @@ def create_players(teams):
         )
         players.append(player)
 
+    player = Player(
+        team = teams[0],
+        player_name = "Haviland",
+        birthday = fake.date_between_dates(date_start=datetime(2009, 1, 1), date_end=datetime(2009, 12, 31)),
+        parent_name = "Holly",
+        parent_email = "holly1@email.com",
+        password_hash = "password1"
+    )
+    players.append(player)
+
     return players
 
 def create_events(teams, coaches):
@@ -144,7 +162,19 @@ def create_events(teams, coaches):
         )
         events.append(event)
 
-    for _ in range(5):
+    for _ in range(10):
+        event = Event(
+            team = teams[0],
+            coach = coaches[3],
+            event_type = rc(events_types),
+            date = fake.future_date(),
+            start_time = randint(1, 12),
+            duration = rc(duration_options),
+            location = fake.address()
+        )
+        events.append(event)
+
+    for _ in range(6):
         event = Event(
             team = teams[1],
             coach = coaches[1],
@@ -156,7 +186,7 @@ def create_events(teams, coaches):
         )
         events.append(event)
 
-    for _ in range(5):
+    for _ in range(6):
         event = Event(
             team = teams[1],
             coach = coaches[2],
