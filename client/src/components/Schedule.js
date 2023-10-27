@@ -1,6 +1,7 @@
 import ScheduleCard from "./ScheduleCard";
 import { useNavigate } from "react-router-dom";
-
+import React, { useState } from 'react';
+import { Radio, Timeline } from 'antd';
 
 function Schedule({events, user, teams}) {
   const navigate = useNavigate()
@@ -8,7 +9,9 @@ function Schedule({events, user, teams}) {
   return (
     <div className="right">
       {events.map(event => <ScheduleCard key={event.id} event={event} user={user} teams={teams}/> )}
-      <button onClick={() => navigate('/schedule/new')}>Add An Event</button>
+    
+      {user.is_admin? 
+        <button onClick={() => navigate('/event/new')}>Add An Event</button> : null}
     </div>
   )
 }

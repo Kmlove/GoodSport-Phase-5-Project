@@ -96,7 +96,7 @@ function EventForm({teams, user, addNewEvent}) {
     .then(res => res.json())
     .then(data => {
       addNewEvent(data)
-      navigate('/schedule')
+      navigate(`/event/${data.id}`)
     })
   }
 
