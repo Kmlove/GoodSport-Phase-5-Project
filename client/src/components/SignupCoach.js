@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Form, Input, Button, Select, Alert } from 'antd';
 
-function SignupCoach({handleSetUser, handleLoginorSignUp, clubs}) {
+function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerErrorAlert, handleShowServerErrorAlert}) {
   const { Option } = Select
   const initialValue = {
     club_id: "",
@@ -14,19 +14,7 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs}) {
 
   const navigate = useNavigate()
   const [signupForm, setSignupForm] = useState(initialValue)
-  const [showServerErrorAlert, setShowServerErrorAlert] = useState(false)
 
-  useEffect(() => {
-    if (showServerErrorAlert) {
-      // Use a setTimeout to hide the alert after 3 seconds
-      const timer = setTimeout(() => {
-        setShowServerErrorAlert(false);
-      }, 3000); // 3000 milliseconds (3 seconds)
-
-      // Clear the timer if the component unmounts
-      return () => clearTimeout(timer);
-    } 
-  }, [ showServerErrorAlert ]);
 
   function handleChange(e){
     const {name, value} = e.target
@@ -65,7 +53,7 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs}) {
       } else if (res.status === 400){
         return Promise.reject("Validations Error")
       } else if (res.status === 500){
-        setShowServerErrorAlert(true)
+        handleShowServerErrorAlert(true)
         return Promise.reject("Server Error")
       }
     })
