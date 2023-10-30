@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 import { Radio, Timeline } from 'antd';
 
-function Schedule({events, user, teams}) {
+function Schedule({events, user, teams, handleDeleteEvent}) {
   const navigate = useNavigate()
 
   return (
@@ -11,7 +11,15 @@ function Schedule({events, user, teams}) {
       {user.is_admin? 
         <button onClick={() => navigate('/event/new')}>Add An Event</button> : null}
         
-      {events.map(event => <ScheduleCard key={event.id} event={event} user={user} teams={teams}/> )}
+      {events.map(event => (
+        <ScheduleCard 
+          key={event.id} 
+          event={event} 
+          user={user} 
+          teams={teams} 
+          handleDeleteEvent={handleDeleteEvent} 
+        />) 
+      )}
     </div>
   )
 }

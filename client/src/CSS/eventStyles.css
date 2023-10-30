@@ -62,3 +62,22 @@ strong:hover::after {
     transform: scaleX(1); /* Scale to 100% on hover */
     transform-origin: bottom left;
   }
+  
+.event-delete-button, .event-edit-button {
+    width: 175px;
+    height: 30px;
+    font-weight: bold;
+    color: #EA6C36;
+    background-color: black;
+    /* background-color: transparent; */
+    border: none;
+    border-radius: 8px;
+    transition: all ease-in-out 0.2s;
+    font-size: 1.3rem;
+}
+  
+.event-delete-button:hover, .event-edit-button:hover {
+    cursor: pointer;
+    background-color: #EA6C36;
+    color: white;
+}

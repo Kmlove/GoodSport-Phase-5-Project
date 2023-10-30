@@ -8,9 +8,10 @@
     font-family: Arial, sans-serif;
     width: 60%;
     text-align: left;
-  }
+    position: relative;
+}
   
-  .scheduleCard p {
+.scheduleCard p {
     margin: 5px 0;
     font-size: 16px;
 
@@ -18,9 +19,9 @@
     font-size: 16px;
     font-weight: normal;
     color: #333; /* Text color */
-  }
+}
   
-  .scheduleCard a {
+.scheduleCard a {
     display: block;
     background-color: #007bff;
     color: #fff;
@@ -37,9 +38,29 @@
     font-weight: bold;
     color: #fff;
     text-transform: uppercase; /* Convert text to uppercase */
-  }
+}
   
-  .scheduleCard a:hover {
+.scheduleCard a:hover {
     background-color: #0056b3;
-  }
+}
   
+.schedule-delete-button {
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    color: #EA6C36;
+    /* background-color: #EA6C36; */
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    transition: all ease-in-out 0.2s;
+    font-size: 1.3rem;
+    position: absolute;
+    right: 15px;
+}
+  
+.schedule-delete-button:hover {
+    cursor: pointer;
+    background-color: #EA6C36;
+    color: white;
+}
