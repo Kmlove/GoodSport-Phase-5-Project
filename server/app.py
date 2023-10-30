@@ -263,7 +263,13 @@ class EventsById(Resource):
         
         try:
             for attr in request.json:
-                setattr(event, attr, request.json[attr])
+                if attr == 'date':
+                    # Parse the date string from request.json into a Python date object
+                    date_str = request.json['date']
+                    date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+                    setattr(event, attr, date_obj)
+                else:
+                    setattr(event, attr, request.json[attr])
             db.session.add(event)
             db.session.commit()
             event_dict = event.to_dict(rules=('-coach._password_hash', '-coach.club', '-team_id', '-coach.is_admin', '-coach_id', '-coach.email', '-team.club', '-team.players._password_hash', '-team.players.birthday', '-team.players.parent_name', '-team.players.parent_email', '-team.players.team_id', '-team.players.is_admin'))

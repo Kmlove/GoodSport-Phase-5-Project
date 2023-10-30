@@ -2,12 +2,10 @@ import { useState } from "react"
 import { Button, DatePicker, Form, Input, Select,TimePicker } from 'antd';
 import dayjs from 'dayjs';
 
-function EditEventForm() {
+function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleCloseEditForm}) {
     const {TextArea} = Input;   
     const dateFormat = 'MM/DD/YYYY';
     const eventDetails = document.querySelector('.event-details')
-    const time = eventDetails.querySelector('#time').textContent
-
 
     const initialValue = {
         event_type: eventDetails.querySelector('#event_type').textContent,
@@ -51,13 +49,29 @@ function EditEventForm() {
 
     function handleSubmit(e){
 
-        for (const key in editEventFormData){
-            if (editEventFormData[key] === ''){
-                delete editEventFormData[key]
-            }
+      for (const key in editEventFormData){
+        if (editEventFormData[key] === ''){
+            delete editEventFormData[key]
         }
 
-        console.log(editEventFormData)
+        if (key === 'date' && editEventFormData.date){
+          const curdate = editEventFormData.date
+          const formattedDate = dayjs(curdate).format('YYYY-MM-DD')
+          editEventFormData.date = formattedDate
+        }
+      }
+
+      fetch(`/events/${id}`, {
+        method: "PATCH",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(editEventFormData)
+      })
+      .then(res => res.json())
+      .then(data => {
+        handleUpdateEvent(data)
+        handleUpdateCurEvent(data)
+        handleCloseEditForm(false)
+      })
     }
 
   return (

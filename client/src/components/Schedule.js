@@ -9,7 +9,8 @@ function Schedule({events, user, teams, handleDeleteEvent}) {
   return (
     <div className="right">
       {user.is_admin? 
-        <button onClick={() => navigate('/event/new')}>Add An Event</button> : null}
+        <button onClick={() => navigate('/event/new')}>Add An Event</button> : null
+      }
         
       {events.map(event => (
         <ScheduleCard 

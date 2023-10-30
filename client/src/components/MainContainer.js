@@ -35,6 +35,19 @@ function MainContainer({handleLoginorSignUp, user}) {
         setEvents(updatedEvents)
     }
 
+    function handleUpdateEvent(updatedEvent){
+        updatedEvent.coach_id = updatedEvent.coach.id
+        updatedEvent.team_id = updatedEvent.team.id
+        const updatedEvents = events.map(event => {
+            if (event.id === updatedEvent.id){
+                return updatedEvent
+            } else {
+                return event
+            }
+        })
+        setEvents(updatedEvents)  
+    }
+
     // To sort 'events' array by the 'date' attribute in ascending order
     function compareEventsByDate(eventA, eventB) {
         const dateA = new Date(eventA.date);
@@ -47,13 +60,11 @@ function MainContainer({handleLoginorSignUp, user}) {
     } else {
     
         let eventsToDisplay
-    
         if(user.is_admin === true){
             eventsToDisplay = events.filter(event => event.coach_id === user.id).sort(compareEventsByDate)
         } else if (user.is_admin === false){
             eventsToDisplay = user.team.events.sort(compareEventsByDate)
         }
-
 
       return (
         <>
@@ -67,7 +78,7 @@ function MainContainer({handleLoginorSignUp, user}) {
                     <Route path="/schedule" element={<Schedule teams={teams} events={eventsToDisplay} user={user} handleDeleteEvent={handleDeleteEvent} />} />
                     <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
                     <Route path="/event/new" element={<EventForm user={user} teams={teams} addNewEvent={addNewEvent}/>}/>
-                    <Route path="/event/:id" element={<Event handleDeleteEvent={handleDeleteEvent} />} />
+                    <Route path="/event/:id" element={<Event handleDeleteEvent={handleDeleteEvent} handleUpdateEvent={handleUpdateEvent} />} />
                 </Routes>
             </div>
         </>
