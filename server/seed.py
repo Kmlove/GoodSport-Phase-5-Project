@@ -117,7 +117,8 @@ def create_players(teams):
             birthday = fake.date_between_dates(date_start=datetime(2009, 1, 1), date_end=datetime(2009, 12, 31)),
             parent_name = fake.name(),
             parent_email = fake.email(),
-            password_hash = fake.password()
+            password_hash = fake.password(),
+            gender = "F"
         )
         players.append(player)
 
@@ -128,7 +129,8 @@ def create_players(teams):
             birthday = fake.date_between_dates(date_start=datetime(2009, 1, 1), date_end=datetime(2009, 12, 31)),
             parent_name = fake.name(),
             parent_email = fake.email(),
-            password_hash = fake.password()
+            password_hash = fake.password(),
+            gender = "F"
         )
         players.append(player)
 
@@ -138,7 +140,8 @@ def create_players(teams):
         birthday = fake.date_between_dates(date_start=datetime(2009, 1, 1), date_end=datetime(2009, 12, 31)),
         parent_name = "Holly",
         parent_email = "holly1@email.com",
-        password_hash = "password1"
+        password_hash = "password1",
+        gender = "F"
     )
     players.append(player)
 
