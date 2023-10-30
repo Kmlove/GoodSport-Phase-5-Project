@@ -5,7 +5,7 @@ import { Alert } from 'antd';
 import EditEventForm from "./EditEventForm"
 import "../CSS/eventStyles.css"
 
-function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessfulDeleteAlert, handleShowErrorDeleteAlert}) {
+function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessfulDeleteAlert, handleShowErrorDeleteAlert, handleShowSuccessfulAddAlert, showSuccessfulAddAlert}) {
   const navigate = useNavigate()
   const {id} = useParams()
   const [curEvent, setCurEvent] = useState(null)
@@ -32,12 +32,20 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
       // Use a setTimeout to hide the alert after 3 seconds
       const timer = setTimeout(() => {
         setShowErrorUpdateAlert(false);
-      }, 3000); // 3000 milliseconds (5 seconds)
+      }, 3000); // 3000 milliseconds (3 seconds)
+
+      // Clear the timer if the component unmounts
+      return () => clearTimeout(timer);
+    } else if (showSuccessfulAddAlert) {
+      // Use a setTimeout to hide the alert after 3 seconds
+      const timer = setTimeout(() => {
+        handleShowSuccessfulAddAlert(false);
+      }, 3000); // 3000 milliseconds (3 seconds)
 
       // Clear the timer if the component unmounts
       return () => clearTimeout(timer);
     }
-  }, [showSuccessfulUpdateAlert, showErrorUpdateAlert ]);
+  }, [showSuccessfulUpdateAlert, showErrorUpdateAlert, showSuccessfulAddAlert ]);
 
   function handleDeleteClick(e){
     fetch(`/events/${id}`, {
@@ -87,11 +95,12 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
   } else{
     const {date, event_time, event_type, notes, location, team, coach} = curEvent
     const formattedDate = dayjs(date).format('MM-DD-YYYY')
-
+  console.log(showSuccessfulAddAlert)
     return (
       <div className="right">
         {showSuccessfulUpdateAlert? <Alert message="Event Successfully Updated" type="success" banner closable showIcon /> : null}
         {showErrorUpdateAlert? <Alert message="An error occured when updating this event, please try again later!" type="error" banner closable showIcon /> : null}
+        {showSuccessfulAddAlert? <Alert message="Event Successfully Created" type="success" banner closable showIcon /> : null}
 
         <div className="event-details">
           <h2 className="event-title">{`${event_type} Details`}</h2>

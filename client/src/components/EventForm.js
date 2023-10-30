@@ -1,23 +1,9 @@
-import { Button, DatePicker, Form, Input, Select,TimePicker } from 'antd';
-import React, { useState } from 'react';
+import { Button, DatePicker, Form, Input, Select,TimePicker, Alert } from 'antd';
+import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 
-function EventForm({teams, user, addNewEvent}) {
-  const navigate = useNavigate()
-  const { club } = user
-  const [componentSize, setComponentSize] = useState('default');
-  const onFormLayoutChange = ({ size }) => {
-    setComponentSize(size);
-  };
-  const {TextArea} = Input;   
-
-  const dateFormat = 'MM/DD/YYYY';
-  // const dayjs1 = dayjs().format(dateFormat)
-  // defaultValue={dayjs(dayjs1, dateFormat)}
-
-  const teamsInClub = teams.filter(team => club.id === team.club_id)
-
+function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
   const initialValue = {
     team_id: "",
     event_type: "",
@@ -26,7 +12,25 @@ function EventForm({teams, user, addNewEvent}) {
     location: "",
     notes: ""
   }
+  const navigate = useNavigate()
+  const [showAddEventError, setShowAddEventError] = useState(false)
   const [newEventFormData, setNewEventFormData] = useState(initialValue)
+  const { club } = user
+  const {TextArea} = Input;   
+  const dateFormat = 'MM/DD/YYYY';
+  const teamsInClub = teams.filter(team => club.id === team.club_id)
+
+  useEffect(() => {
+    if (showAddEventError) {
+      // Use a setTimeout to hide the alert after 3 seconds
+      const timer = setTimeout(() => {
+        setShowAddEventError(false);
+      }, 3000); // 3000 milliseconds (3 seconds)
+
+      // Clear the timer if the component unmounts
+      return () => clearTimeout(timer);
+    } 
+    }, [ showAddEventError ]);
 
   function handleTimeChange(time, timeStringArray) {
     const timeString = timeStringArray[0] + " - " + timeStringArray[1]
@@ -82,65 +86,117 @@ function EventForm({teams, user, addNewEvent}) {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(newEvent)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status === 201){
+        return res.json()
+      } else if(res.status === 400){
+        setShowAddEventError(true)
+        return Promise.reject("Validations Error")
+      } else if (res.status === 500){
+        setShowAddEventError(true)
+        return Promise.reject("Server Error")
+      }
+    })
     .then(data => {
       addNewEvent(data)
+      handleShowSuccessfulAddAlert(true)
       navigate(`/event/${data.id}`)
     })
+    .catch(err => console.error("Error: ", err))
   } 
 
   return (
-    <Form
-      labelCol={{
-        span: 8,
-      }}
-      wrapperCol={{
-        span: 16,
-      }}
-      layout="horizontal"
-      size="large"
-      style={{
-        maxWidth: 600,
-      }}
-      onFinish={handleSubmit}
-    >
-      <Form.Item label="Team" >
-        <Select name="team_id" onChange={handleTeamChange}>
-          {teamsInClub.map(team => <Select.Option key={team.id} value={team.id}>{team.team_name}</Select.Option>)}
-        </Select>
-      </Form.Item>
+    <div className='right'>
+      {showAddEventError? <Alert message="An error occured while creating this event, please try again!" type="error" banner closable showIcon /> : null}
 
-      <Form.Item label="Event Type" >
-        <Select name="event_type" onChange={handleEventChange}>
-          <Select.Option value="Practice">Practice</Select.Option>
-          <Select.Option value="Game">Game</Select.Option>
-          <Select.Option value="Meeting">Meeting</Select.Option>
-          <Select.Option value="Other">Other</Select.Option>
-        </Select>
-      </Form.Item>
+      <Form
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        layout="horizontal"
+        size="large"
+        style={{
+          maxWidth: 600,
+        }}
+        onFinish={handleSubmit}
+      >
+        <Form.Item 
+          label="Team"
+          name="team_id" 
+          rules={[
+            {
+              required: true,
+              message: 'Please select a team!',
+            },
+          ]}
+        >
+          <Select name="team_id" onChange={handleTeamChange}>
+            {teamsInClub.map(team => <Select.Option key={team.id} value={team.id}>{team.team_name}</Select.Option>)}
+          </Select>
+        </Form.Item>
 
-      <Form.Item label="Time">
-        <TimePicker.RangePicker use12Hours format="h:mm a" onChange={handleTimeChange} />
-      </Form.Item>
-      
-      <Form.Item label="Date">
-        <DatePicker format={dateFormat} onChange={handleDateChange}/>
-      </Form.Item>
+        <Form.Item 
+          label="Event Type"
+          name="event_type"
+          rules={[
+            {
+              required: true,
+              message: 'Please select an event type!',
+            },
+          ]} 
+        >
+          <Select name="event_type" onChange={handleEventChange}>
+            <Select.Option value="Practice">Practice</Select.Option>
+            <Select.Option value="Game">Game</Select.Option>
+            <Select.Option value="Meeting">Meeting</Select.Option>
+            <Select.Option value="Other">Other</Select.Option>
+          </Select>
+        </Form.Item>
 
-      <Form.Item label="Location">
-        <Input onChange={handleTextChange} name="location" value={newEventFormData.location}/>
-      </Form.Item>
+        <Form.Item 
+          label="Time"
+          name="event_time"
+          rules={[
+            {
+              required: true,
+              message: 'Please select an event time!',
+            },
+          ]} 
+        >
+          <TimePicker.RangePicker use12Hours format="h:mm a" onChange={handleTimeChange} />
+        </Form.Item>
+        
+        <Form.Item 
+          label="Date"
+          name="date"
+          rules={[
+            {
+              required: true,
+              message: 'Please select an date!',
+            },
+          ]} 
+        >
+          <DatePicker format={dateFormat} onChange={handleDateChange}/>
+        </Form.Item>
 
-      <Form.Item label="Notes" >
-          <TextArea rows={4} name='notes' value={newEventFormData.notes} onChange={handleTextChange}/>
-      </Form.Item>
+        <Form.Item label="Location">
+          <Input onChange={handleTextChange} name="location" value={newEventFormData.location}/>
+        </Form.Item>
 
-      <Form.Item >
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item label="Notes" >
+            <TextArea rows={4} name='notes' value={newEventFormData.notes} onChange={handleTextChange}/>
+        </Form.Item>
+
+        <Form.Item >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 
 }
