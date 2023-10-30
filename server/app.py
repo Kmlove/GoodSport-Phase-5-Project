@@ -95,6 +95,7 @@ class Players(Resource):
             # Parse the date string from request.json into a Python date object
             birthday_str = request.json['birthday']
             birthday_obj = datetime.strptime(birthday_str, '%Y-%m-%d').date()
+            print(birthday_str, birthday_obj)
 
             new_player = Player(
                 team_id = request.json['team_id'],
@@ -102,7 +103,8 @@ class Players(Resource):
                 birthday = birthday_obj,
                 parent_name = request.json['parent_name'],
                 parent_email = request.json['parent_email'],
-                password_hash = request.json['password']
+                password_hash = request.json['password'],
+                gender = request.json['gender']
             )
             db.session.add(new_player)
             db.session.commit()

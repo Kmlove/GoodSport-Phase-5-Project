@@ -67,7 +67,6 @@ function EventForm({teams, user, addNewEvent}) {
   }
 
   function handleSubmit(e){
-    // e.preventDefault()
 
     const curdate = newEventFormData.date
     const formattedDate = dayjs(curdate).format('YYYY-MM-DD')

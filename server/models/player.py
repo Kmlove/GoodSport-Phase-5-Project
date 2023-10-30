@@ -18,6 +18,7 @@ class Player(db.Model, SerializerMixin):
     parent_email = db.Column(db.String, unique=True)
     _password_hash = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=False)
+    gender = db.Column(db.String)
 
     # relationships
     team = db.relationship('Team', back_populates='players')
