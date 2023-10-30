@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import EditEventForm from "./EditEventForm"
 import "../CSS/eventStyles.css"
 
-function Event({handleDeleteEvent, handleUpdateEvent, user}) {
+function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessfulDeleteAlert, handleShowErrorDeleteAlert}) {
   const navigate = useNavigate()
   const {id} = useParams()
   const [curEvent, setCurEvent] = useState(null)
@@ -23,12 +23,20 @@ function Event({handleDeleteEvent, handleUpdateEvent, user}) {
     .then(res => {
       if (res.status === 204){
         handleDeleteEvent(curEvent)
+        handleShowSuccessfulDeleteAlert(true)
         navigate('/schedule')
+      } else if (res.status === 404){
+        handleShowErrorDeleteAlert(true)
+        return Promise.reject('Event Not Found')
+      } else if (res.status === 500){
+        handleShowErrorDeleteAlert(true)
+        return Promise.reject('Server Error') 
       } else {
+        handleShowErrorDeleteAlert(true)
         console.log("Delete Operation Failed")
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => console.error("Error: ", err))
   }
 
   function handleEditClick(e){

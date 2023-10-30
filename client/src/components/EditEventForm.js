@@ -66,12 +66,23 @@ function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleClose
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(editEventFormData)
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 202){
+          return  res.json()
+        } else if (res.status === 400){
+          return Promise.reject('Validations Error')
+        } else if (res.status === 404){
+          return Promise.reject('Event Not Found')
+        } else if (res.status === 500){
+          return Promise.reject('Server Error')
+        }
+      })
       .then(data => {
         handleUpdateEvent(data)
         handleUpdateCurEvent(data)
         handleCloseEditForm(false)
       })
+      .catch(err => console.error("Error: ", err))
     }
 
   return (

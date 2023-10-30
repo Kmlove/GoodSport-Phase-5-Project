@@ -13,6 +13,8 @@ import Event from "./Event";
 function MainContainer({handleLoginorSignUp, user}) {
     const [events, setEvents] = useState([])
     const [teams, setTeams] = useState([])
+    const [showSuccessfulDeleteAlert, setShowSuccessfulDeleteAlert] = useState(false)
+    const [showErrorDeleteAlert, setShowErrorDeleteAlert] = useState(true)
 
     useEffect(() => {
         fetch('/events')
@@ -25,6 +27,14 @@ function MainContainer({handleLoginorSignUp, user}) {
         .then(res => res.json())
         .then(teams => setTeams(teams))
     }, [])
+
+    function handleShowSuccessfulDeleteAlert(value){
+        setShowSuccessfulDeleteAlert(value)
+    }
+
+    function handleShowErrorDeleteAlert(value){
+        setShowErrorDeleteAlert(value)
+    }
 
     function addNewEvent(new_event){
         setEvents([...events, new_event])
@@ -75,10 +85,10 @@ function MainContainer({handleLoginorSignUp, user}) {
                     <Route path="/home" element={<Home />} />
                     <Route path="/teams" element={<TeamsList />} />
                     <Route path="/players" element={<PlayersList />} />
-                    <Route path="/schedule" element={<Schedule teams={teams} events={eventsToDisplay} user={user} handleDeleteEvent={handleDeleteEvent} />} />
+                    <Route path="/schedule" element={<Schedule teams={teams} events={eventsToDisplay} user={user} handleDeleteEvent={handleDeleteEvent} handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert} showSuccessfulDeleteAlert={showSuccessfulDeleteAlert} showErrorDeleteAlert={showErrorDeleteAlert} handleShowErrorDeleteAlert={handleShowErrorDeleteAlert} />} />
                     <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
                     <Route path="/event/new" element={<EventForm user={user} teams={teams} addNewEvent={addNewEvent}/>}/>
-                    <Route path="/event/:id" element={<Event handleDeleteEvent={handleDeleteEvent} handleUpdateEvent={handleUpdateEvent} user={user} />} />
+                    <Route path="/event/:id" element={<Event handleDeleteEvent={handleDeleteEvent} handleUpdateEvent={handleUpdateEvent} user={user} handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert} handleShowErrorDeleteAlert={handleShowErrorDeleteAlert}/>} />
                 </Routes>
             </div>
         </>

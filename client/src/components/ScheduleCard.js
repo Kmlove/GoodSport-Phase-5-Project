@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import dayjs from 'dayjs';
+import { Alert } from 'antd';
 import "../CSS/scheduleCardStyles.css"
+import { useState } from "react";
 
-function ScheduleCard({event, user, teams, handleDeleteEvent}) {
+function ScheduleCard({event, user, teams, handleDeleteEvent, handleShowSuccessfulDeleteAlert, handleShowErrorDeleteAlert}) {
   const {coach_id, team_id, date, duration, event_type, location, start_time, id} = event
   const coachesTeam = teams.filter(team => team.id === team_id)
   const formattedDate = dayjs(date).format('MM-DD-YYYY')
@@ -11,14 +13,22 @@ function ScheduleCard({event, user, teams, handleDeleteEvent}) {
     fetch(`/events/${id}`, {
       method: "DELETE"
     })
-    .then(res =>{
+    .then(res => {
       if (res.status === 204){
         handleDeleteEvent(event)
+        handleShowSuccessfulDeleteAlert(true)
+      } else if (res.status === 404){
+        handleShowErrorDeleteAlert(true)
+        return Promise.reject('Event Not Found')
+      } else if (res.status === 500){
+        handleShowErrorDeleteAlert(true)
+        return Promise.reject('Server Error') 
       } else {
+        handleShowErrorDeleteAlert(true)
         console.log("Delete Operation Failed")
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => console.error("Error: ", err))
   }
   
   if (user.is_admin && coachesTeam.length === 0){
