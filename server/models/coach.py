@@ -30,7 +30,7 @@ class Coach(db.Model, SerializerMixin):
         return self._password_hash
     @password_hash.setter
     def password_hash(self, password):
-        if password and type(password) is str and len(password) > 6:
+        if password and type(password) is str and len(password) >= 8:
             password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
             self._password_hash = password_hash.decode('utf-8')
         else:
