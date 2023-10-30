@@ -23,7 +23,12 @@ function Signup({handleLoginorSignUp, handleSetUser}) {
       />
 
       {isPlayer ? 
-        <SignupPlayer clubs={clubs}/> : 
+        <SignupPlayer
+          handleLoginorSignUp={handleLoginorSignUp} 
+          handleSetUser={handleSetUser} 
+          clubs={clubs}
+        /> 
+        : 
         <SignupCoach 
           handleLoginorSignUp={handleLoginorSignUp} 
           handleSetUser={handleSetUser}

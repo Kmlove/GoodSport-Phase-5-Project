@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 
 
-function SignupPlayer({clubs}) {
+function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser}) {
   const initialValue = {
     team_id: "",
     player_name: "",
@@ -86,7 +86,11 @@ function SignupPlayer({clubs}) {
       body: JSON.stringify(newPlayer)
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+      handleSetUser(data)
+      handleLoginorSignUp(true)
+      navigate('/home')
+    })
   };
 
   function handleFinishFailed (errorInfo) {

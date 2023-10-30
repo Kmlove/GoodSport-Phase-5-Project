@@ -1,0 +1,64 @@
+.event-details {
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Cursive', cursive; /* Use a custom or Google Font here */
+    max-width: 75%;
+    height: fit-content;
+  }
+  
+  .event-title {
+    font-size: 36px;
+    color: #ff6600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .label {
+    font-weight: 600;
+    color: #555;
+
+  }
+  
+  .value{
+    font-size: 20px;
+    color: #6600ff;
+    font-family: 'Pacifico', cursive; /* Another custom or Google Font for exciting text */
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  strong {
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+  }  
+  
+  strong {
+    font-weight: 800; /* Increase font weight for strong elements within labels */
+    color: #ff6600; /* Change color for strong elements within labels */
+    position: relative;
+    display: inline-block;
+    font-size: 1.2em;
+  }
+  
+  strong::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 5px;
+    background: #ff6600; /* Add a background color */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0); /* Initial scaling */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+  }
+  
+strong:hover::after {
+    transform: scaleX(1); /* Scale to 100% on hover */
+    transform-origin: bottom left;
+  }
