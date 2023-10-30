@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import EditEventForm from "./EditEventForm"
 import "../CSS/eventStyles.css"
 
-function Event({handleDeleteEvent, handleUpdateEvent}) {
+function Event({handleDeleteEvent, handleUpdateEvent, user}) {
   const navigate = useNavigate()
   const {id} = useParams()
   const [curEvent, setCurEvent] = useState(null)
@@ -59,8 +59,14 @@ function Event({handleDeleteEvent, handleUpdateEvent}) {
         <p><strong>Time:</strong> <span id="time" className="value">{event_time}</span></p>
         <p><strong>Location:</strong> <span id="location" className="value">{location}</span></p>
         <p><strong>Notes:</strong> <span id="notes" className="value">{notes}</span></p>
-        <button onClick={handleDeleteClick} className='event-delete-button'>Delete Event</button>
-        <button onClick={handleEditClick} className='event-edit-button'>Edit Event</button>
+        {user.is_admin ? (
+          <>
+            <button onClick={handleDeleteClick} className='event-delete-button'>Delete Event</button>
+            <button onClick={handleEditClick} className='event-edit-button'>Edit Event</button>
+          </>
+          ) : null
+        }
+        
         {editEvent? <EditEventForm id={id} handleUpdateEvent={handleUpdateEvent} handleUpdateCurEvent={handleUpdateCurEvent} handleCloseEditForm={handleCloseEditForm} /> : null}
       </div>
       

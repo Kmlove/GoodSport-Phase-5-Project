@@ -78,7 +78,7 @@ function MainContainer({handleLoginorSignUp, user}) {
                     <Route path="/schedule" element={<Schedule teams={teams} events={eventsToDisplay} user={user} handleDeleteEvent={handleDeleteEvent} />} />
                     <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
                     <Route path="/event/new" element={<EventForm user={user} teams={teams} addNewEvent={addNewEvent}/>}/>
-                    <Route path="/event/:id" element={<Event handleDeleteEvent={handleDeleteEvent} handleUpdateEvent={handleUpdateEvent} />} />
+                    <Route path="/event/:id" element={<Event handleDeleteEvent={handleDeleteEvent} handleUpdateEvent={handleUpdateEvent} user={user} />} />
                 </Routes>
             </div>
         </>

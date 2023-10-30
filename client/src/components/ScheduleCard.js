@@ -27,7 +27,7 @@ function ScheduleCard({event, user, teams, handleDeleteEvent}) {
     return (
 
       <div className="scheduleCard">
-          <button onClick={handleDeleteClick} className='schedule-delete-button'>✖</button>
+          {user.is_admin? <button onClick={handleDeleteClick} className='schedule-delete-button'>✖</button> : null}
           <p>Team: {user.is_admin? coachesTeam[0].team_name : user.team.team_name}</p>
           <p>Date: {formattedDate}</p>
           <p>Event Type: {event_type}</p>
