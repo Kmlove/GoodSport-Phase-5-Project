@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import dayjs from 'dayjs';
+import { Alert } from 'antd';
 import EditEventForm from "./EditEventForm"
 import "../CSS/eventStyles.css"
 
@@ -9,12 +10,34 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
   const {id} = useParams()
   const [curEvent, setCurEvent] = useState(null)
   const [editEvent, setEditEvent] = useState(false)
+  const [showSuccessfulUpdateAlert, setShowSuccessfulUpdateAlert] = useState(false)
+  const [showErrorUpdateAlert, setShowErrorUpdateAlert] = useState(false)
 
   useEffect(() => {
       fetch(`/events/${id}`)
       .then(res => res.json())
       .then(data => setCurEvent(data))
   }, [id])
+
+  useEffect(() => {
+    if (showSuccessfulUpdateAlert) {
+      // Use a setTimeout to hide the alert after 3 seconds
+      const timer = setTimeout(() => {
+        setShowSuccessfulUpdateAlert(false);
+      }, 3000); // 3000 milliseconds (3 seconds)
+
+      // Clear the timer if the component unmounts
+      return () => clearTimeout(timer);
+    } else if (showErrorUpdateAlert) {
+      // Use a setTimeout to hide the alert after 3 seconds
+      const timer = setTimeout(() => {
+        setShowErrorUpdateAlert(false);
+      }, 3000); // 3000 milliseconds (5 seconds)
+
+      // Clear the timer if the component unmounts
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessfulUpdateAlert, showErrorUpdateAlert ]);
 
   function handleDeleteClick(e){
     fetch(`/events/${id}`, {
@@ -39,6 +62,14 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
     .catch(err => console.error("Error: ", err))
   }
 
+  function handleShowSuccessfulUpdateAlert(value){
+    setShowSuccessfulUpdateAlert(value)
+  }
+
+  function handleShowErrorUpdateAlert(value){
+    setShowErrorUpdateAlert(value)
+  }
+
   function handleEditClick(e){
     setEditEvent(!editEvent)
   }
@@ -58,26 +89,30 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
     const formattedDate = dayjs(date).format('MM-DD-YYYY')
 
     return (
-      <div className="event-details">
-        <h2 className="event-title">{`${event_type} Details`}</h2>
-        <p><strong>Team:</strong> <span className="value">{team.team_name}</span></p>
-        <p><strong>Coach:</strong> <span className="value">{coach.coach_name}</span></p>
-        <p><strong>Event Type:</strong> <span id="event_type" className="value">{event_type}</span></p>
-        <p><strong>Date:</strong> <span id="date" className="value">{formattedDate}</span></p>
-        <p><strong>Time:</strong> <span id="time" className="value">{event_time}</span></p>
-        <p><strong>Location:</strong> <span id="location" className="value">{location}</span></p>
-        <p><strong>Notes:</strong> <span id="notes" className="value">{notes}</span></p>
-        {user.is_admin ? (
-          <>
-            <button onClick={handleDeleteClick} className='event-delete-button'>Delete Event</button>
-            <button onClick={handleEditClick} className='event-edit-button'>Edit Event</button>
-          </>
-          ) : null
-        }
-        
-        {editEvent? <EditEventForm id={id} handleUpdateEvent={handleUpdateEvent} handleUpdateCurEvent={handleUpdateCurEvent} handleCloseEditForm={handleCloseEditForm} /> : null}
+      <div className="right">
+        {showSuccessfulUpdateAlert? <Alert message="Event Successfully Updated" type="success" banner closable showIcon /> : null}
+        {showErrorUpdateAlert? <Alert message="An error occured when updating this event, please try again later!" type="error" banner closable showIcon /> : null}
+
+        <div className="event-details">
+          <h2 className="event-title">{`${event_type} Details`}</h2>
+          <p><strong>Team:</strong> <span className="value">{team.team_name}</span></p>
+          <p><strong>Coach:</strong> <span className="value">{coach.coach_name}</span></p>
+          <p><strong>Event Type:</strong> <span id="event_type" className="value">{event_type}</span></p>
+          <p><strong>Date:</strong> <span id="date" className="value">{formattedDate}</span></p>
+          <p><strong>Time:</strong> <span id="time" className="value">{event_time}</span></p>
+          <p><strong>Location:</strong> <span id="location" className="value">{location}</span></p>
+          <p><strong>Notes:</strong> <span id="notes" className="value">{notes}</span></p>
+          {user.is_admin ? (
+            <>
+              <button onClick={handleDeleteClick} className='event-delete-button'>Delete Event</button>
+              <button onClick={handleEditClick} className='event-edit-button'>Edit Event</button>
+            </>
+            ) : null
+          }
+          
+          {editEvent? <EditEventForm id={id} handleUpdateEvent={handleUpdateEvent} handleUpdateCurEvent={handleUpdateCurEvent} handleCloseEditForm={handleCloseEditForm} handleShowSuccessfulUpdateAlert={handleShowSuccessfulUpdateAlert} handleShowErrorUpdateAlert={handleShowErrorUpdateAlert} /> : null}
+        </div>
       </div>
-      
     )
   }
 }

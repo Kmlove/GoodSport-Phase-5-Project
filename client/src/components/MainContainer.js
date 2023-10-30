@@ -14,7 +14,7 @@ function MainContainer({handleLoginorSignUp, user}) {
     const [events, setEvents] = useState([])
     const [teams, setTeams] = useState([])
     const [showSuccessfulDeleteAlert, setShowSuccessfulDeleteAlert] = useState(false)
-    const [showErrorDeleteAlert, setShowErrorDeleteAlert] = useState(true)
+    const [showErrorDeleteAlert, setShowErrorDeleteAlert] = useState(false)
 
     useEffect(() => {
         fetch('/events')

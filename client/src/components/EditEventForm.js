@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button, DatePicker, Form, Input, Select,TimePicker } from 'antd';
 import dayjs from 'dayjs';
 
-function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleCloseEditForm}) {
+function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleCloseEditForm, handleShowSuccessfulUpdateAlert, handleShowErrorUpdateAlert}) {
     const {TextArea} = Input;   
     const dateFormat = 'MM/DD/YYYY';
     const eventDetails = document.querySelector('.event-details')
@@ -70,10 +70,13 @@ function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleClose
         if (res.status === 202){
           return  res.json()
         } else if (res.status === 400){
+          handleShowErrorUpdateAlert(true)
           return Promise.reject('Validations Error')
         } else if (res.status === 404){
+          handleShowErrorUpdateAlert(true)
           return Promise.reject('Event Not Found')
         } else if (res.status === 500){
+          handleShowErrorUpdateAlert(true)
           return Promise.reject('Server Error')
         }
       })
@@ -81,6 +84,7 @@ function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleClose
         handleUpdateEvent(data)
         handleUpdateCurEvent(data)
         handleCloseEditForm(false)
+        handleShowSuccessfulUpdateAlert(true)
       })
       .catch(err => console.error("Error: ", err))
     }

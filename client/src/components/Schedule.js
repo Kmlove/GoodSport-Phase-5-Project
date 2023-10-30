@@ -9,23 +9,23 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
 
   useEffect(() => {
     if (showSuccessfulDeleteAlert) {
-      // Use a setTimeout to hide the alert after 5 seconds
+      // Use a setTimeout to hide the alert after 3 seconds
       const timer = setTimeout(() => {
         handleShowSuccessfulDeleteAlert(false);
-      }, 3000); // 5000 milliseconds (5 seconds)
+      }, 3000); // 3000 milliseconds (3 seconds)
 
       // Clear the timer if the component unmounts
       return () => clearTimeout(timer);
     } else if (showErrorDeleteAlert) {
-      // Use a setTimeout to hide the alert after 5 seconds
+      // Use a setTimeout to hide the alert after 3 seconds
       const timer = setTimeout(() => {
         handleShowErrorDeleteAlert(false);
-      }, 3000); // 5000 milliseconds (5 seconds)
+      }, 3000); // 3000 milliseconds (3 seconds)
 
       // Clear the timer if the component unmounts
       return () => clearTimeout(timer);
     }
-  }, [showSuccessfulDeleteAlert, handleShowSuccessfulDeleteAlert, showErrorDeleteAlert, handleShowErrorDeleteAlert]);
+  }, [showSuccessfulDeleteAlert, showErrorDeleteAlert]);
 
   return (
     <div className="right">
