@@ -99,7 +99,7 @@ def create_coaches(clubs):
 
     kim = Coach(
         club = clubs[0],
-        coach_name = "Kim",
+        coach_name = "Kim Love",
         email = "kim1@email.com",
         password_hash = "password1"
     )
@@ -136,9 +136,9 @@ def create_players(teams):
 
     player = Player(
         team = teams[0],
-        player_name = "Haviland",
+        player_name = "Ruby Atha",
         birthday = fake.date_between_dates(date_start=datetime(2009, 1, 1), date_end=datetime(2009, 12, 31)),
-        parent_name = "Holly",
+        parent_name = "Holly Atha",
         parent_email = "holly1@email.com",
         password_hash = "password1",
         gender = "F"
