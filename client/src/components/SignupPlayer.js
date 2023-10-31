@@ -3,7 +3,6 @@ import { Cascader, Form, Input, Button, Select, DatePicker, Alert } from 'antd';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 
-
 function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert}) {
   const initialValue = {
     team_id: "",
@@ -34,17 +33,6 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
       ))
     }
   ))
-
-  const validateMessages = {
-    required: '${label} is required!',
-    types: {
-      email: '${label} is not a valid email!',
-      number: '${label} is not a valid number!',
-    },
-    number: {
-      range: '${label} must be between ${min} and ${max}',
-    },
-  };
 
   function handleChange(e) {
     const { id, value } = e.target
@@ -104,7 +92,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
         return Promise.reject("Validations Error")
       } else if (res.status === 500){
         handleShowServerErrorAlert(true)
-        return Promise.reject("Server Error")
+        return Promise.reject("Internal Server Error")
       }
     })
     .then(data => {
@@ -121,7 +109,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
 
   return (
     <>
-      {showServerErrorAlert? <Alert message="SERVER ERROR: please try again later!" type="error" banner closable showIcon /> : null}
+      {showServerErrorAlert? <Alert message="INTERNAL SERVER ERROR: please try again later!" type="error" banner closable showIcon /> : null}
 
       <Form 
         labelCol={{
@@ -140,7 +128,6 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
         onFinish={handleSubmit}
         onFinishFailed={handleFinishFailed}
         autoComplete="off"
-        validateMessages={validateMessages}
       >
         <Form.Item
           name="parent_email"
@@ -150,7 +137,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
           rules={[
             {
               type: 'email',
-              message: 'The input is not valid E-mail!',
+              message: 'The input is not a valid E-mail!',
             },
             {
               required: true,
@@ -323,11 +310,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
           }}
         >
           <Button type="primary" htmlType="submit">
-            Submit
+            Sign Up
           </Button>
         </Form.Item>
 
       </Form>
+
+      <button onClick={() => navigate('/')}>Login</button>
     </>
   )
 }

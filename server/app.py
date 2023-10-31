@@ -334,8 +334,8 @@ class Login(Resource):
             elif user.is_admin == False:
                 player_dict = user.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
                 return make_response(player_dict, 200)
-        else: 
-            make_response("error", 400)
+        else:
+            return make_response({"error": ["User Not Found"]}, 404)
 
 api.add_resource(Login, '/login')
 

@@ -7,6 +7,7 @@ import MainContainer from "./MainContainer";
 function App() {
   const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)
   const [user, setUser] = useState('')
+  const [showServerErrorAlert, setShowServerErrorAlert] = useState(false)
 
   function handleLoginorSignUp(value){
     setLoggedInOrSignedUp(value)
@@ -14,6 +15,10 @@ function App() {
 
   function handleSetUser(user){
     setUser(user)
+  }
+
+  function handleShowServerErrorAlert(value){
+    setShowServerErrorAlert(value)
   }
 
   useEffect(() => {
@@ -33,14 +38,46 @@ function App() {
       .catch((error) => console.error(error));
   }, []);
 
+  useEffect(() => {
+    if (showServerErrorAlert) {
+      // Use a setTimeout to hide the alert after 5 seconds
+      const timer = setTimeout(() => {
+        setShowServerErrorAlert(false);
+      }, 5000); // 5000 milliseconds (5 seconds)
+
+      // Clear the timer if the component unmounts
+      return () => clearTimeout(timer);
+    } 
+  }, [ showServerErrorAlert ]);
+
   return (
     <div >
       {loggedInOrSignedUp ? 
         <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user}/> : 
         (
           <Routes>
-            <Route path="/" element={<Login handleLoginorSignUp={handleLoginorSignUp} handleSetUser={handleSetUser}/>} />
-            <Route path="/signup" element={<Signup handleLoginorSignUp={handleLoginorSignUp} handleSetUser={handleSetUser}/>} />
+            <Route 
+              path="/" 
+              element={
+                <Login 
+                  handleLoginorSignUp={handleLoginorSignUp} 
+                  handleSetUser={handleSetUser}
+                  showServerErrorAlert={showServerErrorAlert}
+                  handleShowServerErrorAlert={handleShowServerErrorAlert}
+                />
+              } 
+            />
+            <Route 
+              path="/signup" 
+              element={
+                <Signup 
+                  handleLoginorSignUp={handleLoginorSignUp} 
+                  handleSetUser={handleSetUser}
+                  showServerErrorAlert={showServerErrorAlert}
+                  handleShowServerErrorAlert={handleShowServerErrorAlert}
+                />
+              } 
+            />
           </Routes>
         )}  
 
