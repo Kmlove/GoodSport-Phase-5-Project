@@ -64,7 +64,7 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
         return Promise.reject('Server Error') 
       } else {
         handleShowErrorDeleteAlert(true)
-        console.log("Delete Operation Failed")
+        console.error("Delete Operation Failed")
       }
     })
     .catch(err => console.error("Error: ", err))
@@ -95,7 +95,7 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
   } else{
     const {date, event_time, event_type, notes, location, team, coach} = curEvent
     const formattedDate = dayjs(date).format('MM-DD-YYYY')
-  console.log(showSuccessfulAddAlert)
+
     return (
       <div className="right">
         {showSuccessfulUpdateAlert? <Alert message="Event Successfully Updated" type="success" banner closable showIcon /> : null}

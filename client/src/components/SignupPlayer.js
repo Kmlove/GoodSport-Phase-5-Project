@@ -49,7 +49,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
         gender: value
       })
     } else if(typeof(value) === "object"){
-      console.log(value, e)
+
       setNewPlayerFormData({
         ...newPlayerFormData,
         team_id: value[1]
@@ -104,7 +104,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
   };
 
   function handleFinishFailed (errorInfo) {
-    console.log('Failed:', errorInfo);
+    console.error('Failed:', errorInfo);
   };
 
   return (

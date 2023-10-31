@@ -25,7 +25,7 @@ function ScheduleCard({event, user, teams, handleDeleteEvent, handleShowSuccessf
         return Promise.reject('Internal Server Error') 
       } else {
         handleShowErrorDeleteAlert(true)
-        console.log("Delete Operation Failed")
+        console.error("Delete Operation Failed")
       }
     })
     .catch(err => console.error("Error: ", err))
