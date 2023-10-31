@@ -142,7 +142,7 @@ function MainContainer({handleLoginorSignUp, user}) {
                     <Route 
                         path="/account" 
                         element={
-                            <Account handleLoginorSignUp={handleLoginorSignUp} />
+                            <Account handleLoginorSignUp={handleLoginorSignUp} user={user} />
                         } 
                     />
                     <Route 
