@@ -22,7 +22,7 @@ function ScheduleCard({event, user, teams, handleDeleteEvent, handleShowSuccessf
         return Promise.reject('Event Not Found')
       } else if (res.status === 500){
         handleShowErrorDeleteAlert(true)
-        return Promise.reject('Server Error') 
+        return Promise.reject('Internal Server Error') 
       } else {
         handleShowErrorDeleteAlert(true)
         console.log("Delete Operation Failed")

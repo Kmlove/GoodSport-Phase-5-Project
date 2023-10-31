@@ -29,6 +29,26 @@ function MainContainer({handleLoginorSignUp, user}) {
         .then(teams => setTeams(teams))
     }, [])
 
+    useEffect(() => {
+        if (showSuccessfulDeleteAlert) {
+          // Use a setTimeout to hide the alert after 3 seconds
+          const timer = setTimeout(() => {
+            setShowSuccessfulDeleteAlert(false);
+          }, 3000); // 3000 milliseconds (3 seconds)
+    
+          // Clear the timer if the component unmounts
+          return () => clearTimeout(timer);
+        } else if (showErrorDeleteAlert) {
+            // Use a setTimeout to hide the alert after 3 seconds
+            const timer = setTimeout(() => {
+              handleShowErrorDeleteAlert(false);
+            }, 3000); // 3000 milliseconds (3 seconds)
+      
+            // Clear the timer if the component unmounts
+            return () => clearTimeout(timer);
+        }
+    }, [ showSuccessfulDeleteAlert, showErrorDeleteAlert ]);
+
     function handleShowSuccessfulAddAlert(value){
         setShowSuccessfulAddAlert(value)
     }
@@ -87,12 +107,55 @@ function MainContainer({handleLoginorSignUp, user}) {
             <div className="mainPageContainer">
                 <NavBar user={user}/>
                 <Routes>
-                    <Route path="/home" element={<Home />} />
+                    <Route 
+                        path="/home" 
+                        element={
+                            <Home 
+                                events={eventsToDisplay} 
+                                user={user} 
+                                teams={teams}
+                                handleDeleteEvent={handleDeleteEvent} 
+                                handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert}
+                                handleShowErrorDeleteAlert={handleShowErrorDeleteAlert}
+                                showSuccessfulDeleteAlert={showSuccessfulDeleteAlert}
+                                showErrorDeleteAlert={showErrorDeleteAlert}
+                            />
+                        } 
+                    />
                     <Route path="/teams" element={<TeamsList />} />
                     <Route path="/players" element={<PlayersList />} />
-                    <Route path="/schedule" element={<Schedule teams={teams} events={eventsToDisplay} user={user} handleDeleteEvent={handleDeleteEvent} handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert} showSuccessfulDeleteAlert={showSuccessfulDeleteAlert} showErrorDeleteAlert={showErrorDeleteAlert} handleShowErrorDeleteAlert={handleShowErrorDeleteAlert} />} />
-                    <Route path="/account" element={<Account handleLoginorSignUp={handleLoginorSignUp} />} />
-                    <Route path="/event/new" element={<EventForm user={user} teams={teams} addNewEvent={addNewEvent} handleShowSuccessfulAddAlert={handleShowSuccessfulAddAlert}/>}/>
+                    <Route 
+                        path="/schedule" 
+                        element={
+                            <Schedule 
+                                teams={teams} 
+                                events={eventsToDisplay} 
+                                user={user} 
+                                handleDeleteEvent={handleDeleteEvent} 
+                                handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert} 
+                                showSuccessfulDeleteAlert={showSuccessfulDeleteAlert} 
+                                showErrorDeleteAlert={showErrorDeleteAlert} 
+                                handleShowErrorDeleteAlert={handleShowErrorDeleteAlert} 
+                            />
+                        } 
+                    />
+                    <Route 
+                        path="/account" 
+                        element={
+                            <Account handleLoginorSignUp={handleLoginorSignUp} />
+                        } 
+                    />
+                    <Route 
+                        path="/event/new" 
+                        element={
+                            <EventForm 
+                                user={user} 
+                                teams={teams} 
+                                addNewEvent={addNewEvent} 
+                                handleShowSuccessfulAddAlert={handleShowSuccessfulAddAlert}
+                            />
+                        }
+                    />
                     <Route 
                         path="/event/:id" 
                         element={
