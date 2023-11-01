@@ -10,7 +10,7 @@ import Account from "./Account";
 import EventForm from "./EventForm"
 import Event from "./Event";
 
-function MainContainer({handleLoginorSignUp, user}) {
+function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const [events, setEvents] = useState([])
     const [teams, setTeams] = useState([])
     const [showSuccessfulDeleteAlert, setShowSuccessfulDeleteAlert] = useState(false)
@@ -142,7 +142,7 @@ function MainContainer({handleLoginorSignUp, user}) {
                     <Route 
                         path="/account" 
                         element={
-                            <Account handleLoginorSignUp={handleLoginorSignUp} user={user} />
+                            <Account handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/>
                         } 
                     />
                     <Route 

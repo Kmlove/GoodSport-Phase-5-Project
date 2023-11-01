@@ -3,7 +3,7 @@ import "../CSS/accountStyles.css"
 import { Form, Input, Button, Select, Alert, Steps } from 'antd';
 import { useState, useEffect } from "react";
 
-function Account({handleLoginorSignUp, user}) {
+function Account({handleLoginorSignUp, user, handleUpdateUser}) {
   const {coach_name, email, id} = user
   const spaceIndex = indexOfSpace(coach_name)
   const firstName = coach_name.slice(0, spaceIndex)
@@ -98,8 +98,6 @@ function Account({handleLoginorSignUp, user}) {
     delete accountFormData.first_name
     delete accountFormData.last_name
 
-    console.log(accountFormData)
-
     fetch(`/coaches/${id}`, {
       method: "PATCH",
       headers: {"Content-Type": "application/json"},
@@ -130,6 +128,7 @@ function Account({handleLoginorSignUp, user}) {
       const spaceIndex = indexOfSpace(data.coach_name)
       const firstName = data.coach_name.slice(0, spaceIndex)
       const lastName = data.coach_name.slice(spaceIndex + 1)
+      handleUpdateUser(data)
       setSuccessfulUpdate(true)
       setAccountFormData({
         first_name: firstName,

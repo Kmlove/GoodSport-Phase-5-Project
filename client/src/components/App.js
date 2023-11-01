@@ -17,6 +17,10 @@ function App() {
     setUser(user)
   }
 
+  function handleUpdateUser(updatedUser){
+    setUser(updatedUser)
+  }
+
   function handleShowServerErrorAlert(value){
     setShowServerErrorAlert(value)
   }
@@ -53,7 +57,7 @@ function App() {
   return (
     <div >
       {loggedInOrSignedUp ? 
-        <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user}/> : 
+        <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/> : 
         (
           <Routes>
             <Route 
