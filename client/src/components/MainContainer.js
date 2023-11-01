@@ -97,23 +97,44 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     }
 
     function handleYesClick(e){
-        fetch(`coaches/${user.id}`, {
-            method: "DELETE"
-        })
-        .then((res) => {
-            if (res.status === 204){
-                popup.classList.add("hidden")
-                mainContainer.classList.remove("blurr")
-                handleLoginorSignUp(false)
-                navigate('/')
-            }
-            else {
-                setDeleteError(true)
-                popup.classList.add("hidden")
-                mainContainer.classList.remove("blurr")
-                return Promise.reject("Error deleting account")
-            }
-        })
+        if (user.is_admin){
+            fetch(`coaches/${user.id}`, {
+                method: "DELETE"
+            })
+            .then((res) => {
+                if (res.status === 204){
+                    popup.classList.add("hidden")
+                    mainContainer.classList.remove("blurr")
+                    handleLoginorSignUp(false)
+                    navigate('/')
+                }
+                else {
+                    setDeleteError(true)
+                    popup.classList.add("hidden")
+                    mainContainer.classList.remove("blurr")
+                    return Promise.reject("Error deleting account")
+                }
+            })
+        } else {
+            fetch(`players/${user.id}`, {
+                method: "DELETE"
+            })
+            .then((res) => {
+                if (res.status === 204){
+                    popup.classList.add("hidden")
+                    mainContainer.classList.remove("blurr")
+                    handleLoginorSignUp(false)
+                    navigate('/')
+                }
+                else {
+                    setDeleteError(true)
+                    popup.classList.add("hidden")
+                    mainContainer.classList.remove("blurr")
+                    return Promise.reject("Error deleting account")
+                }
+            })
+        }
+
     }
 
     // To sort 'events' array by the 'date' attribute in ascending order

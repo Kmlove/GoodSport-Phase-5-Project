@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import MainContainer from "./MainContainer";
@@ -8,6 +8,7 @@ function App() {
   const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)
   const [user, setUser] = useState('')
   const [showServerErrorAlert, setShowServerErrorAlert] = useState(false)
+  const navigate = useNavigate()
 
   function handleLoginorSignUp(value){
     setLoggedInOrSignedUp(value)

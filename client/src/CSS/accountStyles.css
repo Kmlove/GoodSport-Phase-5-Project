@@ -1,8 +1,8 @@
-#account-form {
+#coach-account-form, #player-account-form {
     margin: 0 auto;
 }
 
-#profile-information {
+#profile-information, #player-information, #parent-information {
     border: 1px solid black;
 }
 

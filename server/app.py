@@ -152,16 +152,32 @@ class PlayersById(Resource):
         if not player:
             return make_response({"error": ["Player Not Found"]}, 404)
         
-        try:
-            for attr in request.json:
-                setattr(player, attr, request.json[attr])
-            db.session.add(player)
-            db.session.commit()
-            player_dict = player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
-            return make_response(player_dict, 202)
-        except ValueError as error:
-            response = jsonify({"Validation Error": [str(error)]})
-            return make_response(response, 400)
+        if request.json.get("currPassword"):
+            if player.authenticate(request.json["currPassword"]):
+                try:
+                    del request.json["currPassword"]
+                    for attr in request.json:
+                        setattr(player, attr, request.json[attr])
+                    db.session.add(player)
+                    db.session.commit()
+                    player_dict = player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+                    return make_response(player_dict, 202)
+                except ValueError as error:
+                    response = jsonify({"Validation Error": [str(error)]})
+                    return make_response(response, 400)
+            else:
+                return make_response({"error": ["Password not authenticated"]}, 401)
+        else:
+            try:
+                for attr in request.json:
+                    setattr(player, attr, request.json[attr])
+                db.session.add(player)
+                db.session.commit()
+                player_dict = player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+                return make_response(player_dict, 202)
+            except ValueError as error:
+                response = jsonify({"Validation Error": [str(error)]})
+                return make_response(response, 400)
         
     def delete(self, id):
         player = Player.query.filter_by(id=id).first()

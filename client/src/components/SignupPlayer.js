@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert}) {
   const initialValue = {
     team_id: "",
-    player_name: "",
     birthday: "",
     parent_first_name: "",
     parent_last_name: "",
