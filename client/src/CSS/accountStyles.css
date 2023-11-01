@@ -9,3 +9,20 @@
 #login-information {
     border: 1px solid black;
 }
+
+.hidden {
+    display: none;
+}
+
+.blur {
+    opacity: .5;
+    filter: blur(15px);
+}
+
+#delete-account-popup{
+    border: 1px solid black;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+    z-index: 1;
+}

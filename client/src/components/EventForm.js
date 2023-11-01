@@ -19,7 +19,6 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
   const {TextArea} = Input;   
   const dateFormat = 'MM/DD/YYYY';
   const teamsInClub = teams.filter(team => club.id === team.club_id)
-
   useEffect(() => {
     if (showAddEventError) {
       // Use a setTimeout to hide the alert after 3 seconds

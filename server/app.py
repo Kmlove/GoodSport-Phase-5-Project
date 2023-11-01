@@ -99,6 +99,8 @@ class CoachesById(Resource):
         
         db.session.delete(coach)
         db.session.commit()
+        session['user_id'] = None
+        session['is_admin'] = None
         return make_response({}, 204)
 api.add_resource(CoachesById, '/coaches/<int:id>')
 

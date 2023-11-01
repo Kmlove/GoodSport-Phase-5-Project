@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import NavBar from "./NavBar";
 import Home from "./Home";
@@ -16,6 +16,10 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const [showSuccessfulDeleteAlert, setShowSuccessfulDeleteAlert] = useState(false)
     const [showErrorDeleteAlert, setShowErrorDeleteAlert] = useState(false)
     const [showSuccessfulAddAlert, setShowSuccessfulAddAlert] = useState(false)
+    const [ deleteError, setDeleteError ] = useState(false)
+    const mainContainer = document.querySelector('.mainPageContainer')
+    const popup = document.querySelector('#delete-account-popup')
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch('/events')
@@ -62,6 +66,10 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     }
 
     function addNewEvent(new_event){
+        new_event.coach_id = new_event.coach.id
+        new_event.team_id = new_event.team.id
+        delete new_event.coach
+        delete new_event.team
         setEvents([...events, new_event])
     }
 
@@ -81,6 +89,31 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
             }
         })
         setEvents(updatedEvents)  
+    }
+
+    function handleNoClick(e){
+        mainContainer.classList.remove("blur")
+        popup.classList.add("hidden")
+    }
+
+    function handleYesClick(e){
+        fetch(`coaches/${user.id}`, {
+            method: "DELETE"
+        })
+        .then((res) => {
+            if (res.status === 204){
+                popup.classList.add("hidden")
+                mainContainer.classList.remove("blurr")
+                handleLoginorSignUp(false)
+                navigate('/')
+            }
+            else {
+                setDeleteError(true)
+                popup.classList.add("hidden")
+                mainContainer.classList.remove("blurr")
+                return Promise.reject("Error deleting account")
+            }
+        })
     }
 
     // To sort 'events' array by the 'date' attribute in ascending order
@@ -103,6 +136,12 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
 
       return (
         <>
+            <div id="delete-account-popup" className="hidden">
+                <p>Are you sure you want to delete your account?</p>
+                <button onClick={handleYesClick}>YES</button>
+                <button onClick={handleNoClick}>NO</button>
+            </div>
+
             <Header />
             <div className="mainPageContainer">
                 <NavBar user={user}/>
@@ -142,7 +181,14 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                     <Route 
                         path="/account" 
                         element={
-                            <Account handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/>
+                            <Account 
+                                handleLoginorSignUp={handleLoginorSignUp} 
+                                user={user} 
+                                handleUpdateUser={handleUpdateUser}
+                                mainContainer={mainContainer}
+                                popup={popup}
+                                deleteError={deleteError}
+                            />
                         } 
                     />
                     <Route 

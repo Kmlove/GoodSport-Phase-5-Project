@@ -3,7 +3,7 @@ import "../CSS/accountStyles.css"
 import { Form, Input, Button, Select, Alert, Steps } from 'antd';
 import { useState, useEffect } from "react";
 
-function Account({handleLoginorSignUp, user, handleUpdateUser}) {
+function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, popup, deleteError}) {
   const {coach_name, email, id} = user
   const spaceIndex = indexOfSpace(coach_name)
   const firstName = coach_name.slice(0, spaceIndex)
@@ -63,6 +63,12 @@ function Account({handleLoginorSignUp, user, handleUpdateUser}) {
       handleLoginorSignUp(false)
       navigate('/')
     })
+  }
+
+  function handleDeleteAccount(e){
+    console.log(e)
+    mainContainer.classList.add("blur")
+    popup.classList.remove("hidden")
   }
 
   function indexOfSpace(name){
@@ -148,10 +154,12 @@ function Account({handleLoginorSignUp, user, handleUpdateUser}) {
     <div className="right" >
       <h2>Account Information</h2>
       <button onClick={handleLogoutClick}>Log Out</button>
+      <button onClick={handleDeleteAccount}>Delete Account</button>
 
       {successfulUpdate? <Alert message="Account Successfully Updated!" type="success" banner closable showIcon /> : null}
       {passwordError? <Alert message="The current password you entered did not match what we have on file, please try again." type="error" banner closable showIcon /> : null}
       {serverError? <Alert message="There was an error updating your account, please try again later!" type="error" banner closable showIcon /> : null}
+      {deleteError? <Alert message="There was an error deleting your account, please try again later!" type="error" banner closable showIcon /> : null}
 
       <Form 
         form={form}
