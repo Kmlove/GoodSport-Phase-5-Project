@@ -16,7 +16,7 @@
 
 .blur {
     opacity: .5;
-    filter: blur(15px);
+    filter: blur(20px);
 }
 
 #delete-account-popup{

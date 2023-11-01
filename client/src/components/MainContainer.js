@@ -182,7 +182,15 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                             />
                         } 
                     />
-                    <Route path="/teams" element={<TeamsList />} />
+                    <Route 
+                        path="/teams" 
+                        element={
+                            <TeamsList 
+                                user={user}
+                                teams={teams}
+                            />
+                        } 
+                    />
                     <Route path="/players" element={<PlayersList />} />
                     <Route 
                         path="/schedule" 
