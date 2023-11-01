@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import "../CSS/accountStyles.css"
 import { Form, Input, Button } from 'antd';
 import { useState } from "react";
@@ -44,18 +43,22 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     }
 
     const name = accountFormData.first_name + " " + accountFormData.last_name
-    accountFormData.coach_name = name
-    if (accountFormData.password){
-      accountFormData.password_hash = accountFormData.password
-      delete accountFormData.password
+    const new_coach = {
+      ...accountFormData,
+      coach_name: name
     }
-    delete accountFormData.first_name
-    delete accountFormData.last_name
+
+    if (accountFormData.password){
+      new_coach.password_hash = accountFormData.password
+      delete new_coach.password
+    }
+    delete new_coach.first_name
+    delete new_coach.last_name
 
     fetch(`/coaches/${id}`, {
       method: "PATCH",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(accountFormData)
+      body: JSON.stringify(new_coach)
     })
     .then(res => {
       if (res.status === 202){

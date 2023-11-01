@@ -13,6 +13,7 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
   const parentLastName = parent_name.slice(spaceParentIndex + 1)
   const playerFirstName = player_name.slice(0, spacePlayerIndex)
   const playerLastName = player_name.slice(spacePlayerIndex + 1)
+  const container = document.querySelector(".right")
 
   const initialValue = {
     birthday: initBirthday,
@@ -63,26 +64,27 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
     const parentName = accountFormData.parent_first_name + " " + accountFormData.parent_last_name
     const playerName = accountFormData.player_first_name + " " + accountFormData.player_last_name
     
-    accountFormData.player_name = playerName
-    accountFormData.parent_name = parentName
-    accountFormData.birthday = formattedDate
-
-    if (accountFormData.password){
-      accountFormData.password_hash = accountFormData.password
-      delete accountFormData.password
+    const updated_player = {
+        ...accountFormData,
+        player_name: playerName,
+        parent_name: parentName,
+        birthday: formattedDate
     }
 
-    delete accountFormData.player_first_name
-    delete accountFormData.player_last_name
-    delete accountFormData.parent_first_name
-    delete accountFormData.parent_last_name
+    if (accountFormData.password){
+        updated_player.password_hash = accountFormData.password
+        delete updated_player.password
+    }
 
-    console.log(accountFormData)
+    delete updated_player.player_first_name
+    delete updated_player.player_last_name
+    delete updated_player.parent_first_name
+    delete updated_player.parent_last_name
 
     fetch(`/players/${id}`, {
       method: "PATCH",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(accountFormData)
+      body: JSON.stringify(updated_player)
     })
     .then(res => {
       if (res.status === 202){
@@ -97,27 +99,38 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         form.resetFields(['currPassword'])
         form.resetFields(['password'])
         form.resetFields(['confirm'])
+        container.scrollTop = 0
         return Promise.reject("Password Not Authenticated")
       } else if (res.status === 400){
+        container.scrollTop = 0
         return Promise.reject("Validations Error")
       } else if (res.status === 500){
+        container.scrollTop = 0
         handleServerError(true)
         return Promise.reject("Internal Server Error")
       }
     })
     .then(data => {
-      const spaceIndex = indexOfSpace(data.coach_name)
-      const firstName = data.coach_name.slice(0, spaceIndex)
-      const lastName = data.coach_name.slice(spaceIndex + 1)
+        const spaceParentIndex = indexOfSpace(data.parent_name)
+        const spacePlayerIndex = indexOfSpace(data.player_name)
+        const parentFirstName = data.parent_name.slice(0, spaceParentIndex)
+        const parentLastName = data.parent_name.slice(spaceParentIndex + 1)
+        const playerFirstName = data.player_name.slice(0, spacePlayerIndex)
+        const playerLastName = data.player_name.slice(spacePlayerIndex + 1)
+        const initBirthday = dayjs(data.birthday).format('MM/DD/YYYY')
       handleUpdateUser(data)
       handleSucessfulUpdate(true)
       setAccountFormData({
-        first_name: firstName,
-        last_name: lastName,
-        email: data.email,
+        birthday: initBirthday,
+        parent_first_name: parentFirstName,
+        parent_last_name: parentLastName,
+        player_first_name: playerFirstName,
+        player_last_name: playerLastName,
+        parent_email: parent_email,
+        currPassword: "",
         password: "",
-        currPassword: ""
       })
+      container.scrollTop = 0
       form.resetFields(['currPassword'])
       form.resetFields(['password'])
       form.resetFields(['confirm'])
@@ -157,7 +170,7 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
                 value={accountFormData.player_first_name}
                 onChange={handleChange}
             >
-                <Input name="first_name"/>
+                <Input name="player_first_name"/>
             </Form.Item>
 
             <Form.Item
@@ -167,7 +180,7 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
                 value={accountFormData.player_last_name}
                 onChange={handleChange}
             >
-                <Input name="last_name"/>
+                <Input name="player_last_name"/>
             </Form.Item>
 
             <Form.Item 
@@ -189,7 +202,7 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
                 value={accountFormData.parent_first_name}
                 onChange={handleChange}
             >
-                <Input name="first_name"/>
+                <Input name="parent_first_name"/>
             </Form.Item>
 
             <Form.Item
@@ -199,7 +212,7 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
                 value={accountFormData.parent_last_name}
                 onChange={handleChange}
             >
-                <Input name="last_name"/>
+                <Input name="parent_last_name"/>
             </Form.Item>
         </div>
 

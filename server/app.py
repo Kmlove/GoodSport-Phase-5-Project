@@ -114,7 +114,6 @@ class Players(Resource):
             # Parse the date string from request.json into a Python date object
             birthday_str = request.json['birthday']
             birthday_obj = datetime.strptime(birthday_str, '%Y-%m-%d').date()
-            print(birthday_str, birthday_obj)
 
             new_player = Player(
                 team_id = request.json['team_id'],
@@ -148,16 +147,23 @@ class PlayersById(Resource):
     
     def patch(self, id):
         player = Player.query.filter_by(id=id).first()
-
+ 
         if not player:
             return make_response({"error": ["Player Not Found"]}, 404)
+        
+        # Parse the date string from request.json into a Python date object
+        birthday_str = request.json['birthday']
+        birthday_obj = datetime.strptime(birthday_str, '%Y-%m-%d').date()
         
         if request.json.get("currPassword"):
             if player.authenticate(request.json["currPassword"]):
                 try:
                     del request.json["currPassword"]
                     for attr in request.json:
-                        setattr(player, attr, request.json[attr])
+                        if attr == "birthday":
+                            setattr(player, attr, birthday_obj)
+                        else:
+                            setattr(player, attr, request.json[attr])
                     db.session.add(player)
                     db.session.commit()
                     player_dict = player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
@@ -170,7 +176,10 @@ class PlayersById(Resource):
         else:
             try:
                 for attr in request.json:
-                    setattr(player, attr, request.json[attr])
+                    if attr == "birthday":
+                        setattr(player, attr, birthday_obj)
+                    else:
+                        setattr(player, attr, request.json[attr])
                 db.session.add(player)
                 db.session.commit()
                 player_dict = player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))

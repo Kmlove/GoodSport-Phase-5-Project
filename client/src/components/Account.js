@@ -62,7 +62,6 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
       }
     
       function handleDeleteAccount(e){
-        console.log(e)
         mainContainer.classList.add("blur")
         popup.classList.remove("hidden")
       }
