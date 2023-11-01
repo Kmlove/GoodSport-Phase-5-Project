@@ -101,7 +101,7 @@ def create_coaches(clubs):
         club = clubs[0],
         coach_name = "Kim Love",
         email = "kim1@email.com",
-        password_hash = "password1"
+        password_hash = "Password1"
     )
     coaches.append(kim)
     
@@ -140,7 +140,7 @@ def create_players(teams):
         birthday = fake.date_between_dates(date_start=datetime(2009, 1, 1), date_end=datetime(2009, 12, 31)),
         parent_name = "Holly Atha",
         parent_email = "holly1@email.com",
-        password_hash = "password1",
+        password_hash = "Password1",
         gender = "F"
     )
     players.append(player)

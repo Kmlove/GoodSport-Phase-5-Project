@@ -63,17 +63,34 @@ class CoachesById(Resource):
         if not coach:
             return make_response({"error": ["Coach Not Found"]}, 404)
         
-        try:
-            for attr in request.json:
-                setattr(coach, attr, request.json[attr])
-            db.session.add(coach)
-            db.session.commit()
-            coach_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
-            return make_response(coach_dict, 202)
-        except ValueError as error:
-            response = jsonify({"Validation Error": [str(error)]})
-            return make_response(response, 400)
-        
+        if request.json.get("currPassword"):
+            if coach.authenticate(request.json["currPassword"]):
+                try:
+                    del request.json["currPassword"]
+                    for attr in request.json:
+                        setattr(coach, attr, request.json[attr])
+                    db.session.add(coach)
+                    db.session.commit()
+                    coach_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+                    return make_response(coach_dict, 202)
+                except ValueError as error:
+                    response = jsonify({"Validation Error": [str(error)]})
+                    return make_response(response, 400)
+            else:
+                return make_response({"error": ["Password not authenticated"]}, 401)
+        else:
+            try:
+                for attr in request.json:
+                    setattr(coach, attr, request.json[attr])
+                db.session.add(coach)
+                db.session.commit()
+                coach_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+                return make_response(coach_dict, 202)
+            except ValueError as error:
+                response = jsonify({"Validation Error": [str(error)]})
+                return make_response(response, 400)
+
+            
     def delete(self, id):
         coach = Coach.query.filter_by(id=id).first()
 
