@@ -5,6 +5,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 
 # Local imports
 from config import db
+from .event import Event
 
 class Team(db.Model, SerializerMixin):
     __tablename__ = 'teams'
@@ -20,6 +21,7 @@ class Team(db.Model, SerializerMixin):
     events = db.relationship('Event', back_populates='team', cascade='all, delete-orphan')
     players = db.relationship('Player', back_populates='team', cascade='all, delete-orphan')
     club = db.relationship('Club', back_populates='teams')
+    coaches = association_proxy("events", "coach", creator= lambda coach_obj : Event(coach=coach_obj))
 
     # serialize rules
     serialize_rules = ('-events.team', '-players.team', '-club.teams')
