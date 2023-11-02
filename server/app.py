@@ -196,6 +196,8 @@ class PlayersById(Resource):
         
         db.session.delete(player)
         db.session.commit()
+        session['user_id'] = None
+        session['is_admin'] = None
         return make_response({}, 204)
 api.add_resource(PlayersById, '/players/<int:id>')
 
@@ -385,7 +387,7 @@ api.add_resource(Login, '/login')
 
 class AutoLogin(Resource):
     def get(self):
-        if session['user_id']:
+        if session.get('user_id'):
             if session['is_admin'] == True:
                 user = Coach.query.filter_by(id=session['user_id']).first()
             elif session['is_admin'] == False:
