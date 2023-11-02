@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Form, Input, Button, Alert } from 'antd';
+import "../CSS/loginStyles.css"
 
 function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert}) {
   const navigate = useNavigate()
@@ -52,23 +53,21 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
   }
 
   return (
-    <>
+    <div id="login">
       {showServerErrorAlert? <Alert message="INTERNAL SERVER ERROR: please try again later!" type="error" banner closable showIcon /> : null}
 
       {hasAccount? null : <Alert message="Sorry, we didn't recognize that email or password, please try again!" type="error" banner showIcon />}
 
       <Form 
         form={form}
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 10,
-        }}
+        className="form"
+        // labelCol={{
+        //   span: 8,
+        // }}
+        // style={{
+        //   maxWidth: 600,
+        // }}
         layout="vertical"
-        style={{
-          maxWidth: 600,
-        }}
         initialValues={{
           remember: true,
         }}
@@ -80,6 +79,7 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
         <Form.Item
           name="email"
           label="E-mail"
+          className="form-item"
           value={loginForm.email}
           onChange={handleChange}
           rules={[
@@ -93,12 +93,13 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
             },
           ]}
         >
-          <Input name="email"/>
+          <Input name="email" className="input"/>
         </Form.Item>
 
         <Form.Item
           name="password"
           label="Password"
+          className="form-item"
           value={loginForm.password}
           onChange={handleChange}
           rules={[
@@ -109,24 +110,25 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
           ]}
           hasFeedback
         >
-          <Input.Password name="password"/>
+          <Input.Password name="password" className="input"/>
         </Form.Item>
         
         <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
+          // wrapperCol={{
+          //   offset: 8,
+          //   span: 16,
+          // }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="button">
             Login
           </Button>
         </Form.Item>
 
       </Form>
 
-      <button onClick={() => navigate('/signup')}>Sign Up</button>
-    </>
+      <p>Don't have an account?</p>    
+      <button onClick={() => navigate('/signup')} className="signup-button">Sign Up</button>
+    </div>
   )
 }
 

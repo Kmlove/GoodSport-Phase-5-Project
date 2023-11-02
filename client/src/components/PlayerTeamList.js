@@ -44,7 +44,7 @@ function PlayerTeamList({user}) {
         }
 
         return (
-            <div>
+            <div className="right">
                 <h2>My Team</h2>
                 <p>{team_name}</p>
                 <p>{club.club_name}</p>

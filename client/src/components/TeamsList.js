@@ -12,9 +12,9 @@ function TeamsList({user, teams, events}) {
     )
   } else {
     return (
-      <div className="right">
+      <>
         {user.is_admin? <CoachTeamList user={user} teams={teams} events={events}/> : <PlayerTeamList user={user}/>}
-      </div>
+      </>
     )
   }
 

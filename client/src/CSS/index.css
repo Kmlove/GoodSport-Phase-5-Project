@@ -1,15 +1,20 @@
 * {
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 96%;
   margin: 15px auto;
-  height: 97vh;
+  height: fit-content;
 }
 
-.mainPageContainer {
+#pageContainer {
+  border: 1px solid black;
+}
+
+#mainPageContainer {
   height: calc(97vh - 100px);
   display: flex;
 }
@@ -18,4 +23,9 @@ body {
   border: 1px solid red;
   width: 88%;
   overflow-y: scroll;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
 }

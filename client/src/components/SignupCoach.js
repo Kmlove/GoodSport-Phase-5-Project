@@ -66,20 +66,21 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
   }
   
   return (
-    <>
+    <div id="signup-coach">
       {showServerErrorAlert? <Alert message="INTERNAL SERVER ERROR: please try again later!" type="error" banner closable showIcon /> : null}
-
+      <p>Create A Coach Account Below:</p>
       <Form 
         labelCol={{
           span: 8,
         }}
-        wrapperCol={{
-          span: 10,
-        }}
+        // wrapperCol={{
+        //   span: 10,
+        // }}
         layout="vertical"
-        style={{
-          maxWidth: 600,
-        }}
+        // style={{
+        //   maxWidth: 600,
+        // }}
+        className="form"
         initialValues={{
           remember: true,
         }}
@@ -89,6 +90,7 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
         <Form.Item
           name="first_name"
           label="First Name"
+          className="form-item"
           value={signupForm.first_name}
           onChange={handleChange}
           rules={[
@@ -98,12 +100,13 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
             },
           ]}
         >
-          <Input name="first_name"/>
+          <Input name="first_name" className="input"/>
         </Form.Item>
 
         <Form.Item
           name="last_name"
           label="Last Name"
+          className="form-item"
           value={signupForm.last_name}
           onChange={handleChange}
           rules={[
@@ -113,12 +116,13 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
             },
           ]}
         >
-          <Input name="last_name"/>
+          <Input name="last_name" className="input"/>
         </Form.Item>
 
         <Form.Item
           name="email"
           label="E-mail"
+          className="form-item"
           value={signupForm.email}
           onChange={handleChange}
           rules={[
@@ -132,12 +136,13 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
             },
           ]}
         >
-          <Input name="email"/>
+          <Input name="email" className="input"/>
         </Form.Item>
 
         <Form.Item
           name="password"
           label="Password"
+          className="form-item"
           value={signupForm.password}
           onChange={handleChange}
           rules={[
@@ -152,12 +157,13 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
           ]}
           hasFeedback
         >
-          <Input.Password name="password"/>
+          <Input.Password name="password" className="input"/>
         </Form.Item>
 
         <Form.Item
           name="confirm"
           label="Confirm Password"
+          className="form-item"
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -175,12 +181,13 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
             }),
           ]}
         >
-          <Input.Password />
+          <Input.Password className="input"/>
         </Form.Item>
 
         <Form.Item
           name="club_id"
           label="Select Your Club:"
+          className="form-item"          
           value={signupForm.club_id}
           rules={[
             {
@@ -192,26 +199,30 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
           <Select
             onChange={handleSelectChange}
             allowClear
+            style={{height: "46px"}}
           >
             {clubs.map(club => <Option key={club.id} value={club.id}>{club.club_name}</Option>)}
           </Select>
         </Form.Item>
         
         <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
+          // wrapperCol={{
+          //   offset: 8,
+          //   span: 16,
+          // }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="button">
             Sign Up
           </Button>
         </Form.Item>
 
       </Form>
-
-      <button onClick={() => navigate('/')}>Login</button>
-    </>
+      
+      <div className="have-account">
+        <p>Alredy Have An Account?</p>
+        <button onClick={() => navigate('/')} className="login-button">Login</button>
+      </div>
+    </div>
   )
 }
 

@@ -56,37 +56,40 @@ function App() {
   }, [ showServerErrorAlert ]);
 
   return (
-    <div >
+    <>
       {loggedInOrSignedUp ? 
         <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/> : 
         (
-          <Routes>
-            <Route 
-              path="/" 
-              element={
-                <Login 
-                  handleLoginorSignUp={handleLoginorSignUp} 
-                  handleSetUser={handleSetUser}
-                  showServerErrorAlert={showServerErrorAlert}
-                  handleShowServerErrorAlert={handleShowServerErrorAlert}
-                />
-              } 
-            />
-            <Route 
-              path="/signup" 
-              element={
-                <Signup 
-                  handleLoginorSignUp={handleLoginorSignUp} 
-                  handleSetUser={handleSetUser}
-                  showServerErrorAlert={showServerErrorAlert}
-                  handleShowServerErrorAlert={handleShowServerErrorAlert}
-                />
-              } 
-            />
-          </Routes>
+          <>
+            <h1>GoodSport</h1>
+            <Routes>
+              <Route 
+                path="/" 
+                element={
+                  <Login 
+                    handleLoginorSignUp={handleLoginorSignUp} 
+                    handleSetUser={handleSetUser}
+                    showServerErrorAlert={showServerErrorAlert}
+                    handleShowServerErrorAlert={handleShowServerErrorAlert}
+                  />
+                } 
+              />
+              <Route 
+                path="/signup" 
+                element={
+                  <Signup 
+                    handleLoginorSignUp={handleLoginorSignUp} 
+                    handleSetUser={handleSetUser}
+                    showServerErrorAlert={showServerErrorAlert}
+                    handleShowServerErrorAlert={handleShowServerErrorAlert}
+                  />
+                } 
+              />
+            </Routes>
+          </>
         )}  
 
-    </div>
+    </>
   );
 }
 

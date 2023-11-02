@@ -157,7 +157,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
             eventsToDisplay = user.team.events.sort(compareEventsByDate)
         }
       return (
-        <>
+        <div id="pageContainer">
             <div id="delete-account-popup" className="hidden">
                 <p>Are you sure you want to delete your account?</p>
                 <button onClick={handleYesClick}>YES</button>
@@ -165,7 +165,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
             </div>
 
             <Header />
-            <div className="mainPageContainer">
+            <div id="mainPageContainer">
                 <NavBar user={user}/>
                 <Routes>
                     <Route 
@@ -257,7 +257,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                     />
                 </Routes>
             </div>
-        </>
+        </div>
       )
     }
 

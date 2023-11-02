@@ -107,20 +107,23 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
   };
 
   return (
-    <>
+    <div id="signup-player">
       {showServerErrorAlert? <Alert message="INTERNAL SERVER ERROR: please try again later!" type="error" banner closable showIcon /> : null}
+
+      <p>Create A Player Account Below:</p>
 
       <Form 
         labelCol={{
-          span: 8,
+          span: 15,
         }}
-        wrapperCol={{
-          span: 10,
-        }}
+        // wrapperCol={{
+        //   span: 10,
+        // }}
         layout="vertical"
-        style={{
-          maxWidth: 600,
-        }}
+        // style={{
+        //   maxWidth: 600,
+        // }}
+        className='form'
         initialValues={{
           remember: true,
         }}
@@ -131,6 +134,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
         <Form.Item
           name="parent_email"
           label="E-mail"
+          className="form-item"
           value={newPlayerFormData.parent_email}
           onChange={handleChange}
           rules={[
@@ -144,12 +148,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             },
           ]}
         >
-          <Input />
+          <Input className='input'/>
         </Form.Item>
 
         <Form.Item
           name="password"
           label="Password"
+          className="form-item"
           value={newPlayerFormData.password}
           onChange={handleChange}
           rules={[
@@ -164,12 +169,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
           ]}
           hasFeedback
         >
-          <Input.Password />
+          <Input.Password className='input'/>
         </Form.Item>
 
         <Form.Item
           name="confirm"
           label="Confirm Password"
+          className="form-item"
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -187,12 +193,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             }),
           ]}
         >
-          <Input.Password />
+          <Input.Password className='input' />
         </Form.Item>
 
         <Form.Item 
           label="Team" 
           name="team_id"
+          className="form-item"
           value={newPlayerFormData.team_id}
           rules={[
             {
@@ -205,12 +212,14 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             onChange={handleSelectChange} 
             options={clubsOptions} 
             placeholder="Please select a team..." 
+            style={{height: "46px"}}
           />
         </Form.Item>
 
         <Form.Item
           name="parent_first_name"
           label="Parent First Name"
+          className="form-item"
           value={newPlayerFormData.parent_first_name}
           onChange={handleChange}
           rules={[
@@ -220,12 +229,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             },
           ]}
         >
-          <Input name="parent_first_name"/>
+          <Input name="parent_first_name" className='input'/>
         </Form.Item>
 
         <Form.Item
           name="parent_last_name"
           label="Parent Last Name"
+          className="form-item"
           value={newPlayerFormData.parent_last_name}
           onChange={handleChange}
           rules={[
@@ -235,12 +245,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             },
           ]}
         >
-          <Input name="parent_last_name"/>
+          <Input name="parent_last_name" className='input'/>
         </Form.Item>
 
         <Form.Item
           name="player_first_name"
           label="Player First Name"
+          className="form-item"
           value={newPlayerFormData.player_first_name}
           onChange={handleChange}
           rules={[
@@ -250,12 +261,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             },
           ]}
         >
-          <Input name="player_first_name"/>
+          <Input name="player_first_name" className='input'/>
         </Form.Item>
 
         <Form.Item
           name="player_last_name"
           label="Player Last Name"
+          className="form-item"
           value={newPlayerFormData.player_last_name}
           onChange={handleChange}
           rules={[
@@ -265,12 +277,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             },
           ]}
         >
-          <Input name="player_last_name"/>
+          <Input name="player_last_name" className='input'/>
         </Form.Item>
 
         <Form.Item 
           label="Player Birthday" 
           name="birthday"
+          className="form-item"
           value={newPlayerFormData.birthday}
           rules={[
             {
@@ -285,6 +298,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
         <Form.Item
           name="gender"
           label="Gender"
+          className="form-item"
           value={newPlayerFormData.gender}
           rules={[
             {
@@ -296,6 +310,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             placeholder="Please select a player gender..."
             onChange={handleSelectChange}
             allowClear
+            style={{height: "46px"}}
           >
             <Option value="M">Male</Option>
             <Option value="F">Female</Option>
@@ -303,20 +318,24 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
         </Form.Item>
         
         <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
+          // wrapperCol={{
+          //   offset: 8,
+          //   span: 16,
+          // }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className='button'>
             Sign Up
           </Button>
         </Form.Item>
 
       </Form>
-
-      <button onClick={() => navigate('/')}>Login</button>
-    </>
+      
+      <div className='have-account'>
+        <p>Alredy Have An Account?</p>
+        <button onClick={() => navigate('/')} className='login-button'>Login</button>
+      </div>
+      
+    </div>
   )
 }
 

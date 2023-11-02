@@ -44,7 +44,7 @@ function Team() {
         }
 
         return (
-            <div>
+            <div className="right">
                 <p>{team_name}</p>
                 <p>{club.club_name}</p>
                 <p>{gender === "F"? `G${age_group}`: {age_group}}</p>
