@@ -231,7 +231,7 @@ class TeamsById(Resource):
         if not team:
             return make_response({"error": ["Team Not Found"]}, 404)
         
-        team_to_dict = team.to_dict(rules=('-club', '-events.coach', '-events.team_id', '-players._password_hash', '-players.team_id', '-players.is_admin'))
+        team_to_dict = team.to_dict(rules=( '-events.coach', '-events.team_id', '-players._password_hash', '-players.team_id', '-players.is_admin'))
         return make_response(team_to_dict, 200)
     
     def patch(self, id):

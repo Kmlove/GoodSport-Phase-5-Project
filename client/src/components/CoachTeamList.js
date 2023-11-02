@@ -1,4 +1,4 @@
-import TeamCard from "./TeamCard"
+import TeamListCard from "./TeamListCard"
 
 function CoachTeamList({user, teams, events}) {
     const team_ids = events.map(event => event.team_id)
@@ -21,7 +21,7 @@ function CoachTeamList({user, teams, events}) {
   return (
     <>
         <h2>My Teams</h2>
-        {myTeams.map(team => <TeamCard key={team.id} team={team}/>)}
+        {myTeams.map(team => <TeamListCard key={team.id} team={team}/>)}
     </>
   )
 }
