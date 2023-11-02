@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
-function PlayerTeamList({user}) {
-    const id = user.team.id
+function Team() {
+    const {id} = useParams()
     const [ currTeam, setCurrTeam ] = useState(null)
     const [ coaches, setCoaches ] = useState([])
 
@@ -43,7 +44,6 @@ function PlayerTeamList({user}) {
 
         return (
             <div>
-                <h2>My Team</h2>
                 <p>{team_name}</p>
                 <p>{club.club_name}</p>
                 <p>{gender === "F"? `G${age_group}`: {age_group}}</p>
@@ -79,4 +79,4 @@ function PlayerTeamList({user}) {
 
 }
 
-export default PlayerTeamList
+export default Team

@@ -9,6 +9,7 @@ import Schedule from "./Schedule";
 import Account from "./Account";
 import EventForm from "./EventForm"
 import Event from "./Event";
+import Team from "./Team";
 
 function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const [events, setEvents] = useState([])
@@ -244,6 +245,10 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                                 showSuccessfulAddAlert={showSuccessfulAddAlert}
                             />
                         } 
+                    />
+                    <Route
+                        path="/teams/:id"
+                        element={<Team />}
                     />
                 </Routes>
             </div>
