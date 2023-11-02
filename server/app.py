@@ -378,7 +378,7 @@ class Login(Resource):
                 coach_to_dict = user.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
                 return make_response(coach_to_dict, 200)
             elif user.is_admin == False:
-                player_dict = user.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+                player_dict = user.to_dict(rules=('-_password_hash', '-team.events.coach', '-team.events.team_id', '-team_id'))
                 return make_response(player_dict, 200)
         else:
             return make_response({"error": ["User Not Found"]}, 404)
@@ -398,7 +398,7 @@ class AutoLogin(Resource):
                     coach_to_dict = user.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
                     return make_response(coach_to_dict, 200)
                 elif user.is_admin == False:
-                    player_dict = user.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))
+                    player_dict = user.to_dict(rules=('-_password_hash', '-team.events.coach', '-team.events.team_id', '-team_id'))
                     return make_response(player_dict, 200)
             else:
                 return make_response({"Errors": "User not found"}, 404)

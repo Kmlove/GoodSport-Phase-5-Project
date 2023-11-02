@@ -22,7 +22,6 @@ function Team() {
         return <h3>Loading...</h3>
 
     } else {
-        console.log(currTeam)
         const {age_group, club, events, gender, id, players, sport, team_name} = currTeam
 
         const coach_ids = events.map(event => event.coach_id)
@@ -42,7 +41,6 @@ function Team() {
                 }
             }
         }
-        console.log(myCoaches)
 
         return (
             <div>
