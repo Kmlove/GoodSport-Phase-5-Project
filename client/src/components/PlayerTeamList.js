@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 function PlayerTeamList({user}) {
     const id = user.team.id
+    const navigate = useNavigate()
     const [ currTeam, setCurrTeam ] = useState(null)
     const [ coaches, setCoaches ] = useState([])
 
@@ -63,7 +65,7 @@ function PlayerTeamList({user}) {
                     <div>
                         Players: {players.map(player => {
                             return (
-                                <p key={player.id}>
+                                <p key={player.id} onClick={() => navigate(`/players/${player.id}`)}>
                                     {player.player_name}
                                 </p>
                             )

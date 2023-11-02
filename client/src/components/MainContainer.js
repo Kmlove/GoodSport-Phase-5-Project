@@ -10,6 +10,7 @@ import Account from "./Account";
 import EventForm from "./EventForm"
 import Event from "./Event";
 import Team from "./Team";
+import Player from "./Player";
 
 function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const [events, setEvents] = useState([])
@@ -249,6 +250,10 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                     <Route
                         path="/teams/:id"
                         element={<Team />}
+                    />
+                    <Route
+                        path="/players/:id"
+                        element={<Player />}
                     />
                 </Routes>
             </div>
