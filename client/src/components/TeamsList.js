@@ -1,12 +1,23 @@
 import CoachTeamList from "./CoachTeamList";
 import PlayerTeamList from "./PlayerTeamList";
 
-function TeamsList({user, teams}) {
-  return (
-    <div className="right">
-      {user.is_admin? <CoachTeamList user={user} teams={teams}/> : <PlayerTeamList />}
-    </div>
-  )
+function TeamsList({user, teams, events}) {
+
+  if (events.length === 0){
+    return (
+        <div className="right">
+            <h2>My Teams</h2>
+            <h4>You Do Not Have Any Teams Yet...</h4>
+        </div>
+    )
+  } else {
+    return (
+      <div className="right">
+        {user.is_admin? <CoachTeamList user={user} teams={teams} events={events}/> : <PlayerTeamList />}
+      </div>
+    )
+  }
+
 }
 
 export default TeamsList;

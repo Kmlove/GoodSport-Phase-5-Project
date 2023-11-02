@@ -38,7 +38,7 @@ class Coaches(Resource):
             )
             db.session.add(new_coach)
             db.session.commit()
-            new_coach_dict = new_coach.to_dict(rules=('-_password_hash', '-club', '-events'))
+            new_coach_dict = new_coach.to_dict(rules=('-_password_hash', ))
             session['user_id'] = new_coach.id
             session['is_admin'] = new_coach.is_admin
             return make_response(new_coach_dict, 201)

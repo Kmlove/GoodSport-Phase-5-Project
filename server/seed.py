@@ -73,7 +73,15 @@ def create_teams(clubs):
         gender = 'M'
     )
 
-    teams.extend([t1, t2, t3, t4])
+    t5 = Team(
+        club = clubs[0],
+        team_name = 'Spirit',
+        sport = 'Soccer',
+        age_group = 'U16',
+        gender = 'F'
+    )
+
+    teams.extend([t1, t2, t3, t4, t5])
 
     return teams
 
@@ -179,6 +187,24 @@ def create_events(teams, coaches):
 
         event = Event(
             team = teams[0],
+            coach = coaches[3],
+            event_type = rc(events_types),
+            date = fake.future_date(),
+            event_time = new_time1 + " - " + new_time2,
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
+        )
+        events.append(event)
+
+    for _ in range(10):
+        time1 = fake.time()
+        new_time1 = time1[:-3] + " pm"
+
+        time2 = fake.time()
+        new_time2 = time2[:-3] + " pm"
+
+        event = Event(
+            team = teams[4],
             coach = coaches[3],
             event_type = rc(events_types),
             date = fake.future_date(),

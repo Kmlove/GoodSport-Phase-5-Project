@@ -154,7 +154,6 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
         } else if (user.is_admin === false){
             eventsToDisplay = user.team.events.sort(compareEventsByDate)
         }
-
       return (
         <>
             <div id="delete-account-popup" className="hidden">
@@ -188,6 +187,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                             <TeamsList 
                                 user={user}
                                 teams={teams}
+                                events={eventsToDisplay} 
                             />
                         } 
                     />
