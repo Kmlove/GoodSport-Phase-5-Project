@@ -1,11 +1,11 @@
 .add-event-button {
-    width: 150px;
-    padding: 12px;
+    width: 130px;
+    padding: 10px;
     background-color: #845BB3;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 12px !important;
     cursor: pointer;
     display: flex;
     align-items: center;

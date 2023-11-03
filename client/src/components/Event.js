@@ -112,10 +112,10 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
           <p><strong>Location:</strong> <span id="location" className="value">{location}</span></p>
           <p><strong>Notes:</strong> <span id="notes" className="value">{notes}</span></p>
           {user.is_admin ? (
-            <>
+            <div id="event-edit-delete-buttons">
               <button onClick={handleDeleteClick} className='event-delete-button'>Delete Event</button>
               <button onClick={handleEditClick} className='event-edit-button'>Edit Event</button>
-            </>
+            </div>
             ) : null
           }
           

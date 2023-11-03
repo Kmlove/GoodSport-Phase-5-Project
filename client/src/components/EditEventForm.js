@@ -91,16 +91,18 @@ function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleClose
 
   return (
     <Form
+      className="form edit-event"
+      layout="horizontal"
       labelCol={{
         span: 8,
       }}
       wrapperCol={{
-        span: 16,
+        span: 10,
       }}
-      layout="horizontal"
       size="large"
       style={{
-        maxWidth: 600,
+        // maxWidth: 800,
+        margin: "30px auto 0 auto",
       }}
       onFinish={handleSubmit}
     >
@@ -130,9 +132,9 @@ function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleClose
           <TextArea rows={4} name='notes' value={editEventFormData.notes} onChange={handleTextChange}/>
       </Form.Item>
 
-      <Form.Item >
-        <Button type="primary" htmlType="submit">
-          Submit
+      <Form.Item  wrapperCol={{offset: 10}}>
+        <Button type="primary" htmlType="submit" className="edit-event-submit-button" >
+          Update Event
         </Button>
       </Form.Item>
     </Form>
