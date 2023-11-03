@@ -1,8 +1,9 @@
 import CoachAccount from "./CoachAccount"
 import PlayerAccount from "./PlayerAccount"
 import { Alert } from 'antd';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoggedOutContext } from "../context/loggedOut";
 
 function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, popup, deleteError}) {
 
@@ -11,6 +12,7 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
     const [ successfulUpdate, setSuccessfulUpdate ] = useState(false)
     const [ passwordError, setPasswordError ] = useState(false)
     const [ serverError, setServerError ] = useState(false)
+    const { handleChangeLoggedOutAlert } = useContext(LoggedOutContext)
 
     useEffect(() => {
         if (successfulUpdate) {
@@ -57,6 +59,7 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
           method: "DELETE",
         })
         .then(() => {
+          handleChangeLoggedOutAlert(true)
           handleLoginorSignUp(false)
           navigate('/')
         })

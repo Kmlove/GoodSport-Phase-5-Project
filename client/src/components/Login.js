@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { Form, Input, Button, Alert } from 'antd';
 import "../CSS/loginStyles.css"
+import { LoggedOutContext } from "../context/loggedOut";
 
 function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert}) {
   const navigate = useNavigate()
@@ -12,16 +13,7 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
   }
   const [loginForm, setLoginForm] = useState(initialValue)
   const [hasAccount, setHasAccount] = useState(true)
-  const [loggedOut, setLoggedOut] = useState(false)
-  const [deletedAccountAlert, setDeletedAccountAlert] = useState(false)
-
-  function handleChangeLoggedOutAlert(value){
-    setLoggedOut(value)
-  }
-
-  function handleDeleteAccountAlert(value){
-    setDeletedAccountAlert(value)
-  }
+  const { loggedOut } = useContext(LoggedOutContext)
 
   function handleChange(e){
     const {name, value} = e.target
@@ -68,7 +60,7 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
 
       {hasAccount? null : <Alert message="Sorry, we didn't recognize that email or password, please try again!" type="error" banner showIcon className="alert"/>}
 
-      {true? <Alert message="You've successfully logged out! " type="success" banner showIcon className="alert"/> : null}
+      {loggedOut? <Alert message="You've successfully logged out! " type="success" banner showIcon className="alert"/> : null}
 
       {true? <Alert message="Your account has been successfully deleted!" type="success" banner showIcon className="alert"/> : null}
 

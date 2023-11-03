@@ -3,12 +3,25 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import MainContainer from "./MainContainer";
+import { LoggedOutContext } from "../context/loggedOut";
+import { DeleteAlertContext } from "../context/deleteAccountAlert";
 
 function App() {
   const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)
   const [user, setUser] = useState('')
   const [showServerErrorAlert, setShowServerErrorAlert] = useState(false)
   const navigate = useNavigate()
+
+  const [loggedOut, setLoggedOut] = useState(false)
+  const [deletedAccountAlert, setDeletedAccountAlert] = useState(false)
+
+  function handleChangeLoggedOutAlert(value){
+    setLoggedOut(value)
+  }
+
+  function handleDeleteAccountAlert(value){
+    setDeletedAccountAlert(value)
+  }
 
   function handleLoginorSignUp(value){
     setLoggedInOrSignedUp(value)
@@ -56,7 +69,7 @@ function App() {
   // }, [ showServerErrorAlert ]);
 
   return (
-    <>
+    <LoggedOutContext.Provider value={{loggedOut, handleChangeLoggedOutAlert}}>
       {loggedInOrSignedUp ? 
         <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/> : 
         (
@@ -92,7 +105,7 @@ function App() {
           </>
         )}  
 
-    </>
+    </LoggedOutContext.Provider>
   );
 }
 
