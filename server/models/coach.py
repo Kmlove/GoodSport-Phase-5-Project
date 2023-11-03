@@ -24,7 +24,7 @@ class Coach(db.Model, SerializerMixin):
     teams = association_proxy("events", "team", creator=lambda team_obj : Event(team=team_obj))
 
     # serialize rules
-    serialize_rules = ('-events.coach', '-club.coaches')
+    serialize_rules = ('-events.coach', '-club.coaches', '-_password_hash')
 
     # password hash and validations
     @hybrid_property

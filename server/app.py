@@ -54,7 +54,7 @@ class CoachesById(Resource):
         if not coach:
             return make_response({"error": ["Coach Not Found"]}, 404)
         
-        coach_to_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+        coach_to_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team', "teams", "-teams.events", "-teams.players", "-teams.club"))
         return make_response(coach_to_dict, 200)
     
     def patch(self, id):
@@ -231,7 +231,7 @@ class TeamsById(Resource):
         if not team:
             return make_response({"error": ["Team Not Found"]}, 404)
         
-        team_to_dict = team.to_dict(rules=( '-events.coach', '-events.team_id', '-players._password_hash', '-players.team_id', '-players.is_admin'))
+        team_to_dict = team.to_dict(rules=( '-events.coach', '-events.team_id', '-players._password_hash', '-players.team_id', '-players.is_admin', 'coaches', '-coaches.events', '-coaches.club'))
         return make_response(team_to_dict, 200)
     
     def patch(self, id):
