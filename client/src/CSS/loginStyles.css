@@ -32,6 +32,10 @@
     border-radius: 5px;
     font-size: 16px;
 }
+
+.input:hover {
+    border-color: #845BB3;
+}
   
 .button {
     width: 100%;

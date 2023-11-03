@@ -159,8 +159,10 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
         <div id="pageContainer">
             <div id="delete-account-popup" className="hidden">
                 <p>Are you sure you want to delete your account?</p>
-                <button onClick={handleYesClick}>YES</button>
-                <button onClick={handleNoClick}>NO</button>
+                <div id="popup-buttons-container">
+                    <button onClick={handleYesClick} className="popup-button">YES</button>
+                    <button onClick={handleNoClick} className="popup-button">NO</button>
+                </div>
             </div>
 
             <Header />

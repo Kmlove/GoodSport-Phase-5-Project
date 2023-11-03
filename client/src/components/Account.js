@@ -69,8 +69,10 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
   return (
     <div className="right">
         <h2 className="containerHeaders">Account Information</h2>
-        <button onClick={handleLogoutClick}>Log Out</button>
-        <button onClick={handleDeleteAccount}>Delete Account</button>
+        <div id="account-buttons-container">
+          <button onClick={handleLogoutClick} className="account-button">Log Out</button>
+          <button onClick={handleDeleteAccount} className="account-button">Delete Account</button>
+        </div>
 
         {successfulUpdate? <Alert message="Account Successfully Updated!" type="success" banner closable showIcon /> : null}
         {passwordError? <Alert message="The current password you entered did not match what we have on file, please try again." type="error" banner closable showIcon /> : null}

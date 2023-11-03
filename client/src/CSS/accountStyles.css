@@ -1,13 +1,29 @@
-#coach-account-form, #player-account-form {
+.account-form {
     margin: 0 auto;
+    width: 100%;
 }
 
-#profile-information, #player-information, #parent-information {
-    border: 1px solid black;
+.account-form-section {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-#login-information {
-    border: 1px solid black;
+.account-form-section h3 {
+    color: #845BB3;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+#profile-information h3, #player-information h3{
+    margin-bottom: 0px;
+}
+
+.player-account-birthday:hover {
+    border-color: #845BB3;
 }
 
 .hidden {
@@ -20,9 +36,66 @@
 }
 
 #delete-account-popup{
-    border: 1px solid black;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
     position: absolute;
     left: 40%;
     top: 40%;
     z-index: 1;
+}
+
+#account-buttons-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+.account-button {
+    width: 120px;
+    padding: 8px;
+    background-color: #845BB3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    /* Font styles */
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase; /* Convert text to uppercase */
+}
+  
+.account-button:hover {
+    background-color: #D0BDf4;
+    text-decoration: none;
+}
+
+#popup-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.popup-button {
+    width: 50px;
+    padding: 5px;
+    background-color: #845BB3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+    cursor: pointer;
+
+    /* Font styles */
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase; /* Convert text to uppercase */
+}
+
+.popup-button:hover {
+    background-color: #D0BDf4;
+    text-decoration: none;
 }

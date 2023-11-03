@@ -107,9 +107,9 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
       labelCol={{
         span: 8,
       }}
-      wrapperCol={{
-        span: 10,
-      }}
+      // wrapperCol={{
+      //   span: 10,
+      // }}
       layout="vertical"
       style={{
         maxWidth: 600,
@@ -119,41 +119,45 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
       }}
       onFinish={handleSubmit}
       autoComplete="off"
+      className="account-form"
       id="coach-account-form"
     >
-      <div id="profile-information">
+      <div id="profile-information" className="account-form-section">
         <h3>Profile Information</h3>
         <div>
           <img />
           <Form.Item
             name="first_name"
             label="First Name"
+            className="form-item"
             initialValue={accountFormData.first_name}
             value={accountFormData.first_name}
             onChange={handleChange}
           >
-            <Input name="first_name"/>
+            <Input name="first_name" className="input"/>
           </Form.Item>
 
           <Form.Item
             name="last_name"
             label="Last Name"
+            className="form-item"
             initialValue={accountFormData.last_name}
             value={accountFormData.last_name}
             onChange={handleChange}
           >
-            <Input name="last_name"/>
+            <Input name="last_name" className="input"/>
           </Form.Item>
 
         </div>
       </div>
 
-      <div id="login-information">
+      <div id="login-information" className="account-form-section">
         <h3>Log In Information</h3>
         <div>
         <Form.Item
           name="email"
           label="E-mail"
+          className="form-item"
           initialValue={accountFormData.email}
           onChange={handleChange}
           rules={[
@@ -163,21 +167,23 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
             }
           ]}
         >
-          <Input name="email"/>
+          <Input name="email" className="input"/>
         </Form.Item>
 
         <Form.Item
           name="currPassword"
           label="Current Password"
+          className="form-item"
           value={accountFormData.currPassword}
           onChange={handleChange}
         >
-          <Input.Password name="currPassword"/>
+          <Input.Password name="currPassword" className="input"/>
         </Form.Item>
 
         <Form.Item
           name="password"
           label="New Password"
+          className="form-item"
           value={accountFormData.password}
           onChange={handleChange}
           rules={[
@@ -199,12 +205,13 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
             }),
           ]}
         >
-          {accountFormData.currPassword? <Input.Password name="password"/> : <Input.Password disabled name="password"/>}
+          {accountFormData.currPassword? <Input.Password name="password" className="input"/> : <Input.Password disabled name="password" className="input"/>}
         </Form.Item>
 
         <Form.Item
           name="confirm"
           label="Confirm Password"
+          className="form-item"
           dependencies={['password']}
           rules={[
             ({ getFieldValue }) => ({
@@ -221,7 +228,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
             }),
           ]}
         >
-          {accountFormData.currPassword? <Input.Password/>: <Input.Password disabled/>}
+          {accountFormData.currPassword? <Input.Password className="input"/>: <Input.Password disabled className="input"/>}
         </Form.Item>
         </div>
       </div>
@@ -231,7 +238,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
           span: 16,
         }}
       >
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" className="button" style={{width: "150px"}}>
           Save
         </Button>
       </Form.Item>

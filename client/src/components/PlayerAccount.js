@@ -145,9 +145,9 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         labelCol={{
             span: 8,
         }}
-        wrapperCol={{
-            span: 10,
-        }}
+        // wrapperCol={{
+        //     span: 10,
+        // }}
         layout="vertical"
         style={{
             maxWidth: 600,
@@ -158,70 +158,77 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         onFinish={handleSubmit}
         autoComplete="off"
         id="player-account-form"
+        className="account-form"
         >
-        <div id="player-information">
+        <div id="player-information" className="account-form-section">
             <h3>Player Information</h3>
             <div>
             <img />
             <Form.Item
                 name="player_first_name"
                 label="Player First Name"
+                className="form-item"
                 initialValue={accountFormData.player_first_name}
                 value={accountFormData.player_first_name}
                 onChange={handleChange}
             >
-                <Input name="player_first_name"/>
+                <Input name="player_first_name" className="input"/>
             </Form.Item>
 
             <Form.Item
                 name="player_last_name"
                 label="Player Last Name"
+                className="form-item"
                 initialValue={accountFormData.player_last_name}
                 value={accountFormData.player_last_name}
                 onChange={handleChange}
             >
-                <Input name="player_last_name"/>
+                <Input name="player_last_name" className="input"/>
             </Form.Item>
 
             <Form.Item 
                 label="Player Birthday" 
                 name="birthday"
+                className="form-item"
                 value={accountFormData.birthday}
                 >
-                <DatePicker format={dateFormat} defaultValue={dayjs(initBirthday)} onChange={handleDateChange}/>
+                <DatePicker format={dateFormat} defaultValue={dayjs(initBirthday)} onChange={handleDateChange} style={{height: "45px"}} className="player-account-birthday"/>
             </Form.Item>
             </div>
         </div>
 
-        <div id="parent-information">
+        <div id="parent-information" className="account-form-section">
             <h3>Parent Information</h3>
             <Form.Item
                 name="parent_first_name"
                 label="Parent First Name"
+                className="form-item"
                 initialValue={accountFormData.parent_first_name}
                 value={accountFormData.parent_first_name}
                 onChange={handleChange}
             >
-                <Input name="parent_first_name"/>
+                <Input name="parent_first_name" className="input"/>
             </Form.Item>
 
             <Form.Item
                 name="parent_last_name"
                 label="Parent Last Name"
+                className="form-item"
                 initialValue={accountFormData.parent_last_name}
                 value={accountFormData.parent_last_name}
                 onChange={handleChange}
             >
-                <Input name="parent_last_name"/>
+                <Input name="parent_last_name" className="input"/>
             </Form.Item>
         </div>
 
-        <div id="login-information">
+        <div id="login-information" className="account-form-section">
             <h3>Log In Information</h3>
             <div>
             <Form.Item
             name="parent_email"
             label="E-mail"
+            className="form-item"
             initialValue={accountFormData.parent_email}
             onChange={handleChange}
             rules={[
@@ -231,21 +238,23 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
                 }
             ]}
             >
-            <Input name="parent_email"/>
+            <Input name="parent_email" className="input"/>
             </Form.Item>
 
             <Form.Item
             name="currPassword"
             label="Current Password"
+            className="form-item"
             value={accountFormData.currPassword}
             onChange={handleChange}
             >
-            <Input.Password name="currPassword"/>
+            <Input.Password name="currPassword" className="input" />
             </Form.Item>
 
             <Form.Item
             name="password"
             label="New Password"
+            className="form-item"
             value={accountFormData.password}
             onChange={handleChange}
             rules={[
@@ -267,12 +276,13 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
                 }),
             ]}
             >
-            {accountFormData.currPassword? <Input.Password name="password"/> : <Input.Password disabled name="password"/>}
+            {accountFormData.currPassword? <Input.Password name="password" className="input"/> : <Input.Password disabled name="password" className="input"/>}
             </Form.Item>
 
             <Form.Item
             name="confirm"
             label="Confirm Password"
+            className="form-item"
             dependencies={['password']}
             rules={[
                 ({ getFieldValue }) => ({
@@ -289,7 +299,7 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
                 }),
             ]}
             >
-            {accountFormData.currPassword? <Input.Password/>: <Input.Password disabled/>}
+            {accountFormData.currPassword? <Input.Password className="input"/>: <Input.Password disabled className="input"/>}
             </Form.Item>
             </div>
         </div>
@@ -299,7 +309,7 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
             span: 16,
             }}
         >
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" className="button" style={{width: "150px"}}>
             Save
             </Button>
         </Form.Item>

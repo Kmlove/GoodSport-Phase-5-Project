@@ -64,9 +64,9 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
         // labelCol={{
         //   span: 8,
         // }}
-        // style={{
-        //   maxWidth: 600,
-        // }}
+        style={{
+          maxWidth: 600,
+        }}
         layout="vertical"
         initialValues={{
           remember: true,
