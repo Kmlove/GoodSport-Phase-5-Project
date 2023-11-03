@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, popup, deleteError}) {
 
     const navigate = useNavigate()
+    const container = document.querySelector(".right")
     const [ successfulUpdate, setSuccessfulUpdate ] = useState(false)
     const [ passwordError, setPasswordError ] = useState(false)
     const [ serverError, setServerError ] = useState(false)
@@ -74,10 +75,10 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
           <button onClick={handleDeleteAccount} className="account-button">Delete Account</button>
         </div>
 
-        {successfulUpdate? <Alert message="Account Successfully Updated!" type="success" banner closable showIcon /> : null}
-        {passwordError? <Alert message="The current password you entered did not match what we have on file, please try again." type="error" banner closable showIcon /> : null}
-        {serverError? <Alert message="There was an error updating your account, please try again later!" type="error" banner closable showIcon /> : null}
-        {deleteError? <Alert message="There was an error deleting your account, please try again later!" type="error" banner closable showIcon /> : null}
+        {successfulUpdate? <Alert message="Account Successfully Updated!" type="success" banner showIcon className="alert"/> : null}
+        {passwordError? <Alert message="The current password you entered did not match what we have on file, please try again." type="error" banner  showIcon className="alert"/> : null}
+        {serverError? <Alert message="There was an error updating your account, please try again later!" type="error" banner showIcon className="alert"/> : null}
+        {deleteError? <Alert message="There was an error deleting your account, please try again later!" type="error" banner showIcon className="alert"/> : null}
 
         {user.is_admin? (
             <CoachAccount 
@@ -86,6 +87,7 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
                 handleServerError={handleServerError}
                 handlePasswordError={handlePasswordError}
                 handleSucessfulUpdate={handleSucessfulUpdate}
+                container={container}
             />
         ) : (
             <PlayerAccount 
@@ -94,6 +96,7 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
                 handleServerError={handleServerError}
                 handlePasswordError={handlePasswordError}
                 handleSucessfulUpdate={handleSucessfulUpdate}
+                container={container}
             />
         )
     }

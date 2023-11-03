@@ -2,7 +2,7 @@ import "../CSS/accountStyles.css"
 import { Form, Input, Button } from 'antd';
 import { useState } from "react";
 
-function CoachAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate}) {
+function CoachAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
   const {coach_name, email, id} = user
   const spaceIndex = indexOfSpace(coach_name)
   const firstName = coach_name.slice(0, spaceIndex)
@@ -73,10 +73,13 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
         form.resetFields(['currPassword'])
         form.resetFields(['password'])
         form.resetFields(['confirm'])
+        container.scrollTop = 0
         return Promise.reject("Password Not Authenticated")
       } else if (res.status === 400){
+        container.scrollTop = 0
         return Promise.reject("Validations Error")
       } else if (res.status === 500){
+        container.scrollTop = 0
         handleServerError(true)
         return Promise.reject("Internal Server Error")
       }
@@ -94,6 +97,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
         password: "",
         currPassword: ""
       })
+      container.scrollTop = 0
       form.resetFields(['currPassword'])
       form.resetFields(['password'])
       form.resetFields(['confirm'])

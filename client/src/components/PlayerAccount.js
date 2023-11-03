@@ -3,7 +3,7 @@ import { Form, Input, Button, DatePicker } from 'antd';
 import { useState } from "react";
 import dayjs from "dayjs";
 
-function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate}) {
+function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
   const {id, birthday, parent_email, parent_name, player_name} = user
   const dateFormat = 'MM/DD/YYYY';
   const initBirthday = dayjs(birthday).format('MM/DD/YYYY')
@@ -13,7 +13,6 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
   const parentLastName = parent_name.slice(spaceParentIndex + 1)
   const playerFirstName = player_name.slice(0, spacePlayerIndex)
   const playerLastName = player_name.slice(spacePlayerIndex + 1)
-  const container = document.querySelector(".right")
 
   const initialValue = {
     birthday: initBirthday,
