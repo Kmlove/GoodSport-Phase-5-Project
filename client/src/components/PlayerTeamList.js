@@ -45,7 +45,7 @@ function PlayerTeamList({user}) {
 
         return (
             <div className="right">
-                <h2>My Team</h2>
+                <h2 className="containerHeaders">My Team</h2>
                 <p>{team_name}</p>
                 <p>{club.club_name}</p>
                 <p>{gender === "F"? `G${age_group}`: {age_group}}</p>

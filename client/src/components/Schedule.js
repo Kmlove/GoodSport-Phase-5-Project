@@ -20,7 +20,7 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
   } else{
     return (
       <div className="right">
-        <h2>Schedule</h2>
+        <h2 className="containerHeaders">Schedule</h2>
         {user.is_admin? 
           <button onClick={() => navigate('/event/new')}>Add An Event</button> : null
         }

@@ -16,7 +16,7 @@ function Home({events, user, teams, handleDeleteEvent, handleShowSuccessfulDelet
   } else {
     return (
       <div className="right">
-        <h2>Home</h2>
+        <h2 className="containerHeaders">Home</h2>
         <h3>Upcoming Events:</h3>
   
         {showSuccessfulDeleteAlert? <Alert message="Event Successfully Deleted" type="success" banner closable showIcon /> : null}

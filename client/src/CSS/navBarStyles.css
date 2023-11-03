@@ -1,9 +1,13 @@
 .navBarContainer {
-    border-right: 1px solid black;
+    border-right: 1px solid #ccc;
     /* width: 200px; */
     width: 12%;
     text-align: center;
     padding-top: 50px;
+}
+
+.navBarContainer h3 {
+    font-size: 25px;
 }
   
 .navBar {
@@ -14,11 +18,23 @@
   
 .navBar a {
     display: block;
-    border-top: 1px solid black;
+    border-top: 1px solid #ccc;
     text-decoration: none;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     font-size: 20px;
+}
+
+.navBar a:last-of-type{
+    border-bottom: 1px solid #ccc;
+}
+
+.navBar a:active {
+    color: #845BB3;
+}
+
+.active {
+    background-color: #D0BDF4;
 }
   
 .navBarContainer img {

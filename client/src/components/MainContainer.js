@@ -4,7 +4,6 @@ import Header from "./Header";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import TeamsList from "./TeamsList";
-import PlayersList from "./PlayersList";
 import Schedule from "./Schedule";
 import Account from "./Account";
 import EventForm from "./EventForm"
@@ -193,7 +192,6 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                             />
                         } 
                     />
-                    <Route path="/players" element={<PlayersList />} />
                     <Route 
                         path="/schedule" 
                         element={

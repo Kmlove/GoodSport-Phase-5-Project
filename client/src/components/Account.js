@@ -68,7 +68,7 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
 
   return (
     <div className="right">
-        <h2>Account Information</h2>
+        <h2 className="containerHeaders">Account Information</h2>
         <button onClick={handleLogoutClick}>Log Out</button>
         <button onClick={handleDeleteAccount}>Delete Account</button>
 

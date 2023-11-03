@@ -3,6 +3,21 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f4f4f4;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #D0BDF4;
+  border-radius: 10px;
+}
+
 body {
   width: 100vw;
   height: 100vh;
@@ -13,9 +28,7 @@ body {
 }
 
 #pageContainer {
-  border: 1px solid black;
   margin: 0;
-
 }
 
 #mainPageContainer {
@@ -24,18 +37,16 @@ body {
 }
 
 .right {
-  border: 1px solid red;
   width: 88%;
   overflow-y: scroll;
 }
 
 /* Header styles */
-#login-header {
+.header {
   background-color: #fff; 
   color: #ecf0f1; /* Text color */
   padding: 20px;
   text-align: center;
-  margin-bottom: 30px;
   border-bottom: 1px solid #ccc;
   width: 100vw;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
@@ -47,4 +58,11 @@ body {
   font-weight: bold;
   margin: 10px 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.containerHeaders {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0px 25px 25px;
+  font-weight: normal;
+  font-size: 26px;
 }

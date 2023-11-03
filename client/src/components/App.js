@@ -61,7 +61,7 @@ function App() {
         <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/> : 
         (
           <>
-            <header id="login-header">
+            <header className="header">
               <h1 className="app-title">GoodSport</h1>
             </header>
             

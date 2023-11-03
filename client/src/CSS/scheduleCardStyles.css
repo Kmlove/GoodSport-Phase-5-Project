@@ -23,7 +23,7 @@
   
 .scheduleCard a {
     display: block;
-    background-color: #007bff;
+    background-color: #845BB3;
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -41,14 +41,14 @@
 }
   
 .scheduleCard a:hover {
-    background-color: #0056b3;
+    background-color: #D0BDF4;
 }
   
 .schedule-delete-button {
     width: 30px;
     height: 30px;
     font-weight: bold;
-    color: #EA6C36;
+    color: red;
     /* background-color: #EA6C36; */
     background-color: transparent;
     border: none;
@@ -61,6 +61,6 @@
   
 .schedule-delete-button:hover {
     cursor: pointer;
-    background-color: #EA6C36;
+    background-color: red;
     color: white;
 }

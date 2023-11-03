@@ -13,7 +13,6 @@ function NavBar({user}){
             <nav className="navBar">
                 <NavLink to="/home">Home</NavLink>
                 <NavLink to="/teams">Teams</NavLink>
-                <NavLink to="/players">Players</NavLink>
                 <NavLink to="/schedule">Schedule</NavLink>
                 <NavLink to="/account">Account</NavLink>
             </nav>
