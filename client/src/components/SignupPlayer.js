@@ -90,6 +90,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
       } else if (res.status === 400){
         return Promise.reject("Validations Error")
       } else if (res.status === 500){
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         handleShowServerErrorAlert(true)
         return Promise.reject("Internal Server Error")
       }
@@ -108,7 +109,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
 
   return (
     <div id="signup-player">
-      {showServerErrorAlert? <Alert message="INTERNAL SERVER ERROR: please try again later!" type="error" banner closable showIcon /> : null}
+      {showServerErrorAlert? <Alert message="This email already has an account. Please login with that email or enter a new email to signup." type="error" banner showIcon /> : null}
 
       <p>Create A Player Account Below:</p>
 
@@ -292,7 +293,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
             },
           ]}
         >
-          <DatePicker format={dateFormat} onChange={handleDateChange}/>
+          <DatePicker format={dateFormat} onChange={handleDateChange} style={{height: "46px"}} className='select'/>
         </Form.Item>
 
         <Form.Item
@@ -332,7 +333,13 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
       
       <div className='change-login-signup'>
         <p>Alredy Have An Account?</p>
-        <button onClick={() => navigate('/')} className='login-button'>Login</button>
+        <button 
+          onClick={() => {
+            handleShowServerErrorAlert(false)
+            navigate('/')
+          }} 
+          className='login-button'
+        >Login</button>
       </div>
       
     </div>

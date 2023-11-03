@@ -43,17 +43,17 @@ function App() {
       .catch((error) => console.error(error));
   }, []);
 
-  useEffect(() => {
-    if (showServerErrorAlert) {
-      // Use a setTimeout to hide the alert after 5 seconds
-      const timer = setTimeout(() => {
-        setShowServerErrorAlert(false);
-      }, 5000); // 5000 milliseconds (5 seconds)
+  // useEffect(() => {
+  //   if (showServerErrorAlert) {
+  //     // Use a setTimeout to hide the alert after 5 seconds
+  //     const timer = setTimeout(() => {
+  //       setShowServerErrorAlert(false);
+  //     }, 5000); // 5000 milliseconds (5 seconds)
 
-      // Clear the timer if the component unmounts
-      return () => clearTimeout(timer);
-    } 
-  }, [ showServerErrorAlert ]);
+  //     // Clear the timer if the component unmounts
+  //     return () => clearTimeout(timer);
+  //   } 
+  // }, [ showServerErrorAlert ]);
 
   return (
     <>

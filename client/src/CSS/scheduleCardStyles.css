@@ -5,7 +5,6 @@
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 12px !important;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -13,13 +12,13 @@
     margin-left: 15px;
 
     /* Font styles */
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
     text-transform: uppercase; /* Convert text to uppercase */
 }
   
 .add-event-button:hover {
-    background-color: #D0BDf4 !important;
+    background-color: #D0BDf4;
     text-decoration: none;
 }
 
