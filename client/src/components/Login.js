@@ -125,9 +125,10 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
         </Form.Item>
 
       </Form>
-
-      <p>Don't have an account?</p>    
-      <button onClick={() => navigate('/signup')} className="signup-button">Sign Up</button>
+      <div className="change-login-signup">
+        <p>Don't have an account?</p>    
+        <button onClick={() => navigate('/signup')} className="signup-button">Sign Up</button>
+      </div>
     </div>
   )
 }

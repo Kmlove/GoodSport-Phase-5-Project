@@ -218,7 +218,7 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
 
       </Form>
       
-      <div className="have-account">
+      <div className="change-login-signup">
         <p>Alredy Have An Account?</p>
         <button onClick={() => navigate('/')} className="login-button">Login</button>
       </div>

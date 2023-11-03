@@ -19,7 +19,7 @@ function Signup({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handl
       <div id="isPlayer">
         <label htmlFor="isPlayer">{isPlayer? "Are you a Player?": "Are you a Coach?" }</label>
 
-        <Switch checked={isPlayer} checkedChildren="Create Player" unCheckedChildren="Create Coach" defaultChecked onChange={() => setIsPlayer(!isPlayer)}/>
+        <Switch id="switch" checked={isPlayer} checkedChildren="Create Player" unCheckedChildren="Create Coach" defaultChecked onChange={() => setIsPlayer(!isPlayer)} />
       </div>
 
       {isPlayer ? 
