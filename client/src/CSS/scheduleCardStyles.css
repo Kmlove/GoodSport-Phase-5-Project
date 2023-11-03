@@ -1,3 +1,28 @@
+.add-event-button {
+    width: 150px;
+    padding: 12px;
+    background-color: #845BB3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+
+    /* Font styles */
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase; /* Convert text to uppercase */
+}
+  
+.add-event-button:hover {
+    background-color: #D0BDf4 !important;
+    text-decoration: none;
+}
+
 .scheduleCard {
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -9,6 +34,8 @@
     width: 60%;
     text-align: left;
     position: relative;
+    transition: transform 0.2s ease-in-out;
+    border-left: 8px solid #845BB3;
 }
   
 .scheduleCard p {
@@ -19,6 +46,19 @@
     font-size: 16px;
     font-weight: normal;
     color: #333; /* Text color */
+}
+
+.scheduleCard:hover {
+    transform: scale(1.05); /* Enlarge the card on hover */
+}
+
+/* .scheduleCard span {
+    font-weight: bold;
+    color: #845BB3;
+} */
+
+#sc-team {
+    font-size: 25px;
 }
   
 .scheduleCard a {
@@ -49,7 +89,6 @@
     height: 30px;
     font-weight: bold;
     color: red;
-    /* background-color: #EA6C36; */
     background-color: transparent;
     border: none;
     border-radius: 8px;

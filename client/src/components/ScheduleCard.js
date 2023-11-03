@@ -38,10 +38,10 @@ function ScheduleCard({event, user, teams, handleDeleteEvent, handleShowSuccessf
 
       <div className="scheduleCard">
           {user.is_admin? <button onClick={handleDeleteClick} className='schedule-delete-button'>✖</button> : null}
-          <p>Team: {user.is_admin? coachesTeam[0].team_name : user.team.team_name}</p>
-          <p>Date: {formattedDate}</p>
-          <p>Event Type: {event_type}</p>
-          <p>Location: {location}</p>
+          <p><span id="sc-date">{formattedDate}</span></p>
+          <p><span id="sc-team">{user.is_admin? coachesTeam[0].team_name : user.team.team_name}</span></p>
+          <p><span id="sc-event-type">{event_type}</span></p>
+          <p><span id="sc-location">{location}</span></p>
           <Link to={`/event/${id}`}>See more...</Link>
       </div>
     )

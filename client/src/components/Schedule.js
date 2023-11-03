@@ -22,7 +22,7 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
       <div className="right">
         <h2 className="containerHeaders">Schedule</h2>
         {user.is_admin? 
-          <button onClick={() => navigate('/event/new')}>Add An Event</button> : null
+          <button onClick={() => navigate('/event/new')} className="add-event-button">Add An Event</button> : null
         }
   
         {showSuccessfulDeleteAlert? <Alert message="Event Successfully Deleted" type="success" banner closable showIcon /> : null}

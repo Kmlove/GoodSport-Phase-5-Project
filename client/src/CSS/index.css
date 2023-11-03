@@ -63,6 +63,6 @@ body {
 .containerHeaders {
   border-bottom: 1px solid #ccc;
   padding: 10px 0px 25px 25px;
-  font-weight: normal;
-  font-size: 26px;
+  font-size: 28px;
+  color: #845BB3;
 }
