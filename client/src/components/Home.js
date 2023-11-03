@@ -11,7 +11,7 @@ function Home({events, user, teams, handleDeleteEvent, handleShowSuccessfulDelet
       <div className="right">
         <h2 className="containerHeaders">Home</h2>
         <h3 id="upcoming-events">Upcoming Events:</h3>
-        <h4>You Have No Upcoming Events...</h4>
+        <h4 className="no-upcoming">You Have No Upcoming Events...</h4>
       </div>
     )
   } else {

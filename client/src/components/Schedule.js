@@ -10,11 +10,11 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
   if (events.length === 0){
     return (
       <div className="right">
-        <h2>Schedule</h2>
+        <h2 className="containerHeaders">Schedule</h2>
         {user.is_admin? 
-        <button onClick={() => navigate('/event/new')}>Add An Event</button> : null
+        <button onClick={() => navigate('/event/new')} className="add-event-button">Add An Event</button> : null
         }
-        <h4>You Have No Upcoming Events...</h4>
+        <h4 className="no-upcoming">You Have No Upcoming Events...</h4>
       </div>
     )
   } else{

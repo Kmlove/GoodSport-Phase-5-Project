@@ -18,7 +18,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const [showErrorDeleteAlert, setShowErrorDeleteAlert] = useState(false)
     const [showSuccessfulAddAlert, setShowSuccessfulAddAlert] = useState(false)
     const [ deleteError, setDeleteError ] = useState(false)
-    const mainContainer = document.querySelector('.mainPageContainer')
+    const mainContainer = document.querySelector('#mainPageContainer')
     const popup = document.querySelector('#delete-account-popup')
     const navigate = useNavigate()
 
