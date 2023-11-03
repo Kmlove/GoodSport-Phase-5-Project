@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import NavBar from "./NavBar";
@@ -10,6 +10,7 @@ import EventForm from "./EventForm"
 import Event from "./Event";
 import Team from "./Team";
 import Player from "./Player";
+import { DeleteAlertContext } from "../context/deleteAccountAlert";
 
 function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const [events, setEvents] = useState([])
@@ -21,6 +22,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const mainContainer = document.querySelector('#mainPageContainer')
     const popup = document.querySelector('#delete-account-popup')
     const navigate = useNavigate()
+    const { handleDeleteAccountAlert } = useContext(DeleteAlertContext)
 
     useEffect(() => {
         fetch('/events')
@@ -106,6 +108,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                 if (res.status === 204){
                     popup.classList.add("hidden")
                     mainContainer.classList.remove("blurr")
+                    handleDeleteAccountAlert(true)
                     handleLoginorSignUp(false)
                     navigate('/')
                 }
@@ -124,6 +127,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                 if (res.status === 204){
                     popup.classList.add("hidden")
                     mainContainer.classList.remove("blurr")
+                    handleDeleteAccountAlert(true)
                     handleLoginorSignUp(false)
                     navigate('/')
                 }
