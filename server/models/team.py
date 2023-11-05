@@ -24,7 +24,7 @@ class Team(db.Model, SerializerMixin):
     coaches = association_proxy("events", "coach", creator= lambda coach_obj : Event(coach=coach_obj))
 
     # serialize rules
-    serialize_rules = ('-events.team', '-players.team', '-club.teams')
+    serialize_rules = ('-events.team', '-players.team', '-club.teams', '-club.coaches')
 
     # validations
     @validates('team_name')

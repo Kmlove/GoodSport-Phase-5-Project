@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import MainContainer from "./MainContainer";
+import { LoggedOutContext } from "../context/loggedOut";
+import { DeleteAlertContext } from "../context/deleteAccountAlert";
 
 function App() {
   const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)
   const [user, setUser] = useState('')
   const [showServerErrorAlert, setShowServerErrorAlert] = useState(false)
-  const navigate = useNavigate()
+
+  const [loggedOut, setLoggedOut] = useState(false)
+  const [deletedAccountAlert, setDeletedAccountAlert] = useState(false)
+
+  function handleChangeLoggedOutAlert(value){
+    setLoggedOut(value)
+  }
+
+  function handleDeleteAccountAlert(value){
+    setDeletedAccountAlert(value)
+  }
 
   function handleLoginorSignUp(value){
     setLoggedInOrSignedUp(value)
@@ -56,43 +68,45 @@ function App() {
   // }, [ showServerErrorAlert ]);
 
   return (
-    <>
-      {loggedInOrSignedUp ? 
-        <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/> : 
-        (
-          <>
-            <header className="header">
-              <h1 className="app-title">GoodSport</h1>
-            </header>
-            
-            <Routes>
-              <Route 
-                path="/" 
-                element={
-                  <Login 
-                    handleLoginorSignUp={handleLoginorSignUp} 
-                    handleSetUser={handleSetUser}
-                    showServerErrorAlert={showServerErrorAlert}
-                    handleShowServerErrorAlert={handleShowServerErrorAlert}
-                  />
-                } 
-              />
-              <Route 
-                path="/signup" 
-                element={
-                  <Signup 
-                    handleLoginorSignUp={handleLoginorSignUp} 
-                    handleSetUser={handleSetUser}
-                    showServerErrorAlert={showServerErrorAlert}
-                    handleShowServerErrorAlert={handleShowServerErrorAlert}
-                  />
-                } 
-              />
-            </Routes>
-          </>
-        )}  
+    <DeleteAlertContext.Provider value={{deletedAccountAlert, handleDeleteAccountAlert}}>
+      <LoggedOutContext.Provider value={{loggedOut, handleChangeLoggedOutAlert}}>
+        {loggedInOrSignedUp ? 
+          <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/> : 
+          (
+            <>
+              <header className="header">
+                <h1 className="app-title">GoodSport</h1>
+              </header>
+              
+              <Routes>
+                <Route 
+                  path="/" 
+                  element={
+                    <Login 
+                      handleLoginorSignUp={handleLoginorSignUp} 
+                      handleSetUser={handleSetUser}
+                      showServerErrorAlert={showServerErrorAlert}
+                      handleShowServerErrorAlert={handleShowServerErrorAlert}
+                    />
+                  } 
+                />
+                <Route 
+                  path="/signup" 
+                  element={
+                    <Signup 
+                      handleLoginorSignUp={handleLoginorSignUp} 
+                      handleSetUser={handleSetUser}
+                      showServerErrorAlert={showServerErrorAlert}
+                      handleShowServerErrorAlert={handleShowServerErrorAlert}
+                    />
+                  } 
+                />
+              </Routes>
+            </>
+          )}  
 
-    </>
+      </LoggedOutContext.Provider>
+    </DeleteAlertContext.Provider >
   );
 }
 

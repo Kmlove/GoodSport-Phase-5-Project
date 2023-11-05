@@ -1,0 +1,79 @@
+#teamListContainer {
+    margin: 0 auto;
+    width: 75%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.coachTeam {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0 10px 15px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.coachTeam:hover {
+    transform: scale(1.05); /* Enlarge the card on hover */
+}
+
+.coachTeam a {
+    display: block;
+    background-color: #845BB3;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    width: 25%;
+    margin: 0 auto;
+    
+    /* Font styles */
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase; /* Convert text to uppercase */
+}
+  
+.coachTeam a:hover {
+    background-color: #D0BDF4;
+}
+
+#team {
+    padding-left: 20px;
+}
+
+#teamname {
+    font-size: 30px;
+    border-bottom: 1px solid #ccc;
+}
+
+.subheader {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#coachesContainer {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    width: 80%;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#playersContainer {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
