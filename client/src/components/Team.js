@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import dayjs from "dayjs";
 
 function Team() {
     const {id} = useParams()
@@ -45,35 +48,79 @@ function Team() {
 
         return (
             <div className="right">
-                <p>{team_name}</p>
-                <p>{club.club_name}</p>
-                <p>{gender === "F"? `G${age_group}`: {age_group}}</p>
-                <div>Coach(es): {myCoaches.map(coach => {
-                    return (
-                        <p key={coach.id}>
-                            Name: {coach.coach_name} Email: {coach.email}
-                        </p>
-                    )
-                })}</div>
-                {players.length === 0 ? (
-                    <div>
-                        Players:
-                            <p>No Players Yet...</p>
+                <div id="team">
+                    <p id="teamname">{team_name}</p>
+                    <p id="club">{club.club_name}</p>
+                    <p id="age-group">{gender === "F"? `G${age_group}`: {age_group}}</p>
+                    <div id="coachesContainer">
+                        <span className="subheader">Coach(es):</span> 
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone #</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {myCoaches.map(coach => {
+                                    return (
+                                        <tr key={coach.id}>
+                                            <td><Avatar size={50} icon={<UserOutlined />} /></td>
+                                            <td>{coach.coach_name}</td>
+                                            <td>{coach.email}</td>
+                                            <td>{}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>       
                     </div>
-                ) : (
-                    <div>
-                        Players: {players.map(player => {
-                            return (
-                                <p key={player.id} onClick={() => navigate(`/players/${player.id}`) }>
-                                    {player.player_name}
-                                </p>
-                            )
-                        })}
-                    </div>
-                )}
-      
-                <p></p>
-                <p></p>
+                    {players.length === 0 ? (
+                        <div id="playersContainer">
+                            <span className="subheader">Players:</span>
+                                <p className="no-upcoming">No Players Yet...</p>
+                        </div>
+                    ) : (
+                        <div id="playersContainer">
+                            <span className="subheader">Players:</span> 
+                            <table>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Photo</th>
+                                                <th>Player Name</th>
+                                                <th>Player Birthday</th>
+                                                <th>Parent Name</th>
+                                                <th>Parent Email</th>
+                                                <th>Parent Phone #</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {players.map(player => {
+                                                const birthday = dayjs(player.birthday)
+                                                const formattedDate  = birthday.format("MM/DD/YYYY")
+
+                                                return (
+                                                    <tr key={player.id}>
+                                                        <td>{}</td>
+                                                        <td><Avatar size={50} icon={<UserOutlined />} /></td>
+                                                        <td>{player.player_name}</td>
+                                                        <td>{formattedDate}</td>
+                                                        <td>{player.parent_name}</td>
+                                                        <td>{player.parent_email}</td>
+                                                        <td>{}</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </table>
+                        </div>
+                    )}
+                </div>
             </div>
           )
     }

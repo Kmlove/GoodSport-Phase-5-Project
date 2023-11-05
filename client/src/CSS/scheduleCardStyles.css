@@ -51,11 +51,6 @@
     transform: scale(1.05); /* Enlarge the card on hover */
 }
 
-/* .scheduleCard span {
-    font-weight: bold;
-    color: #845BB3;
-} */
-
 #sc-team {
     font-size: 25px;
 }

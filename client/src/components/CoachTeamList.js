@@ -19,10 +19,12 @@ function CoachTeamList({user, teams, events}) {
         }
     }
   return (
-    <div className="right">
+    <>
         <h2 className="containerHeaders">My Teams</h2>
-        {myTeams.map(team => <TeamListCard key={team.id} team={team}/>)}
-    </div>
+        <div id="teamListContainer">
+            {myTeams.map(team => <TeamListCard key={team.id} team={team}/>)}
+        </div>
+    </>
   )
 }
 
