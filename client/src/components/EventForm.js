@@ -109,8 +109,9 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
       {showAddEventError? <Alert message="An error occured while creating this event, please try again!" type="error" banner closable showIcon /> : null}
 
       <Form
+        className="form event-details"
         labelCol={{
-          span: 8,
+          span: 4,
         }}
         wrapperCol={{
           span: 16,
@@ -118,11 +119,14 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
         layout="horizontal"
         size="large"
         style={{
-          maxWidth: 600,
+          maxWidth: 800,
+          padding: "35px 0px 0px 20px",
+          marginTop: "50px"
         }}
         onFinish={handleSubmit}
       >
-        <Form.Item 
+        <Form.Item
+          className="form-item" 
           label="Team"
           name="team_id" 
           rules={[
@@ -132,12 +136,13 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
             },
           ]}
         >
-          <Select name="team_id" onChange={handleTeamChange}>
+          <Select name="team_id" onChange={handleTeamChange} style={{height: "46px"}}>
             {teamsInClub.map(team => <Select.Option key={team.id} value={team.id}>{team.team_name}</Select.Option>)}
           </Select>
         </Form.Item>
 
-        <Form.Item 
+        <Form.Item
+          className="form-item" 
           label="Event Type"
           name="event_type"
           rules={[
@@ -147,7 +152,7 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
             },
           ]} 
         >
-          <Select name="event_type" onChange={handleEventChange}>
+          <Select name="event_type" onChange={handleEventChange} style={{height: "46px"}}>
             <Select.Option value="Practice">Practice</Select.Option>
             <Select.Option value="Game">Game</Select.Option>
             <Select.Option value="Meeting">Meeting</Select.Option>
@@ -155,7 +160,8 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
           </Select>
         </Form.Item>
 
-        <Form.Item 
+        <Form.Item
+          className="form-item" 
           label="Time"
           name="event_time"
           rules={[
@@ -165,10 +171,11 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
             },
           ]} 
         >
-          <TimePicker.RangePicker use12Hours format="h:mm a" onChange={handleTimeChange} />
+          <TimePicker.RangePicker use12Hours format="h:mm a" onChange={handleTimeChange} style={{height: "46px"}} className='select'/>
         </Form.Item>
         
         <Form.Item 
+          className="form-item"
           label="Date"
           name="date"
           rules={[
@@ -178,19 +185,19 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
             },
           ]} 
         >
-          <DatePicker format={dateFormat} onChange={handleDateChange}/>
+          <DatePicker format={dateFormat} onChange={handleDateChange} style={{height: "46px"}} className='select'/>
         </Form.Item>
 
-        <Form.Item label="Location">
-          <Input onChange={handleTextChange} name="location" value={newEventFormData.location}/>
+        <Form.Item label="Location" className="form-item">
+          <Input onChange={handleTextChange} name="location" value={newEventFormData.location} className='input'/>
         </Form.Item>
 
-        <Form.Item label="Notes" >
-            <TextArea rows={4} name='notes' value={newEventFormData.notes} onChange={handleTextChange}/>
+        <Form.Item label="Notes"  className="form-item">
+            <TextArea rows={4} name='notes' value={newEventFormData.notes} onChange={handleTextChange} className='select'/>
         </Form.Item>
 
-        <Form.Item >
-          <Button type="primary" htmlType="submit">
+        <Form.Item  wrapperCol={{offset: 10}}>
+          <Button type="primary" htmlType="submit" className='button' style={{width: "125px"}}>
             Submit
           </Button>
         </Form.Item>

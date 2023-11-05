@@ -117,19 +117,19 @@ function EditEventForm({id, handleUpdateEvent, handleUpdateCurEvent, handleClose
       </Form.Item>
 
       <Form.Item label="Time">
-        <TimePicker.RangePicker use12Hours format="h:mm a" onChange={handleTimeChange} />
+        <TimePicker.RangePicker use12Hours format="h:mm a" onChange={handleTimeChange} className="select"/>
       </Form.Item>
       
       <Form.Item label="Date">
-        <DatePicker format={dateFormat} onChange={handleDateChange} defaultValue={dayjs(editEventFormData.date, dateFormat)}/>
+        <DatePicker format={dateFormat} onChange={handleDateChange} defaultValue={dayjs(editEventFormData.date, dateFormat)} className="select"/>
       </Form.Item>
 
       <Form.Item label="Location">
-        <Input onChange={handleTextChange} name="location" value={editEventFormData.location}/>
+        <Input onChange={handleTextChange} name="location" value={editEventFormData.location} className="select"/>
       </Form.Item>
 
       <Form.Item label="Notes" >
-          <TextArea rows={4} name='notes' value={editEventFormData.notes} onChange={handleTextChange}/>
+          <TextArea rows={4} name='notes' value={editEventFormData.notes} onChange={handleTextChange} className="select"/>
       </Form.Item>
 
       <Form.Item  wrapperCol={{offset: 10}}>
