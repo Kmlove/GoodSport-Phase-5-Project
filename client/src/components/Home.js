@@ -20,8 +20,8 @@ function Home({events, user, teams, handleDeleteEvent, handleShowSuccessfulDelet
         <h2 className="containerHeaders">Home</h2>
         <h3 id="upcoming-events">Upcoming Events: <Link to={'/schedule'} id="see-full-schedule">See full schedule...</Link></h3>
   
-        {showSuccessfulDeleteAlert? <Alert message="Event Successfully Deleted" type="success" banner closable showIcon /> : null}
-        {showErrorDeleteAlert? <Alert message="An error occured deleting the event, please try again later!" type="error" banner closable showIcon /> : null}
+        {showSuccessfulDeleteAlert? <Alert className="alert-top" message="Event Successfully Deleted" type="success" banner showIcon /> : null}
+        {showErrorDeleteAlert? <Alert className="alert-top" message="An error occured deleting the event, please try again later!" type="error" banner showIcon /> : null}
   
         {homePageEvents.map(event => (
           <ScheduleCard 

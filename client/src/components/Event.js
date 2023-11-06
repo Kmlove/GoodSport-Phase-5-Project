@@ -98,9 +98,9 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
 
     return (
       <div className="right">
-        {showSuccessfulUpdateAlert? <Alert message="Event Successfully Updated" type="success" banner closable showIcon /> : null}
-        {showErrorUpdateAlert? <Alert message="An error occured when updating this event, please try again later!" type="error" banner closable showIcon /> : null}
-        {showSuccessfulAddAlert? <Alert message="Event Successfully Created" type="success" banner closable showIcon /> : null}
+        {showSuccessfulUpdateAlert? <Alert style={{border: "1px solid red"}} className="alert-top" message="Event Successfully Updated" type="success" banner showIcon /> : null}
+        {showErrorUpdateAlert? <Alert className="alert-top" message="An error occured when updating this event, please try again later!" type="error" banner showIcon /> : null}
+        {showSuccessfulAddAlert? <Alert className="alert-top" message="Event Successfully Created" type="success" banner showIcon /> : null}
 
         <div className="event-details">
           <h2 className="event-title">{`${event_type} Details`}</h2>

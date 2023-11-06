@@ -77,3 +77,7 @@ body {
 .alert {
   margin-bottom: 20px;
 }
+
+.alert-top {
+  margin-top: 20px;
+}

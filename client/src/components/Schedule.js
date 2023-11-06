@@ -25,8 +25,8 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
           <button onClick={() => navigate('/event/new')} className="add-event-button">Add An Event</button> : null
         }
   
-        {showSuccessfulDeleteAlert? <Alert message="Event Successfully Deleted" type="success" banner closable showIcon /> : null}
-        {showErrorDeleteAlert? <Alert message="An error occured deleting the event, please try again later!" type="error" banner closable showIcon /> : null}
+        {showSuccessfulDeleteAlert? <Alert className="alert-top" message="Event Successfully Deleted" type="success" banner showIcon /> : null}
+        {showErrorDeleteAlert? <Alert className="alert-top" message="An error occured deleting the event, please try again later!" type="error" banner showIcon /> : null}
           
         {events.map(event => (
           <ScheduleCard 
