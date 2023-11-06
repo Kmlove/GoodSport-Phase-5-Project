@@ -4,6 +4,7 @@ import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 function NavBar({user}){
+    console.log(user)
     const {player_name, coach_name, headshot_img_url} = user
     return (
         <div className="navBarContainer">
@@ -11,7 +12,7 @@ function NavBar({user}){
                 <div id="headshot-container">
                     <img 
                         src={headshot_img_url}
-                        alt={`${coach_name} headshot`}
+                        alt={`${coach_name? coach_name : player_name} headshot`}
                     />
                 </div> 
                 : 

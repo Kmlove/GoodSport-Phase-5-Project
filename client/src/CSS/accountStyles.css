@@ -23,10 +23,6 @@
     margin: 0 auto;
 }
 
-#profile-information h3, #player-information h3{
-    margin-bottom: 0px;
-}
-
 .player-account-birthday:hover {
     border-color: #845BB3;
 }

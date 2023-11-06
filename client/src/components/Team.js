@@ -109,7 +109,7 @@ function Team() {
                                         return (
                                             <tr key={player.id} >
                                                 <td>{player.jersey_num}</td>
-                                                <td><Avatar shape="square" size={50} icon={<UserOutlined />} /></td>
+                                                <td>{player.headshot_img_url? <img src={player.headshot_img_url} alt={`${player.player_name} Headshot`} style={{width: "55px", height: "60px", borderRadius: "5px"}}/>: <Avatar shape="square" size={50} icon={<UserOutlined />} />}</td>
                                                 <td>{player.player_name}</td>
                                                 <td>{formattedDate}</td>
                                                 <td>{player.parent_name}</td>

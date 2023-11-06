@@ -1,9 +1,12 @@
 import "../CSS/accountStyles.css"
-import { Form, Input, Button, DatePicker, InputNumber } from 'antd';
+import { Form, Input, Button, DatePicker, InputNumber, Upload, Progress } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
 import { useState } from "react";
 import dayjs from "dayjs";
+import { CLOUDINARY_API_KEY } from "../apikeys";
 
 function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
+
   const {id, birthday, parent_email, parent_name, player_name, parent_phone_number, jersey_num} = user
   const dateFormat = 'MM/DD/YYYY';
   const initBirthday = dayjs(birthday).format('MM/DD/YYYY')
@@ -27,6 +30,9 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
     jersey_num: jersey_num
   }
   const [accountFormData , setAccountFormData] = useState(initialValue)
+  const [ photoFile, setPhotoFile ] = useState(null);
+  const [ photoUrl, setPhotoUrl ] = useState("")
+  const [uploadStatus, setUploadStatus] = useState('idle'); // 'idle', 'uploading', or 'done'
   const [form] = Form.useForm()
 
   function indexOfSpace(name){
@@ -59,6 +65,32 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
     })
   }
 
+  function handlePhotoChange(info){
+    setPhotoFile(info.file)
+    setUploadStatus('uploading')
+    const formData = new FormData()
+    formData.append('file', info.file)
+    formData.append('upload_preset', 'bvspu3zv')
+    formData.append('api_key', CLOUDINARY_API_KEY)
+
+    // Make a POST request to Cloudinary for image upload
+    fetch('https://api.cloudinary.com/v1_1/kmlovecloud/image/upload', {
+      method: 'POST',
+      body: formData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response from Cloudinary here, e.g., store the image URL
+      setPhotoUrl(data.secure_url)
+      setUploadStatus('done');
+      // You can now do something with the image URL, like saving it to your database or displaying it in your UI.
+    })
+    .catch((error) => {
+      setUploadStatus('error')
+      console.error('Upload error:', error);
+    });
+  }
+
   function handleSubmit(e){
 
     for (const key in accountFormData){
@@ -71,12 +103,23 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
     const formattedDate = dayjs(curdate).format('YYYY-MM-DD')
     const parentName = accountFormData.parent_first_name + " " + accountFormData.parent_last_name
     const playerName = accountFormData.player_first_name + " " + accountFormData.player_last_name
-    
-    const updated_player = {
+
+    let updated_player
+    if(photoUrl.length > 0){
+      updated_player = {
+        ...accountFormData,
+        player_name: playerName,
+        parent_name: parentName,
+        birthday: formattedDate,
+        headshot_img_url: photoUrl
+      }
+    } else {
+      updated_player = {
         ...accountFormData,
         player_name: playerName,
         parent_name: parentName,
         birthday: formattedDate
+      }
     }
 
     if (accountFormData.password){
@@ -128,6 +171,9 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         const initBirthday = dayjs(data.birthday).format('MM/DD/YYYY')
       handleUpdateUser(data)
       handleSucessfulUpdate(true)
+      setPhotoFile(null)
+      setPhotoUrl("")
+      setUploadStatus('idle')
       setAccountFormData({
         birthday: initBirthday,
         parent_first_name: parentFirstName,
@@ -158,7 +204,7 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         // }}
         layout="vertical"
         style={{
-            maxWidth: 600,
+            maxWidth: 800,
         }}
         initialValues={{
             remember: true,
@@ -169,49 +215,78 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         className="account-form"
         >
         <div id="player-information" className="account-form-section">
-            <h3>Player Information</h3>
-            <div>
-              <img />
-              <Form.Item
-                  name="player_first_name"
-                  label="Player First Name"
-                  className="form-item"
-                  initialValue={accountFormData.player_first_name}
-                  value={accountFormData.player_first_name}
-                  onChange={handleChange}
-              >
-                  <Input name="player_first_name" className="input"/>
-              </Form.Item>
+          <h3>Player Information</h3>
+            <Form.Item
+                name="player_first_name"
+                label="Player First Name"
+                className="form-item"
+                initialValue={accountFormData.player_first_name}
+                value={accountFormData.player_first_name}
+                onChange={handleChange}
+            >
+                <Input name="player_first_name" className="input"/>
+            </Form.Item>
 
-              <Form.Item
-                  name="player_last_name"
-                  label="Player Last Name"
-                  className="form-item"
-                  initialValue={accountFormData.player_last_name}
-                  value={accountFormData.player_last_name}
-                  onChange={handleChange}
-              >
-                  <Input name="player_last_name" className="input"/>
-              </Form.Item>
+            <Form.Item
+                name="player_last_name"
+                label="Player Last Name"
+                className="form-item"
+                initialValue={accountFormData.player_last_name}
+                value={accountFormData.player_last_name}
+                onChange={handleChange}
+            >
+                <Input name="player_last_name" className="input"/>
+            </Form.Item>
 
-              <Form.Item 
-                  label="Player Birthday" 
-                  name="birthday"
-                  className="form-item"
-                  value={accountFormData.birthday}
-                  >
-                  <DatePicker format={dateFormat} defaultValue={dayjs(initBirthday)} onChange={handleDateChange} style={{height: "45px"}} className="player-account-birthday"/>
-              </Form.Item>
+            <Form.Item 
+                label="Player Birthday" 
+                name="birthday"
+                className="form-item"
+                value={accountFormData.birthday}
+                >
+                <DatePicker format={dateFormat} defaultValue={dayjs(initBirthday)} onChange={handleDateChange} style={{height: "45px"}} className="player-account-birthday"/>
+            </Form.Item>
 
-              <Form.Item 
-                  label="Jersey Number" 
-                  name="jersey_num"
-                  className="form-item"
-                  value={accountFormData.jersey_num}
-                  >
-                <InputNumber name="jersey_num" size="large" min={0} max={999} defaultValue={accountFormData.jersey_num} onChange={handleJerseyChange} />
-              </Form.Item>
-            </div>
+            <Form.Item 
+                label="Jersey Number" 
+                name="jersey_num"
+                className="form-item"
+                value={accountFormData.jersey_num}
+                >
+              <InputNumber name="jersey_num" size="large" min={0} max={999} defaultValue={accountFormData.jersey_num} onChange={handleJerseyChange} />
+            </Form.Item>
+
+            <Form.Item label="Upload Profile Picture" name="profile-pic">
+            <Upload.Dragger name="profile-pic" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
+              {uploadStatus === 'done' ? (
+                                    
+                <div>
+                  <Progress
+                    percent={100} // Set the progress to 88% 
+                    status="done"
+                  />
+                  <p className="ant-upload-text">Upload complete!</p>
+                </div>
+              ) : (
+                <>
+                  <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                  </p>
+                  <p className="ant-upload-text">
+                    {uploadStatus === 'uploading' ? 'Uploading...' : 'Click or drag file to this area to upload'}
+                  </p>
+                  {uploadStatus === 'uploading' && (
+                    <Progress
+                      percent={88} // Set the progress to 88% 
+                      status="active"
+                    />
+                  )}
+                  <p className="ant-upload-hint">Support for a single upload.</p>
+                </>
+              )}
+            </Upload.Dragger>
+          </Form.Item>
+          {uploadStatus === "done"? photoFile.name: null}
         </div>
 
         <div id="parent-information" className="account-form-section">
