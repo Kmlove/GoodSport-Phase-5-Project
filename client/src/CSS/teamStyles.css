@@ -44,12 +44,7 @@
 }
 
 #team {
-    padding-left: 20px;
-}
-
-#teamname {
-    font-size: 30px;
-    border-bottom: 1px solid #ccc;
+    padding-left: 30px;
 }
 
 .subheader {
@@ -62,7 +57,7 @@
     border: 1px solid #ccc;
     margin-bottom: 20px;
     border-radius: 5px;
-    width: 80%;
+    width: fit-content;
     padding: 15px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -72,8 +67,49 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 80%;
-    padding: 15px;
+    max-width: 1000px;
+    padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
+    overflow-x: scroll;
+}
+
+#playersContainer::-webkit-scrollbar {
+    height: 12px;
+}
+  
+#playersContainer::-webkit-scrollbar-thumb {
+    background-color: #D0BDF4;
+    border-radius: 10px;
+}
+  
+#playersContainer::-webkit-scrollbar-thumb:hover {
+    background: #845bbb;
+}
+  
+#playersContainer::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: fit-content;
+}
+  
+.table th, .table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+  
+.table th {
+    background-color: #d0bdf4;
+    font-weight: bold;
+    color: #845bbb;
+    border-color: rgb(248, 246, 246);
 }
