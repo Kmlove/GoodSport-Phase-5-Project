@@ -4,11 +4,21 @@ import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 function NavBar({user}){
-    const {player_name, coach_name} = user
+    console.log(user)
+    const {player_name, coach_name, headshot_img_url} = user
     return (
         <div className="navBarContainer">
-            {/* <img src="https://www.lee-evans.co.uk/wp-content/uploads/2019/10/Headshot-Blank-300x300.jpg" alt="Headshot of Kimberly Love"/> */}
-            <Avatar size={125} icon={<UserOutlined />} />
+            {headshot_img_url? 
+                <div id="headshot-container">
+                    <img 
+                        src={headshot_img_url}
+                        alt={`${coach_name} headshot`}
+                    />
+                </div> 
+                : 
+                <Avatar size={125} icon={<UserOutlined />} />
+            }
+            
             <h3>{coach_name ? coach_name : player_name}</h3>
             <nav className="navBar">
                 <NavLink to="/home">Home</NavLink>

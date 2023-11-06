@@ -1,6 +1,8 @@
 import "../CSS/accountStyles.css"
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, Upload } from 'antd';
 import { useState } from "react";
+import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import { CLOUDINARY_API_KEY } from "../apikeys";
 
 function CoachAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
   const { Option } = Select
@@ -29,6 +31,8 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     phone_number: phone_number
   }
   const [accountFormData , setAccountFormData] = useState(initialValue)
+  const [ photoFile, setPhotoFile ] = useState(null);
+  const [ photoUrl, setPhotoUrl ] = useState("")
   const [form] = Form.useForm()
 
   function indexOfSpace(name){
@@ -37,6 +41,31 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
         return name.indexOf(el)
       }
     }
+  }
+
+  function handlePhotoChange(info){
+    setPhotoFile(info.file)
+
+    const formData = new FormData()
+    formData.append('file', info.file)
+    formData.append('upload_preset', 'bvspu3zv')
+    formData.append('api_key', CLOUDINARY_API_KEY)
+
+    // Make a POST request to Cloudinary for image upload
+    fetch('https://api.cloudinary.com/v1_1/kmlovecloud/image/upload', {
+      method: 'POST',
+      body: formData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response from Cloudinary here, e.g., store the image URL
+      console.log('Upload result:', data);
+      setPhotoUrl(data.secure_url)
+      // You can now do something with the image URL, like saving it to your database or displaying it in your UI.
+    })
+    .catch((error) => {
+      console.error('Upload error:', error);
+    });
   }
 
   function handleChange(e){
@@ -48,7 +77,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
   }
 
   function handleSubmit(e){
-
+    
     for (const key in accountFormData){
       if (accountFormData[key] === ""){
         delete accountFormData[key]
@@ -56,9 +85,18 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     }
 
     const name = accountFormData.first_name + " " + accountFormData.last_name
-    const new_coach = {
-      ...accountFormData,
-      coach_name: name
+    let new_coach
+    if(photoUrl.length > 0){
+      new_coach = {
+        ...accountFormData,
+        coach_name: name,
+        headshot_img_url: photoUrl
+      }
+    } else {
+      new_coach = {
+        ...accountFormData,
+        coach_name: name
+      }
     }
 
     if (accountFormData.password){
@@ -98,11 +136,14 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
       }
     })
     .then(data => {
+      console.log(data)
       const spaceIndex = indexOfSpace(data.coach_name)
       const firstName = data.coach_name.slice(0, spaceIndex)
       const lastName = data.coach_name.slice(spaceIndex + 1)
       handleUpdateUser(data)
       handleSucessfulUpdate(true)
+      setPhotoFile(null)
+      setPhotoUrl("")
       setAccountFormData({
         first_name: firstName,
         last_name: lastName,
@@ -117,7 +158,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     })
     .catch(err => console.error("Error: ", err))
   }
-
+ 
   return (
     <Form 
       form={form}
@@ -129,7 +170,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
       // }}
       layout="vertical"
       style={{
-        maxWidth: 600,
+        maxWidth: 800,
       }}
       initialValues={{
         remember: true,
@@ -141,8 +182,6 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     >
       <div id="profile-information" className="account-form-section">
         <h3>Profile Information</h3>
-        <div>
-          <img />
           <Form.Item
             name="first_name"
             label="First Name"
@@ -196,7 +235,34 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
               className="select"
             />
           </Form.Item>
-        </div>
+
+          <Form.Item
+            name="profile-pic"
+            label="Upload Profile Picture"
+          >
+            <Upload
+              maxCount={1}
+              customRequest={handlePhotoChange}
+              showUploadList={false}
+            >
+              <Button 
+                name="profile-pic"
+              >Upload...</Button>
+              {photoFile? photoFile.name: null}
+            </Upload>
+          </Form.Item>
+
+          {/* <Form.Item label="Dragger">
+            <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile}  noStyle>
+              <Upload.Dragger name="files" action="/upload.do" onChange={handleImageUpload}>
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+              </Upload.Dragger>
+            </Form.Item>
+          </Form.Item> */}
       </div>
 
       <div id="login-information" className="account-form-section">

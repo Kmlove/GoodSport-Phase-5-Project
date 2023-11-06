@@ -71,8 +71,12 @@ function App() {
     <DeleteAlertContext.Provider value={{deletedAccountAlert, handleDeleteAccountAlert}}>
       <LoggedOutContext.Provider value={{loggedOut, handleChangeLoggedOutAlert}}>
         {loggedInOrSignedUp ? 
-          <MainContainer handleLoginorSignUp={handleLoginorSignUp} user={user} handleUpdateUser={handleUpdateUser}/> : 
-          (
+          <MainContainer 
+            handleLoginorSignUp={handleLoginorSignUp} 
+            user={user} 
+            handleUpdateUser={handleUpdateUser}
+          /> 
+          :(
             <>
               <header className="header">
                 <h1 className="app-title">GoodSport</h1>

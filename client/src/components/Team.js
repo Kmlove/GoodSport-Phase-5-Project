@@ -49,10 +49,11 @@ function Team() {
 
         return (
             <div className="right">
-                <h3 id="teamname" className="containerHeaders">{team_name}</h3>
-                <div id="team">
+                <div className="teamsHeaders">
+                    <h3>{team_name} - <span id="age-group">{gender === "F"? `G${age_group}`: {age_group}}</span></h3>
                     <p id="club">{club.club_name}</p>
-                    <p id="age-group">{gender === "F"? `G${age_group}`: {age_group}}</p>
+                </div>
+                <div id="team">
                     <div id="coachesContainer">
                         <span className="subheader">Coach(es):</span> 
                         <table className="table">
@@ -69,7 +70,7 @@ function Team() {
                                 {myCoaches.map(coach => {
                                     return (
                                         <tr key={coach.id}>
-                                            <td><Avatar size={50} icon={<UserOutlined />} /></td>
+                                            <td>{coach.headshot_img_url? <img src={coach.headshot_img_url} alt={`${coach.coach_name} Headshot`} style={{width: "55px", height: "60px", borderRadius: "5px"}}/>: <Avatar shape="square" size={50} icon={<UserOutlined />} />}</td>
                                             <td>{coach.coach_name}</td>
                                             <td>{coach.email}</td>
                                             <td>{coach.phone_number}</td>
@@ -108,7 +109,7 @@ function Team() {
                                         return (
                                             <tr key={player.id} >
                                                 <td>{player.jersey_num}</td>
-                                                <td><Avatar size={50} icon={<UserOutlined />} /></td>
+                                                <td><Avatar shape="square" size={50} icon={<UserOutlined />} /></td>
                                                 <td>{player.player_name}</td>
                                                 <td>{formattedDate}</td>
                                                 <td>{player.parent_name}</td>
