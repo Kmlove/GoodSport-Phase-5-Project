@@ -9,7 +9,6 @@ function Team() {
     const {id} = useParams()
     const navigate = useNavigate()
     const [ currTeam, setCurrTeam ] = useState(null)
-    const [ coaches, setCoaches ] = useState([])
 
     useEffect(() => {
         fetch(`/teams/${id}`)
@@ -17,35 +16,11 @@ function Team() {
         .then(data => setCurrTeam(data))
     }, [id])
 
-    useEffect(() => {
-        fetch('/coaches')
-        .then(res => res.json())
-        .then(data => setCoaches(data))
-    }, [id])
-
     if (currTeam === null){
         return <h3>Loading...</h3>
 
     } else {
-        const {age_group, club, events, gender, id, players, sport, team_name} = currTeam
-
-        const coach_ids = events.map(event => event.coach_id)
-        const unique_coach_ids = []
-        for (let i=0; i < coach_ids.length; i++){
-            const num = coach_ids[i]
-            if (!unique_coach_ids.includes(num)){
-                unique_coach_ids.push(num)
-            }
-        }
-
-        const myCoaches = []
-        for (const id of unique_coach_ids){
-            for (const coach of coaches){
-                if (coach.id === id){
-                    myCoaches.push(coach)
-                }
-            }
-        }
+        const {age_group, club, events, gender, id, players, sport, team_name, coaches} = currTeam
 
         return (
             <div className="right">
@@ -67,7 +42,7 @@ function Team() {
                             </thead>
 
                             <tbody>
-                                {myCoaches.map(coach => {
+                                {coaches.map(coach => {
                                     return (
                                         <tr key={coach.id}>
                                             <td>{coach.headshot_img_url? <img src={coach.headshot_img_url} alt={`${coach.coach_name} Headshot`} style={{width: "55px", height: "60px", borderRadius: "5px"}}/>: <Avatar shape="square" size={50} icon={<UserOutlined />} />}</td>
