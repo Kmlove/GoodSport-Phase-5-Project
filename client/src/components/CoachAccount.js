@@ -1,5 +1,5 @@
 import "../CSS/accountStyles.css"
-import { Form, Input, Button, Select, Upload } from 'antd';
+import { Form, Input, Button, Select, Upload, Progress, message } from 'antd';
 import { useState } from "react";
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import { CLOUDINARY_API_KEY } from "../apikeys";
@@ -33,6 +33,8 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
   const [accountFormData , setAccountFormData] = useState(initialValue)
   const [ photoFile, setPhotoFile ] = useState(null);
   const [ photoUrl, setPhotoUrl ] = useState("")
+  const [uploadStatus, setUploadStatus] = useState('idle'); // 'idle', 'uploading', or 'done'
+
   const [form] = Form.useForm()
 
   function indexOfSpace(name){
@@ -45,7 +47,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
 
   function handlePhotoChange(info){
     setPhotoFile(info.file)
-
+    setUploadStatus('uploading')
     const formData = new FormData()
     formData.append('file', info.file)
     formData.append('upload_preset', 'bvspu3zv')
@@ -59,11 +61,12 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     .then((response) => response.json())
     .then((data) => {
       // Handle the response from Cloudinary here, e.g., store the image URL
-      console.log('Upload result:', data);
       setPhotoUrl(data.secure_url)
+      setUploadStatus('done');
       // You can now do something with the image URL, like saving it to your database or displaying it in your UI.
     })
     .catch((error) => {
+      setUploadStatus('error')
       console.error('Upload error:', error);
     });
   }
@@ -136,7 +139,6 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
       }
     })
     .then(data => {
-      console.log(data)
       const spaceIndex = indexOfSpace(data.coach_name)
       const firstName = data.coach_name.slice(0, spaceIndex)
       const lastName = data.coach_name.slice(spaceIndex + 1)
@@ -144,6 +146,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
       handleSucessfulUpdate(true)
       setPhotoFile(null)
       setPhotoUrl("")
+      setUploadStatus('idle')
       setAccountFormData({
         first_name: firstName,
         last_name: lastName,
@@ -158,7 +161,6 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     })
     .catch(err => console.error("Error: ", err))
   }
- 
   return (
     <Form 
       form={form}
@@ -236,33 +238,38 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
             />
           </Form.Item>
 
-          <Form.Item
-            name="profile-pic"
-            label="Upload Profile Picture"
-          >
-            <Upload
-              maxCount={1}
-              customRequest={handlePhotoChange}
-              showUploadList={false}
-            >
-              <Button 
-                name="profile-pic"
-              >Upload...</Button>
-              {photoFile? photoFile.name: null}
-            </Upload>
+          <Form.Item label="Upload Profile Picture" name="profile-pic">
+            <Upload.Dragger name="profile-pic" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
+              {uploadStatus === 'done' ? (
+                                    
+                <div>
+                  <Progress
+                    percent={100} // Set the progress to 88% 
+                    status="done"
+                  />
+                  <p className="ant-upload-text">Upload complete!</p>
+                </div>
+              ) : (
+                <>
+                  <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                  </p>
+                  <p className="ant-upload-text">
+                    {uploadStatus === 'uploading' ? 'Uploading...' : 'Click or drag file to this area to upload'}
+                  </p>
+                  {uploadStatus === 'uploading' && (
+                    <Progress
+                      percent={88} // Set the progress to 88% 
+                      status="active"
+                    />
+                  )}
+                  <p className="ant-upload-hint">Support for a single upload.</p>
+                </>
+              )}
+            </Upload.Dragger>
           </Form.Item>
+          {uploadStatus === "done"? photoFile.name: null}
 
-          {/* <Form.Item label="Dragger">
-            <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile}  noStyle>
-              <Upload.Dragger name="files" action="/upload.do" onChange={handleImageUpload}>
-                <p className="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-              </Upload.Dragger>
-            </Form.Item>
-          </Form.Item> */}
       </div>
 
       <div id="login-information" className="account-form-section">

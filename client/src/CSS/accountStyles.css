@@ -18,6 +18,11 @@
     margin-top: 5px;
 }
 
+.ant-progress {
+    width: 90%;
+    margin: 0 auto;
+}
+
 #profile-information h3, #player-information h3{
     margin-bottom: 0px;
 }

@@ -4,7 +4,6 @@ import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 function NavBar({user}){
-    console.log(user)
     const {player_name, coach_name, headshot_img_url} = user
     return (
         <div className="navBarContainer">
