@@ -79,7 +79,7 @@ function App() {
           :(
             <>
               <header className="header">
-                <h1 className="app-title">GoodSport</h1>
+                <h1 className="app-title"><span className="good">Good</span><span className="sport">Sport</span></h1>
               </header>
               
               <Routes>

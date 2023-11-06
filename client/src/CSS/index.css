@@ -67,6 +67,16 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.good {
+  color: #845BB3;
+}
+
+.sport {
+  color: #D0BDF4;
+}
+
+/* End Header styles*/
+
 .containerHeaders {
   border-bottom: 1px solid #ccc;
   padding: 10px 0px 25px 25px;
