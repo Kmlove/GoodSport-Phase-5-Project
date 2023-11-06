@@ -1,9 +1,21 @@
 import "../CSS/accountStyles.css"
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import { useState } from "react";
 
 function CoachAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
-  const {coach_name, email, id} = user
+  const { Option } = Select
+  // const prefixSelector = (
+  //   <Form.Item name="prefix" noStyle>
+  //     <Select
+  //       style={{
+  //         width: 70,
+  //       }}
+  //     >
+  //       <Option value="1">+1</Option>
+  //     </Select>
+  //   </Form.Item>
+  // );
+  const {coach_name, email, phone_number, id} = user
   const spaceIndex = indexOfSpace(coach_name)
   const firstName = coach_name.slice(0, spaceIndex)
   const lastName = coach_name.slice(spaceIndex + 1)
@@ -13,7 +25,8 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     last_name: lastName,
     email: email,
     currPassword: "",
-    password: ""
+    password: "",
+    phone_number: phone_number
   }
   const [accountFormData , setAccountFormData] = useState(initialValue)
   const [form] = Form.useForm()
@@ -152,6 +165,37 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
             <Input name="last_name" className="input"/>
           </Form.Item>
 
+          <Form.Item
+            name="phone_number"
+            label="Phone Number"
+            className="form-item"
+            initialValue={accountFormData.phone_number}
+            value={accountFormData.phone_number}
+            onChange={handleChange}
+            rules={[
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (value.length !== 10) {
+                    return Promise.reject(new Error('Phone number need to be 10 digits long!'));
+                  } 
+                  if (isNaN(Number(value))) {
+                    return Promise.reject(new Error('Phone number must consist of numbers between 0-9!'));
+                  }
+                  return Promise.resolve();
+                },
+              }),
+            ]}
+          >
+            <Input
+              // addonBefore={prefixSelector}
+              name="phone_number"
+              style={{
+                width: '100%',
+                height: "46px"
+              }}
+              className="select"
+            />
+          </Form.Item>
         </div>
       </div>
 

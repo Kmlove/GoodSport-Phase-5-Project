@@ -56,6 +56,7 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
     .then(data => {
       handleChangeLoggedOutAlert(false)
       handleDeleteAccountAlert(false)
+      handleShowServerErrorAlert(false)
       handleSetUser(data)
       handleLoginorSignUp(true)
       navigate('/home')
@@ -146,6 +147,7 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
           onClick={() => {
             handleChangeLoggedOutAlert(false)
             handleDeleteAccountAlert(false)
+            handleShowServerErrorAlert(false)
             navigate('/signup')
           }} 
           className="signup-button"

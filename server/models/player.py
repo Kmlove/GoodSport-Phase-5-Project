@@ -16,6 +16,9 @@ class Player(db.Model, SerializerMixin):
     birthday = db.Column(db.Date)
     parent_name = db.Column(db.String)
     parent_email = db.Column(db.String, unique=True)
+    parent_phone_number = db.Column(db.String)
+    jersey_num = db.Column(db.Integer, default=None)
+    headshot_img_url = db.Column(db.String)
     _password_hash = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=False)
     gender = db.Column(db.String)
@@ -42,6 +45,13 @@ class Player(db.Model, SerializerMixin):
         return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
 
     # validations
+    @validates('jersey_num')
+    def validate_jersey_num(sef, key, num):
+        if type(num) is not int or 0 > num < 99:
+            raise ValueError('Jersey number must be an int between 0-99')
+        else:
+            return num
+        
     @validates('player_name', 'parent_name')
     def validate_names(sef, key, name):
         if not name:

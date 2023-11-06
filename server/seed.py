@@ -92,7 +92,8 @@ def create_coaches(clubs):
         club = clubs[0],
         coach_name = fake.name(),
         email = fake.email(),
-        password_hash = fake.password()
+        password_hash = fake.password(),
+        phone_number = fake.numerify(text='##########')
     )
     coaches.append(coach)
 
@@ -101,7 +102,8 @@ def create_coaches(clubs):
             club = clubs[1],
             coach_name = fake.name(),
             email = fake.email(),
-            password_hash = fake.password()
+            password_hash = fake.password(),
+            phone_number = fake.numerify(text='##########')
         )
         coaches.append(coach)
 
@@ -109,7 +111,8 @@ def create_coaches(clubs):
         club = clubs[0],
         coach_name = "Kim Love",
         email = "kim1@email.com",
-        password_hash = "Password1"
+        password_hash = "Password1",
+        phone_number = fake.numerify(text='##########')
     )
     coaches.append(kim)
     
@@ -126,7 +129,9 @@ def create_players(teams):
             parent_name = fake.name(),
             parent_email = fake.email(),
             password_hash = fake.password(),
-            gender = "F"
+            gender = "F",
+            parent_phone_number = fake.numerify(text='##########'),
+            jersey_num = randint(0,99)
         )
         players.append(player)
 
@@ -138,7 +143,9 @@ def create_players(teams):
             parent_name = fake.name(),
             parent_email = fake.email(),
             password_hash = fake.password(),
-            gender = "F"
+            gender = "F",
+            parent_phone_number = fake.numerify(text='##########'),
+            jersey_num = randint(0,99)
         )
         players.append(player)
 
@@ -149,7 +156,9 @@ def create_players(teams):
         parent_name = "Holly Atha",
         parent_email = "holly1@email.com",
         password_hash = "Password1",
-        gender = "F"
+        gender = "F",
+        parent_phone_number = fake.numerify(text='##########'),
+        jersey_num = randint(0,99)
     )
     players.append(player)
 

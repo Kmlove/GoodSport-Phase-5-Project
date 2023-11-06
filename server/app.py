@@ -34,7 +34,8 @@ class Coaches(Resource):
                 club_id = request.json['club_id'],
                 coach_name = request.json['coach_name'],
                 email = request.json['email'],
-                password_hash = request.json['password']
+                password_hash = request.json['password'],
+                phone_number = request.json['phone_number']
             )
             db.session.add(new_coach)
             db.session.commit()
@@ -122,7 +123,8 @@ class Players(Resource):
                 parent_name = request.json['parent_name'],
                 parent_email = request.json['parent_email'],
                 password_hash = request.json['password'],
-                gender = request.json['gender']
+                gender = request.json['gender'],
+                parent_phone_number = request.json['parent_phone_number']
             )
             db.session.add(new_player)
             db.session.commit()

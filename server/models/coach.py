@@ -15,6 +15,8 @@ class Coach(db.Model, SerializerMixin):
     club_id = db.Column(db.Integer, db.ForeignKey('clubs.id'), nullable=False)
     coach_name = db.Column(db.String)
     email = db.Column(db.String, unique=True)
+    phone_number = db.Column(db.String)
+    headshot_img_url = db.Column(db.String)
     _password_hash = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=True)
 

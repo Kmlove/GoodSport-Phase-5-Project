@@ -9,6 +9,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
     birthday: "",
     parent_first_name: "",
     parent_last_name: "",
+    parent_phone_number: "",
     player_first_name: "",
     player_last_name: "",
     parent_email: "",
@@ -20,6 +21,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
   const dateFormat = 'MM/DD/YYYY';
   const navigate = useNavigate()
   const { Option } = Select
+  const [form] = Form.useForm()
   const clubsOptions = clubs.map(club => (
     {
       value: club.id,
@@ -72,7 +74,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
       ...newPlayerFormData,
       player_name: playerName,
       parent_name: parentName,
-      birthday: formattedDate
+      birthday: formattedDate,
     }
     delete newPlayer.parent_first_name
     delete newPlayer.parent_last_name
@@ -92,6 +94,11 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
       } else if (res.status === 500){
         window.scrollTo({ top: 0, behavior: 'smooth' })
         handleShowServerErrorAlert(true)
+        form.resetFields(['parent_email'])
+        setNewPlayerFormData({
+          ...newPlayerFormData,
+          parent_email: ""
+        })
         return Promise.reject("Internal Server Error")
       }
     })
@@ -114,6 +121,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
       <p>Create A Player Account Below:</p>
 
       <Form 
+        form={form}
         labelCol={{
           span: 15,
         }}
@@ -247,6 +255,40 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
           ]}
         >
           <Input name="parent_last_name" className='input'/>
+        </Form.Item>
+
+        <Form.Item
+          name="parent_phone_number"
+          label="Parent Phone Number"
+          className="form-item"
+          value={newPlayerFormData.parent_phone_number}
+          onChange={handleChange}
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (value.length !== 10) {
+                  return Promise.reject(new Error('Phone number need to be 10 digits long!'));
+                } 
+                if (isNaN(Number(value))) {
+                  return Promise.reject(new Error('Phone number must consist of numbers between 0-9!'));
+                }
+                return Promise.resolve();
+              },
+            }), 
+            {
+              required: true,
+              message: 'Please input your phone number!',
+            }
+          ]}
+        >
+          <Input
+            name="parent_phone_number"
+            style={{
+              width: '100%',
+              height: "46px"
+            }}
+            className="select"
+          />
         </Form.Item>
 
         <Form.Item

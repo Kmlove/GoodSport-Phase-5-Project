@@ -9,12 +9,13 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
     first_name: "",
     last_name: "",
     email: "",
-    password: ""
+    password: "",
+    phone_number: ""
   }
 
   const navigate = useNavigate()
   const [signupForm, setSignupForm] = useState(initialValue)
-
+  const [form] = Form.useForm()
 
   function handleChange(e){
     const {name, value} = e.target
@@ -39,7 +40,8 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
       club_id: signupForm.club_id,
       coach_name: name,
       email: signupForm.email,
-      password: signupForm.password
+      password: signupForm.password,
+      phone_number: signupForm.phone_number
     }
 
     fetch('/coaches', {
@@ -55,6 +57,11 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
       } else if (res.status === 500){
         window.scrollTo({ top: 0, behavior: 'smooth' })
         handleShowServerErrorAlert(true)
+        form.resetFields(['email'])
+        setSignupForm({
+          ...signupForm,
+          email: ""
+        })
         return Promise.reject("Internal Server Error")
       }
     })
@@ -70,7 +77,8 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
     <div id="signup-coach">
       {showServerErrorAlert? <Alert message="This email already has an account. Please login with that email or enter a new email to signup." type="error" banner showIcon /> : null}
       <p>Create A Coach Account Below:</p>
-      <Form 
+      <Form
+        form={form}
         labelCol={{
           span: 8,
         }}
@@ -119,6 +127,40 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
         >
           <Input name="last_name" className="input"/>
         </Form.Item>
+
+        <Form.Item
+            name="phone_number"
+            label="Phone Number"
+            className="form-item"
+            value={signupForm.phone_number}
+            onChange={handleChange}
+            rules={[
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (value.length !== 10) {
+                    return Promise.reject(new Error('Phone number need to be 10 digits long!'));
+                  } 
+                  if (isNaN(Number(value))) {
+                    return Promise.reject(new Error('Phone number must consist of numbers between 0-9!'));
+                  }
+                  return Promise.resolve();
+                },
+              }), 
+              {
+                required: true,
+                message: 'Please input your phone number!',
+              }
+            ]}
+          >
+            <Input
+              name="phone_number"
+              style={{
+                width: '100%',
+                height: "46px"
+              }}
+              className="select"
+            />
+          </Form.Item>
 
         <Form.Item
           name="email"

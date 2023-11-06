@@ -1,10 +1,10 @@
 import "../CSS/accountStyles.css"
-import { Form, Input, Button, DatePicker } from 'antd';
+import { Form, Input, Button, DatePicker, InputNumber } from 'antd';
 import { useState } from "react";
 import dayjs from "dayjs";
 
 function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
-  const {id, birthday, parent_email, parent_name, player_name} = user
+  const {id, birthday, parent_email, parent_name, player_name, parent_phone_number, jersey_num} = user
   const dateFormat = 'MM/DD/YYYY';
   const initBirthday = dayjs(birthday).format('MM/DD/YYYY')
   const spaceParentIndex = indexOfSpace(parent_name)
@@ -20,9 +20,11 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
     parent_last_name: parentLastName,
     player_first_name: playerFirstName,
     player_last_name: playerLastName,
+    parent_phone_number: parent_phone_number,
     parent_email: parent_email,
     currPassword: "",
     password: "",
+    jersey_num: jersey_num
   }
   const [accountFormData , setAccountFormData] = useState(initialValue)
   const [form] = Form.useForm()
@@ -39,6 +41,13 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
     setAccountFormData({
       ...accountFormData,
       birthday: dateString
+    })
+  }
+
+  function handleJerseyChange(jerseyNum){
+    setAccountFormData({
+      ...accountFormData,
+      jersey_num: jerseyNum
     })
   }
 
@@ -162,37 +171,46 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         <div id="player-information" className="account-form-section">
             <h3>Player Information</h3>
             <div>
-            <img />
-            <Form.Item
-                name="player_first_name"
-                label="Player First Name"
-                className="form-item"
-                initialValue={accountFormData.player_first_name}
-                value={accountFormData.player_first_name}
-                onChange={handleChange}
-            >
-                <Input name="player_first_name" className="input"/>
-            </Form.Item>
+              <img />
+              <Form.Item
+                  name="player_first_name"
+                  label="Player First Name"
+                  className="form-item"
+                  initialValue={accountFormData.player_first_name}
+                  value={accountFormData.player_first_name}
+                  onChange={handleChange}
+              >
+                  <Input name="player_first_name" className="input"/>
+              </Form.Item>
 
-            <Form.Item
-                name="player_last_name"
-                label="Player Last Name"
-                className="form-item"
-                initialValue={accountFormData.player_last_name}
-                value={accountFormData.player_last_name}
-                onChange={handleChange}
-            >
-                <Input name="player_last_name" className="input"/>
-            </Form.Item>
+              <Form.Item
+                  name="player_last_name"
+                  label="Player Last Name"
+                  className="form-item"
+                  initialValue={accountFormData.player_last_name}
+                  value={accountFormData.player_last_name}
+                  onChange={handleChange}
+              >
+                  <Input name="player_last_name" className="input"/>
+              </Form.Item>
 
-            <Form.Item 
-                label="Player Birthday" 
-                name="birthday"
-                className="form-item"
-                value={accountFormData.birthday}
-                >
-                <DatePicker format={dateFormat} defaultValue={dayjs(initBirthday)} onChange={handleDateChange} style={{height: "45px"}} className="player-account-birthday"/>
-            </Form.Item>
+              <Form.Item 
+                  label="Player Birthday" 
+                  name="birthday"
+                  className="form-item"
+                  value={accountFormData.birthday}
+                  >
+                  <DatePicker format={dateFormat} defaultValue={dayjs(initBirthday)} onChange={handleDateChange} style={{height: "45px"}} className="player-account-birthday"/>
+              </Form.Item>
+
+              <Form.Item 
+                  label="Jersey Number" 
+                  name="jersey_num"
+                  className="form-item"
+                  value={accountFormData.jersey_num}
+                  >
+                <InputNumber name="jersey_num" size="large" min={0} max={999} defaultValue={accountFormData.jersey_num} onChange={handleJerseyChange} />
+              </Form.Item>
             </div>
         </div>
 
@@ -218,6 +236,37 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
                 onChange={handleChange}
             >
                 <Input name="parent_last_name" className="input"/>
+            </Form.Item>
+
+            <Form.Item
+              name="parent_phone_number"
+              label="Parent Phone Number"
+              className="form-item"
+              initialValue={accountFormData.parent_phone_number}
+              value={accountFormData.parent_phone_number}
+              onChange={handleChange}
+              rules={[
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (value.length !== 10) {
+                      return Promise.reject(new Error('Phone number need to be 10 digits long!'));
+                    } 
+                    if (isNaN(Number(value))) {
+                      return Promise.reject(new Error('Phone number must consist of numbers between 0-9!'));
+                    }
+                    return Promise.resolve();
+                  },
+                }),
+              ]}
+            >
+              <Input
+                name="parent_phone_number"
+                style={{
+                  width: '100%',
+                  height: "46px"
+                }}
+                className="select"
+              />
             </Form.Item>
         </div>
 
