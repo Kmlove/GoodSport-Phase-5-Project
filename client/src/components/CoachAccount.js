@@ -1,11 +1,10 @@
 import "../CSS/accountStyles.css"
-import { Form, Input, Button, Select, Upload, Progress } from 'antd';
+import { Form, Input, Button, Upload, Progress } from 'antd';
 import { useState } from "react";
 import { InboxOutlined } from '@ant-design/icons';
 import { CLOUDINARY_API_KEY } from "../apikeys";
 
 function CoachAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
-  const { Option } = Select
   // const prefixSelector = (
   //   <Form.Item name="prefix" noStyle>
   //     <Select

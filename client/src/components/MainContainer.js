@@ -152,7 +152,6 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     if(user === undefined){
         return <h3>Loading...</h3>
     } else {
-        console.log(user)
         let eventsToDisplay
         if(user.is_admin === true){
             eventsToDisplay = events.filter(event => event.coach_id === user.id).sort(compareEventsByDate)

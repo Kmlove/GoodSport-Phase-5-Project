@@ -45,7 +45,7 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
       // Clear the timer if the component unmounts
       return () => clearTimeout(timer);
     }
-  }, [showSuccessfulUpdateAlert, showErrorUpdateAlert, showSuccessfulAddAlert ]);
+  }, [showSuccessfulUpdateAlert, showErrorUpdateAlert, showSuccessfulAddAlert, handleShowSuccessfulAddAlert ]);
 
   function handleDeleteClick(e){
     fetch(`/events/${id}`, {

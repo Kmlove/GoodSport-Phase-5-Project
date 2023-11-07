@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import dayjs from "dayjs";
 
 function PlayerTeamList({user}) {
     const id = user.team.id
-    const navigate = useNavigate()
     const [ currTeam, setCurrTeam ] = useState(null)
 
     useEffect(() => {
@@ -19,7 +17,7 @@ function PlayerTeamList({user}) {
         return <h3>Loading...</h3>
 
     } else {
-        const {age_group, club, events, gender, id, players, sport, team_name, coaches} = currTeam
+        const {age_group, club, gender, players, team_name, coaches} = currTeam
 
         return (
             <div className="right">

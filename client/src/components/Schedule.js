@@ -1,7 +1,6 @@
 import ScheduleCard from "./ScheduleCard";
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import { Radio, Timeline } from 'antd';
+import React from 'react';
 import { Alert } from 'antd';
 
 function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulDeleteAlert, showSuccessfulDeleteAlert, showErrorDeleteAlert, handleShowErrorDeleteAlert}) {
