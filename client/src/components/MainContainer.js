@@ -15,6 +15,7 @@ import { DeleteAlertContext } from "../context/deleteAccountAlert";
 function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const [events, setEvents] = useState([])
     const [teams, setTeams] = useState([])
+    const [ filterScheduleEventsValue, setFilterScheduleEventsValue ] = useState(0)
     const [showSuccessfulDeleteAlert, setShowSuccessfulDeleteAlert] = useState(false)
     const [showErrorDeleteAlert, setShowErrorDeleteAlert] = useState(false)
     const [showSuccessfulAddAlert, setShowSuccessfulAddAlert] = useState(false)
@@ -94,6 +95,10 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
         setEvents(updatedEvents)  
     }
 
+    function handleSetFilterScheduleEventsValue(value){
+        setFilterScheduleEventsValue(value)
+    }
+
     function handleNoClick(e){
         mainContainer.classList.remove("blur")
         popup.classList.add("hidden")
@@ -155,6 +160,12 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
         let eventsToDisplay
         if(user.is_admin === true){
             eventsToDisplay = events.filter(event => event.coach_id === user.id).sort(compareEventsByDate)
+            if (filterScheduleEventsValue !== 0){
+                console.log("IN Here")
+                eventsToDisplay = events.filter(event => event.coach_id === user.id).sort(compareEventsByDate).filter(event => event.team_id === filterScheduleEventsValue)
+                console.log(eventsToDisplay)
+            }
+
         } else if (user.is_admin === false){
             eventsToDisplay = user.team.events.sort(compareEventsByDate)
         }
@@ -170,13 +181,13 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
 
             <Header />
             <div id="mainPageContainer">
-                <NavBar user={user}/>
+                <NavBar handleSetFilterScheduleEventsValue={handleSetFilterScheduleEventsValue} user={user}/>
                 <Routes>
                     <Route 
                         path="/home" 
                         element={
                             <Home 
-                                events={eventsToDisplay} 
+                                events={events.filter(event => event.coach_id === user.id).sort(compareEventsByDate)} 
                                 user={user} 
                                 teams={teams}
                                 handleDeleteEvent={handleDeleteEvent} 
@@ -208,7 +219,8 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                                 handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert} 
                                 showSuccessfulDeleteAlert={showSuccessfulDeleteAlert} 
                                 showErrorDeleteAlert={showErrorDeleteAlert} 
-                                handleShowErrorDeleteAlert={handleShowErrorDeleteAlert} 
+                                handleShowErrorDeleteAlert={handleShowErrorDeleteAlert}
+                                handleSetFilterScheduleEventsValue={handleSetFilterScheduleEventsValue} 
                             />
                         } 
                     />

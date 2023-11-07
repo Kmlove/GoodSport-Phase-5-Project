@@ -8,7 +8,7 @@ function ScheduleCard({event, user, teams, handleDeleteEvent, handleShowSuccessf
   const {team_id, date, event_type, location, id} = event
   const coachesTeam = teams.filter(team => team.id === team_id)
   const formattedDate = dayjs(date).format('MM-DD-YYYY')
-  console.log(coachesTeam)
+
   function handleDeleteClick(e){
     fetch(`/events/${id}`, {
       method: "DELETE"

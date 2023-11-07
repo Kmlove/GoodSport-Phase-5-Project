@@ -47,6 +47,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
   function handlePhotoChange(info){
     setPhotoFile(info.file)
     setUploadStatus('uploading')
+    
     const formData = new FormData()
     formData.append('file', info.file)
     formData.append('upload_preset', 'bvspu3zv')

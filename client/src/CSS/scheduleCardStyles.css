@@ -22,6 +22,61 @@
     text-decoration: none;
 }
 
+#schedule-filter-div {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    gap: 10px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+input[type=search] {
+    background-color: red !important;
+}
+
+.ant-select-selector {
+    padding: 10px !important;
+
+    /* Font styles */
+    font-size: 12px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important; /* Convert text to uppercase */
+}
+
+.filter-select .ant-select-selector {
+    background-color: #845BB3 !important;
+    color: #fff !important;
+}
+
+.filter-select .ant-select-selection-item {
+    color: #fff !important;
+}
+
+.ant-select-item:hover, .ant-cascader-menu-item:hover {
+    background-color: #D0BDf4 !important;
+}
+
+[aria-selected="true"], [aria-checked="true"], .ant-cascader-menu-item-active {
+    background-color: #845BB3 !important;
+}
+
+
+.ant-select-arrow {
+    color: #fff !important;
+}
+
+#filter-label {
+    font-size: 20px;
+    font-weight: normal;
+    color: #845BB3;
+}
+
+#admin-schedule-button-div {
+    position: absolute;
+    margin-right: 30px;
+}
+
 .scheduleCard {
     border: 1px solid #ddd;
     border-radius: 5px;
