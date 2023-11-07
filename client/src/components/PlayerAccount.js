@@ -256,36 +256,36 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
               <InputNumber name="jersey_num" size="large" min={0} max={999} defaultValue={accountFormData.jersey_num} onChange={handleJerseyChange} />
             </Form.Item>
 
-            <Form.Item label="Upload Profile Picture" name="profile-pic">
-            <Upload.Dragger name="profile-pic" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
-              {uploadStatus === 'done' ? (
-                                    
-                <div>
-                  <Progress
-                    percent={100} // Set the progress to 88% 
-                    status="done"
-                  />
-                  <p className="ant-upload-text">Upload complete!</p>
-                </div>
-              ) : (
-                <>
-                  <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p className="ant-upload-text">
-                    {uploadStatus === 'uploading' ? 'Uploading...' : 'Click or drag file to this area to upload'}
-                  </p>
-                  {uploadStatus === 'uploading' && (
+            <Form.Item label="Upload Profile Picture" name="fileList">
+              <Upload.Dragger name="fileList" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
+                {uploadStatus === 'done' ? (
+                                      
+                  <div>
                     <Progress
-                      percent={88} // Set the progress to 88% 
-                      status="active"
+                      percent={100} // Set the progress to 88% 
+                      status="done"
                     />
-                  )}
-                  <p className="ant-upload-hint">Support for a single upload.</p>
-                </>
-              )}
-            </Upload.Dragger>
-          </Form.Item>
+                    <p className="ant-upload-text">Upload complete!</p>
+                  </div>
+                ) : (
+                  <>
+                    <p className="ant-upload-drag-icon">
+                      <InboxOutlined />
+                    </p>
+                    <p className="ant-upload-text">
+                      {uploadStatus === 'uploading' ? 'Uploading...' : 'Click or drag file to this area to upload'}
+                    </p>
+                    {uploadStatus === 'uploading' && (
+                      <Progress
+                        percent={88} // Set the progress to 88% 
+                        status="active"
+                      />
+                    )}
+                    <p className="ant-upload-hint">Support for a single upload.</p>
+                  </>
+                )}
+              </Upload.Dragger>
+            </Form.Item>
           {uploadStatus === "done"? photoFile.name: null}
         </div>
 

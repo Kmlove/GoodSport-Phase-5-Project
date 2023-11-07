@@ -238,8 +238,8 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
             />
           </Form.Item>
 
-          <Form.Item label="Upload Profile Picture" name="profile-pic">
-            <Upload.Dragger name="profile-pic" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
+          <Form.Item label="Upload Profile Picture" name="fileList">
+            <Upload.Dragger name="fileList" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
               {uploadStatus === 'done' ? (
                                     
                 <div>

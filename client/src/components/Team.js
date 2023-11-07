@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import dayjs from "dayjs";
@@ -7,7 +7,6 @@ import "../CSS/teamStyles.css"
 
 function Team() {
     const {id} = useParams()
-    const navigate = useNavigate()
     const [ currTeam, setCurrTeam ] = useState(null)
 
     useEffect(() => {
@@ -20,12 +19,12 @@ function Team() {
         return <h3>Loading...</h3>
 
     } else {
-        const {age_group, club, events, gender, id, players, sport, team_name, coaches} = currTeam
+        const {age_group, club, gender, players, team_name, coaches} = currTeam
 
         return (
             <div className="right">
                 <div className="teamsHeaders">
-                    <h3>{team_name} - <span id="age-group">{gender === "F"? `G${age_group}`: {age_group}}</span></h3>
+                    <h3>{team_name} - <span id="age-group">{gender === "F"? `G${age_group}`: age_group}</span></h3>
                     <p id="club">{club.club_name}</p>
                 </div>
                 <div id="team">
