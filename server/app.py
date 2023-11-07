@@ -116,16 +116,29 @@ class Players(Resource):
             birthday_str = request.json['birthday']
             birthday_obj = datetime.strptime(birthday_str, '%Y-%m-%d').date()
 
-            new_player = Player(
-                team_id = request.json['team_id'],
-                player_name = request.json['player_name'],
-                birthday = birthday_obj,
-                parent_name = request.json['parent_name'],
-                parent_email = request.json['parent_email'],
-                password_hash = request.json['password'],
-                gender = request.json['gender'],
-                parent_phone_number = request.json['parent_phone_number']
-            )
+            if request.json.get('jersey_num'):
+                new_player = Player(
+                    team_id = request.json['team_id'],
+                    player_name = request.json['player_name'],
+                    birthday = birthday_obj,
+                    parent_name = request.json['parent_name'],
+                    parent_email = request.json['parent_email'],
+                    password_hash = request.json['password'],
+                    gender = request.json['gender'],
+                    parent_phone_number = request.json['parent_phone_number'],
+                    jersey_num = request.json['jersey_num']
+                )
+            else:
+                new_player = Player(
+                    team_id = request.json['team_id'],
+                    player_name = request.json['player_name'],
+                    birthday = birthday_obj,
+                    parent_name = request.json['parent_name'],
+                    parent_email = request.json['parent_email'],
+                    password_hash = request.json['password'],
+                    gender = request.json['gender'],
+                    parent_phone_number = request.json['parent_phone_number']
+                )
             db.session.add(new_player)
             db.session.commit()
             new_player_dict = new_player.to_dict(rules=('-_password_hash', '-team.club', '-team.events.coach', '-team.events.team_id', '-team_id'))

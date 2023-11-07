@@ -142,6 +142,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
       const spaceIndex = indexOfSpace(data.coach_name)
       const firstName = data.coach_name.slice(0, spaceIndex)
       const lastName = data.coach_name.slice(spaceIndex + 1)
+      container.scrollTop = 0
       handleUpdateUser(data)
       handleSucessfulUpdate(true)
       setPhotoFile(null)
@@ -154,7 +155,6 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
         password: "",
         currPassword: ""
       })
-      container.scrollTop = 0
       form.resetFields(['currPassword'])
       form.resetFields(['password'])
       form.resetFields(['confirm'])

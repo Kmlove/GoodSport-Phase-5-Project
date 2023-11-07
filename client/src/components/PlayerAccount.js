@@ -162,13 +162,14 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
       }
     })
     .then(data => {
-        const spaceParentIndex = indexOfSpace(data.parent_name)
-        const spacePlayerIndex = indexOfSpace(data.player_name)
-        const parentFirstName = data.parent_name.slice(0, spaceParentIndex)
-        const parentLastName = data.parent_name.slice(spaceParentIndex + 1)
-        const playerFirstName = data.player_name.slice(0, spacePlayerIndex)
-        const playerLastName = data.player_name.slice(spacePlayerIndex + 1)
-        const initBirthday = dayjs(data.birthday).format('MM/DD/YYYY')
+      const spaceParentIndex = indexOfSpace(data.parent_name)
+      const spacePlayerIndex = indexOfSpace(data.player_name)
+      const parentFirstName = data.parent_name.slice(0, spaceParentIndex)
+      const parentLastName = data.parent_name.slice(spaceParentIndex + 1)
+      const playerFirstName = data.player_name.slice(0, spacePlayerIndex)
+      const playerLastName = data.player_name.slice(spacePlayerIndex + 1)
+      const initBirthday = dayjs(data.birthday).format('MM/DD/YYYY')
+      container.scrollTop = 0
       handleUpdateUser(data)
       handleSucessfulUpdate(true)
       setPhotoFile(null)
@@ -184,7 +185,6 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         currPassword: "",
         password: "",
       })
-      container.scrollTop = 0
       form.resetFields(['currPassword'])
       form.resetFields(['password'])
       form.resetFields(['confirm'])

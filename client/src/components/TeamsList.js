@@ -2,8 +2,9 @@ import CoachTeamList from "./CoachTeamList";
 import PlayerTeamList from "./PlayerTeamList";
 
 function TeamsList({user, teams, events}) {
+  console.log(teams)
 
-  if (events.length === 0){
+  if (user.is_admin === true && events.length === 0){
     return (
         <div className="right">
             <h2 className="containerHeaders">My Teams</h2>
