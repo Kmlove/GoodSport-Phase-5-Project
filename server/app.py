@@ -39,7 +39,7 @@ class Coaches(Resource):
             )
             db.session.add(new_coach)
             db.session.commit()
-            new_coach_dict = new_coach.to_dict(rules=('-_password_hash', ))
+            new_coach_dict = new_coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team', "teams", "-teams.events", "-teams.players", "-teams.club"))
             session['user_id'] = new_coach.id
             session['is_admin'] = new_coach.is_admin
             return make_response(new_coach_dict, 201)
@@ -72,7 +72,7 @@ class CoachesById(Resource):
                         setattr(coach, attr, request.json[attr])
                     db.session.add(coach)
                     db.session.commit()
-                    coach_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+                    coach_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team', "teams", "-teams.events", "-teams.players", "-teams.club"))
                     return make_response(coach_dict, 202)
                 except ValueError as error:
                     response = jsonify({"Validation Error": [str(error)]})
@@ -85,7 +85,7 @@ class CoachesById(Resource):
                     setattr(coach, attr, request.json[attr])
                 db.session.add(coach)
                 db.session.commit()
-                coach_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+                coach_dict = coach.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team', "teams", "-teams.events", "-teams.players", "-teams.club"))
                 return make_response(coach_dict, 202)
             except ValueError as error:
                 response = jsonify({"Validation Error": [str(error)]})
@@ -393,7 +393,7 @@ class Login(Resource):
             session['is_admin'] = user.is_admin
             
             if user.is_admin == True:
-                coach_to_dict = user.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+                coach_to_dict = user.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team', "teams", "-teams.events", "-teams.players", "-teams.club"))
                 return make_response(coach_to_dict, 200)
             elif user.is_admin == False:
                 player_dict = user.to_dict(rules=('-_password_hash', '-team.events.coach', '-team.events.team_id', '-team_id'))
@@ -413,7 +413,7 @@ class AutoLogin(Resource):
 
             if user:
                 if user.is_admin == True:
-                    coach_to_dict = user.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team'))
+                    coach_to_dict = user.to_dict(rules=('-_password_hash', '-club.teams', '-club_id', '-events.coach_id', '-events.team', "teams", "-teams.events", "-teams.players", "-teams.club"))
                     return make_response(coach_to_dict, 200)
                 elif user.is_admin == False:
                     player_dict = user.to_dict(rules=('-_password_hash', '-team.events.coach', '-team.events.team_id', '-team_id'))
