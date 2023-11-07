@@ -1,11 +1,10 @@
 import "../CSS/accountStyles.css"
-import { Form, Input, Button, Select, Upload, Progress } from 'antd';
+import { Form, Input, Button, Upload, Progress } from 'antd';
 import { useState } from "react";
 import { InboxOutlined } from '@ant-design/icons';
 import { CLOUDINARY_API_KEY } from "../apikeys";
 
-function CoachAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
-  const { Option } = Select
+function CoachAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, rightContainer}) {
   // const prefixSelector = (
   //   <Form.Item name="prefix" noStyle>
   //     <Select
@@ -127,13 +126,13 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
         form.resetFields(['currPassword'])
         form.resetFields(['password'])
         form.resetFields(['confirm'])
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         return Promise.reject("Password Not Authenticated")
       } else if (res.status === 400){
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         return Promise.reject("Validations Error")
       } else if (res.status === 500){
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         handleServerError(true)
         return Promise.reject("Internal Server Error")
       }
@@ -142,6 +141,7 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
       const spaceIndex = indexOfSpace(data.coach_name)
       const firstName = data.coach_name.slice(0, spaceIndex)
       const lastName = data.coach_name.slice(spaceIndex + 1)
+      rightContainer.scrollTop = 0
       handleUpdateUser(data)
       handleSucessfulUpdate(true)
       setPhotoFile(null)
@@ -154,7 +154,6 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
         password: "",
         currPassword: ""
       })
-      container.scrollTop = 0
       form.resetFields(['currPassword'])
       form.resetFields(['password'])
       form.resetFields(['confirm'])
@@ -238,8 +237,8 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
             />
           </Form.Item>
 
-          <Form.Item label="Upload Profile Picture" name="profile-pic">
-            <Upload.Dragger name="profile-pic" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
+          <Form.Item label="Upload Profile Picture" name="fileList">
+            <Upload.Dragger name="fileList" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
               {uploadStatus === 'done' ? (
                                     
                 <div>

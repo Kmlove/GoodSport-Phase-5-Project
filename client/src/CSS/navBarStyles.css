@@ -1,7 +1,7 @@
 .navBarContainer {
     border-right: 1px solid #ccc;
-    /* width: 200px; */
-    width: 15%;
+    max-width: 300px;
+    width: 13%;
     text-align: center;
     padding-top: 50px;
 }
@@ -9,8 +9,8 @@
 #headshot-container {
     border: 1px solid #ccc;
     border-radius: 50%;
-    width: 175px;
-    height: 175px;
+    width: 160px;
+    height: 160px;
     overflow: hidden;
     margin: 0 auto;
 }

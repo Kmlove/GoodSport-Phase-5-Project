@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import dayjs from "dayjs";
 
 function PlayerTeamList({user}) {
     const id = user.team.id
-    const navigate = useNavigate()
     const [ currTeam, setCurrTeam ] = useState(null)
 
     useEffect(() => {
@@ -19,13 +17,13 @@ function PlayerTeamList({user}) {
         return <h3>Loading...</h3>
 
     } else {
-        const {age_group, club, events, gender, id, players, sport, team_name, coaches} = currTeam
+        const {age_group, club, gender, players, team_name, coaches} = currTeam
 
         return (
             <div className="right">
                 <div className="teamsHeaders">
                     <h2 id="my-team-header">My Team</h2>
-                    <h3>{team_name} - <span id="age-group">{gender === "F"? `G${age_group}`: {age_group}}</span></h3>
+                    <h3>{team_name} - <span id="age-group">{gender === "F"? `G${age_group}`: age_group}</span></h3>
                     <p id="club">{club.club_name}</p>
                 </div>
                 <div id="team">
@@ -83,7 +81,7 @@ function PlayerTeamList({user}) {
 
                                         return (
                                             <tr key={player.id} >
-                                                <td>{player.jersey_num}</td>
+                                                <td>{player.jersey_num === 0 || player.jersey_num? player.jersey_num : "N/A"}</td>
                                                 <td>{player.headshot_img_url? <img src={player.headshot_img_url} alt={`${player.player_name} Headshot`} style={{width: "55px", height: "60px", borderRadius: "5px"}}/>: <Avatar shape="square" size={50} icon={<UserOutlined />} />}</td>
                                                 <td>{player.player_name}</td>
                                                 <td>{formattedDate}</td>

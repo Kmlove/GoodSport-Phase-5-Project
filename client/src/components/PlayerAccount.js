@@ -5,7 +5,7 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import { CLOUDINARY_API_KEY } from "../apikeys";
 
-function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
+function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, rightContainer}) {
 
   const {id, birthday, parent_email, parent_name, player_name, parent_phone_number, jersey_num} = user
   const dateFormat = 'MM/DD/YYYY';
@@ -150,25 +150,27 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         form.resetFields(['currPassword'])
         form.resetFields(['password'])
         form.resetFields(['confirm'])
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         return Promise.reject("Password Not Authenticated")
       } else if (res.status === 400){
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         return Promise.reject("Validations Error")
       } else if (res.status === 500){
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         handleServerError(true)
         return Promise.reject("Internal Server Error")
       }
     })
     .then(data => {
-        const spaceParentIndex = indexOfSpace(data.parent_name)
-        const spacePlayerIndex = indexOfSpace(data.player_name)
-        const parentFirstName = data.parent_name.slice(0, spaceParentIndex)
-        const parentLastName = data.parent_name.slice(spaceParentIndex + 1)
-        const playerFirstName = data.player_name.slice(0, spacePlayerIndex)
-        const playerLastName = data.player_name.slice(spacePlayerIndex + 1)
-        const initBirthday = dayjs(data.birthday).format('MM/DD/YYYY')
+      const spaceParentIndex = indexOfSpace(data.parent_name)
+      const spacePlayerIndex = indexOfSpace(data.player_name)
+      const parentFirstName = data.parent_name.slice(0, spaceParentIndex)
+      const parentLastName = data.parent_name.slice(spaceParentIndex + 1)
+      const playerFirstName = data.player_name.slice(0, spacePlayerIndex)
+      const playerLastName = data.player_name.slice(spacePlayerIndex + 1)
+      const initBirthday = dayjs(data.birthday).format('MM/DD/YYYY')
+      console.log("rightContainer", rightContainer)
+      rightContainer.scrollTop = 0
       handleUpdateUser(data)
       handleSucessfulUpdate(true)
       setPhotoFile(null)
@@ -184,7 +186,6 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         currPassword: "",
         password: "",
       })
-      container.scrollTop = 0
       form.resetFields(['currPassword'])
       form.resetFields(['password'])
       form.resetFields(['confirm'])
@@ -256,36 +257,36 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
               <InputNumber name="jersey_num" size="large" min={0} max={999} defaultValue={accountFormData.jersey_num} onChange={handleJerseyChange} />
             </Form.Item>
 
-            <Form.Item label="Upload Profile Picture" name="profile-pic">
-            <Upload.Dragger name="profile-pic" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
-              {uploadStatus === 'done' ? (
-                                    
-                <div>
-                  <Progress
-                    percent={100} // Set the progress to 88% 
-                    status="done"
-                  />
-                  <p className="ant-upload-text">Upload complete!</p>
-                </div>
-              ) : (
-                <>
-                  <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p className="ant-upload-text">
-                    {uploadStatus === 'uploading' ? 'Uploading...' : 'Click or drag file to this area to upload'}
-                  </p>
-                  {uploadStatus === 'uploading' && (
+            <Form.Item label="Upload Profile Picture" name="fileList">
+              <Upload.Dragger name="fileList" maxCount={1}  showUploadList={false} customRequest={handlePhotoChange} accept=".png, .jpeg, .jpg">
+                {uploadStatus === 'done' ? (
+                                      
+                  <div>
                     <Progress
-                      percent={88} // Set the progress to 88% 
-                      status="active"
+                      percent={100} // Set the progress to 88% 
+                      status="done"
                     />
-                  )}
-                  <p className="ant-upload-hint">Support for a single upload.</p>
-                </>
-              )}
-            </Upload.Dragger>
-          </Form.Item>
+                    <p className="ant-upload-text">Upload complete!</p>
+                  </div>
+                ) : (
+                  <>
+                    <p className="ant-upload-drag-icon">
+                      <InboxOutlined />
+                    </p>
+                    <p className="ant-upload-text">
+                      {uploadStatus === 'uploading' ? 'Uploading...' : 'Click or drag file to this area to upload'}
+                    </p>
+                    {uploadStatus === 'uploading' && (
+                      <Progress
+                        percent={88} // Set the progress to 88% 
+                        status="active"
+                      />
+                    )}
+                    <p className="ant-upload-hint">Support for a single upload.</p>
+                  </>
+                )}
+              </Upload.Dragger>
+            </Form.Item>
           {uploadStatus === "done"? photoFile.name: null}
         </div>
 

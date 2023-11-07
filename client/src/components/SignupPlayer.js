@@ -63,10 +63,9 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
       birthday: dateString
     })
   }
-
+  
   function handleSubmit(e) {
-    const curdate = newPlayerFormData.date
-    const formattedDate = dayjs(curdate).format('YYYY-MM-DD')
+    const formattedDate = dayjs(newPlayerFormData.birthday).format('YYYY-MM-DD')
     const parentName = newPlayerFormData.parent_first_name + " " + newPlayerFormData.parent_last_name
     const playerName = newPlayerFormData.player_first_name + " " + newPlayerFormData.player_last_name
 

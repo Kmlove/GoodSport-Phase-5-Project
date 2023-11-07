@@ -46,7 +46,7 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
           password: ""
         })
         return Promise.reject("Account Not Found")
-      } else if (res.status == 500){
+      } else if (res.status === 500){
         handleChangeLoggedOutAlert(false)
         handleDeleteAccountAlert(false)
         handleShowServerErrorAlert(true)

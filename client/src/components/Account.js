@@ -8,7 +8,7 @@ import { LoggedOutContext } from "../context/loggedOut";
 function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, popup, deleteError}) {
 
     const navigate = useNavigate()
-    const container = document.querySelector(".right")
+    const rightContainer = document.querySelector(".right")
     const [ successfulUpdate, setSuccessfulUpdate ] = useState(false)
     const [ passwordError, setPasswordError ] = useState(false)
     const [ serverError, setServerError ] = useState(false)
@@ -90,7 +90,7 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
                 handleServerError={handleServerError}
                 handlePasswordError={handlePasswordError}
                 handleSucessfulUpdate={handleSucessfulUpdate}
-                container={container}
+                rightContainer={rightContainer}
             />
         ) : (
             <PlayerAccount 
@@ -99,7 +99,7 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
                 handleServerError={handleServerError}
                 handlePasswordError={handlePasswordError}
                 handleSucessfulUpdate={handleSucessfulUpdate}
-                container={container}
+                rightContainer={rightContainer}
             />
         )
     }

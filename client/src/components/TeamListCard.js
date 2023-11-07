@@ -3,7 +3,7 @@ import "../CSS/teamStyles.css"
 
 function TeamListCard({team}) {
     const {id, team_name, age_group, gender} = team
-
+    
   return (
       <div className="coachTeam">
         <p><strong>Team Name:</strong> <span className="value">{team_name}</span></p>
