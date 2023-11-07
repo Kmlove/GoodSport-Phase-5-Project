@@ -5,7 +5,7 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import { CLOUDINARY_API_KEY } from "../apikeys";
 
-function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, container}) {
+function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, rightContainer}) {
 
   const {id, birthday, parent_email, parent_name, player_name, parent_phone_number, jersey_num} = user
   const dateFormat = 'MM/DD/YYYY';
@@ -150,13 +150,13 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
         form.resetFields(['currPassword'])
         form.resetFields(['password'])
         form.resetFields(['confirm'])
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         return Promise.reject("Password Not Authenticated")
       } else if (res.status === 400){
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         return Promise.reject("Validations Error")
       } else if (res.status === 500){
-        container.scrollTop = 0
+        rightContainer.scrollTop = 0
         handleServerError(true)
         return Promise.reject("Internal Server Error")
       }
@@ -169,7 +169,8 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
       const playerFirstName = data.player_name.slice(0, spacePlayerIndex)
       const playerLastName = data.player_name.slice(spacePlayerIndex + 1)
       const initBirthday = dayjs(data.birthday).format('MM/DD/YYYY')
-      container.scrollTop = 0
+      console.log("rightContainer", rightContainer)
+      rightContainer.scrollTop = 0
       handleUpdateUser(data)
       handleSucessfulUpdate(true)
       setPhotoFile(null)

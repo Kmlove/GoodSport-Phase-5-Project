@@ -58,6 +58,17 @@ body {
   position: sticky;
   top: 0;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.logo {
+  display: block;
+  width: 200px;
 }
 
 .app-title {
