@@ -98,3 +98,14 @@
     background-color: red;
     color: white;
 }
+
+#schedule-img-text-containter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+#ball {
+    width: 85px;
+}

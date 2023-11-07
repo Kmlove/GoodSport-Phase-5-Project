@@ -6,7 +6,7 @@ import { Alert } from 'antd';
 function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulDeleteAlert, showSuccessfulDeleteAlert, showErrorDeleteAlert, handleShowErrorDeleteAlert}) {
   const navigate = useNavigate()
 
-  if (events.length === 0){
+  if (events.length === 0) {
     return (
       <div className="right">
         <h2 className="containerHeaders">Schedule</h2>
@@ -16,7 +16,7 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
         <h4 className="no-upcoming">You Have No Upcoming Events...</h4>
       </div>
     )
-  } else{
+  } else {
     return (
       <div className="right">
         <h2 className="containerHeaders">Schedule</h2>

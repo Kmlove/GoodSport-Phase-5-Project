@@ -5,6 +5,7 @@ import Login from "./Login";
 import MainContainer from "./MainContainer";
 import { LoggedOutContext } from "../context/loggedOut";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
+import sportsBalls from "../IMAGES/photo-sports-balls.jpg"
 
 function App() {
   const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)
@@ -79,9 +80,9 @@ function App() {
           :(
             <>
               <header className="header">
-                <img className="logo" src="http://www.allamericancolor.com/images/photo-sports-balls.jpg" />
+                <img className="logo" src={sportsBalls} alt="Sports Balls Array" />
                 <h1 className="app-title"><span className="good">Good</span><span className="sport">Sport</span></h1>
-                <img className="logo" src="http://www.allamericancolor.com/images/photo-sports-balls.jpg" />
+                <img className="logo" src={sportsBalls} alt="Sports Balls Array" />
               </header>
               
               <Routes>
