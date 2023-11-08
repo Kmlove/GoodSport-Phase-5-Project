@@ -16,6 +16,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
     const [events, setEvents] = useState([])
     const [teams, setTeams] = useState([])
     const [ filterScheduleEventsValue, setFilterScheduleEventsValue ] = useState(0)
+    const [ futureEventsCheck, setFutureEventsCheck ] = useState(true)
     const [showSuccessfulDeleteAlert, setShowSuccessfulDeleteAlert] = useState(false)
     const [showErrorDeleteAlert, setShowErrorDeleteAlert] = useState(false)
     const [showSuccessfulAddAlert, setShowSuccessfulAddAlert] = useState(false)
@@ -99,6 +100,10 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
         setFilterScheduleEventsValue(value)
     }
 
+    function handleFutureEventsCheck(value){
+        setFutureEventsCheck(value)
+    }
+
     function handleNoClick(e){
         mainContainer.classList.remove("blur")
         popup.classList.add("hidden")
@@ -158,17 +163,60 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
         return <h3>Loading...</h3>
     } else {
         let eventsToDisplay
+        let futureEventsCoach
+        let futureEventsPlayer
+
+        if(futureEventsCheck && user.is_admin){
+            futureEventsCoach = events.filter(event => {
+                const today = new Date();
+                const currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
+                const currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+                const currYear = today.getFullYear();
+                const eventYear = parseInt(event.date.slice(0, 4), 10); // Convert to an integer
+                const eventMonth = parseInt(event.date.slice(5, 7), 10); // Convert to an integer
+                const eventDay = event.date.slice(8, 10);
+              
+                if (eventYear > currYear || (eventYear === currYear && eventMonth > currMonth)) {
+                  return true;
+                } else if (eventYear === currYear && eventMonth === currMonth && eventDay >= currDay) {
+                  return true;
+                } else {
+                  return false;
+                }
+            })
+        }
+
+        if(futureEventsCheck && user.is_admin === false){
+            futureEventsPlayer = user.team.events.filter(event => {
+                const today = new Date();
+                const currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
+                const currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+                const currYear = today.getFullYear();
+                const eventYear = parseInt(event.date.slice(0, 4), 10); // Convert to an integer
+                const eventMonth = parseInt(event.date.slice(5, 7), 10); // Convert to an integer
+                const eventDay = event.date.slice(8, 10);
+              
+                if (eventYear > currYear || (eventYear === currYear && eventMonth > currMonth)) {
+                  return true;
+                } else if (eventYear === currYear && eventMonth === currMonth && eventDay >= currDay) {
+                  return true;
+                } else {
+                  return false;
+                }
+            })
+        }
+
         if(user.is_admin === true){
-            eventsToDisplay = events.filter(event => event.coach_id === user.id).sort(compareEventsByDate)
+            eventsToDisplay = futureEventsCheck? futureEventsCoach.filter(event => event.coach_id === user.id).sort(compareEventsByDate): events.filter(event => event.coach_id === user.id).sort(compareEventsByDate)
+
             if (filterScheduleEventsValue !== 0){
-                console.log("IN Here")
-                eventsToDisplay = events.filter(event => event.coach_id === user.id).sort(compareEventsByDate).filter(event => event.team_id === filterScheduleEventsValue)
-                console.log(eventsToDisplay)
+                eventsToDisplay = futureEventsCheck? futureEventsCoach.filter(event => event.coach_id === user.id).sort(compareEventsByDate).filter(event => event.team_id === filterScheduleEventsValue): events.filter(event => event.coach_id === user.id).sort(compareEventsByDate).filter(event => event.team_id === filterScheduleEventsValue)
             }
 
         } else if (user.is_admin === false){
-            eventsToDisplay = user.team.events.sort(compareEventsByDate)
+            eventsToDisplay = futureEventsCheck? futureEventsPlayer.sort(compareEventsByDate) : user.team.events.sort(compareEventsByDate)
         }
+
       return (
         <div id="pageContainer">
             <div id="delete-account-popup" className="hidden">
@@ -181,7 +229,11 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
 
             <Header />
             <div id="mainPageContainer">
-                <NavBar handleSetFilterScheduleEventsValue={handleSetFilterScheduleEventsValue} user={user}/>
+                <NavBar 
+                    handleSetFilterScheduleEventsValue={handleSetFilterScheduleEventsValue} 
+                    user={user}
+                    handleFutureEventsCheck={handleFutureEventsCheck}
+                />
                 <Routes>
                     <Route 
                         path="/home" 
@@ -220,7 +272,9 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                                 showSuccessfulDeleteAlert={showSuccessfulDeleteAlert} 
                                 showErrorDeleteAlert={showErrorDeleteAlert} 
                                 handleShowErrorDeleteAlert={handleShowErrorDeleteAlert}
-                                handleSetFilterScheduleEventsValue={handleSetFilterScheduleEventsValue} 
+                                handleSetFilterScheduleEventsValue={handleSetFilterScheduleEventsValue}
+                                handleFutureEventsCheck={handleFutureEventsCheck}
+                                futureEventsCheck={futureEventsCheck} 
                             />
                         } 
                     />

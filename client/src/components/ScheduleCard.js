@@ -9,6 +9,23 @@ function ScheduleCard({event, user, teams, handleDeleteEvent, handleShowSuccessf
   const coachesTeam = teams.filter(team => team.id === team_id)
   const formattedDate = dayjs(date).format('MM-DD-YYYY')
 
+  const today = new Date();
+  const currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
+  const currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+  const currYear = today.getFullYear();
+  const eventYear = parseInt(date.slice(0, 4), 10); // Convert to an integer
+  const eventMonth = parseInt(date.slice(5, 7), 10); // Convert to an integer
+  const eventDay = date.slice(8, 10);
+
+  let futureDate;
+  if (eventYear > currYear || (eventYear === currYear && eventMonth > currMonth)) {
+    futureDate = true;
+  } else if (eventYear === currYear && eventMonth === currMonth && eventDay >= currDay) {
+    futureDate = true;
+  } else {
+    futureDate = false;
+  }
+
   function handleDeleteClick(e){
     fetch(`/events/${id}`, {
       method: "DELETE"
@@ -48,10 +65,10 @@ function ScheduleCard({event, user, teams, handleDeleteEvent, handleShowSuccessf
     }
     return (
 
-      <div className="scheduleCard">
+      <div className={futureDate? "scheduleCard" : "scheduleCard past-date"}>
           {user.is_admin? <button onClick={handleDeleteClick} className='schedule-delete-button'>✖</button> : null}
 
-          <div id="schedule-img-text-containter">
+          <div id="schedule-img-text-containter" >
             <img src={ballSRC} alt={`${sport}`} id="ball"/>
             <div>
               <p><span id="sc-date">{formattedDate}</span></p>

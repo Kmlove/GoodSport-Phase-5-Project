@@ -180,7 +180,8 @@ def create_events(teams, coaches):
             team = teams[0],
             coach = coaches[0],
             event_type = rc(events_types),
-            date = fake.future_date(),
+            # date = fake.future_date(),
+            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2023, 12, 31)),
             event_time = new_time1 + " - " + new_time2,
             notes = fake.sentence(nb_words=10),
             location = fake.address()
@@ -198,7 +199,8 @@ def create_events(teams, coaches):
             team = teams[0],
             coach = coaches[3],
             event_type = rc(events_types),
-            date = fake.future_date(),
+            # date = fake.future_date(),
+            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2023, 12, 31)),
             event_time = new_time1 + " - " + new_time2,
             notes = fake.sentence(nb_words=10),
             location = fake.address()
@@ -216,7 +218,8 @@ def create_events(teams, coaches):
             team = teams[4],
             coach = coaches[3],
             event_type = rc(events_types),
-            date = fake.future_date(),
+            # date = fake.future_date(),
+            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2023, 12, 31)),
             event_time = new_time1 + " - " + new_time2,
             notes = fake.sentence(nb_words=10),
             location = fake.address()
@@ -234,7 +237,8 @@ def create_events(teams, coaches):
             team = teams[1],
             coach = coaches[1],
             event_type = rc(events_types),
-            date = fake.future_date(),
+            # date = fake.future_date(),
+            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2023, 12, 31)),
             event_time = new_time1 + " - " + new_time2,
             notes = fake.sentence(nb_words=10),
             location = fake.address()
@@ -252,7 +256,8 @@ def create_events(teams, coaches):
             team = teams[1],
             coach = coaches[2],
             event_type = rc(events_types),
-            date = fake.future_date(),
+            # date = fake.future_date(),
+            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2023, 12, 31)),
             event_time = new_time1 + " - " + new_time2,
             notes = fake.sentence(nb_words=10),
             location = fake.address()

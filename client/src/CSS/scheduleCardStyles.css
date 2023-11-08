@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 15px;
+    /* margin-left: 15px; */
 
     /* Font styles */
     font-size: 12px;
@@ -27,12 +27,8 @@
     flex-direction: column;
     width: fit-content;
     gap: 10px;
-    margin-top: 15px;
-    margin-left: 15px;
-}
-
-input[type=search] {
-    background-color: red !important;
+    /* margin-top: 15px;
+    margin-left: 15px; */
 }
 
 .ant-select-selector {
@@ -66,15 +62,45 @@ input[type=search] {
     color: #fff !important;
 }
 
-#filter-label {
+#filter-label, #checkbox-label {
     font-size: 20px;
     font-weight: normal;
     color: #845BB3;
 }
 
+#checkbox-container {
+    /* margin-top: 10px;
+    margin-left: 15px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    gap: 5px;
+}
+
 #admin-schedule-button-div {
     position: absolute;
     margin-right: 30px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.ant-checkbox-inner {
+    background-color: #845BB3 !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.ant-checkbox-wrapper {
+    width: 22px;
+}
+
+.schedule-subheader {
+    font-size: 28px;
+    color: #845BB3;
+    text-align: center;
 }
 
 .scheduleCard {
