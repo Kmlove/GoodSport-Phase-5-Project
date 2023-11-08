@@ -169,7 +169,6 @@ function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswor
       const playerFirstName = data.player_name.slice(0, spacePlayerIndex)
       const playerLastName = data.player_name.slice(spacePlayerIndex + 1)
       const initBirthday = dayjs(data.birthday).format('MM/DD/YYYY')
-      console.log("rightContainer", rightContainer)
       rightContainer.scrollTop = 0
       handleUpdateUser(data)
       handleSucessfulUpdate(true)

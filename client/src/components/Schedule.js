@@ -22,9 +22,9 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
       <div className="right">
         <h2 className="containerHeaders">Schedule</h2>
         {user.is_admin? 
-        <button onClick={() => navigate('/event/new')} className="add-event-button">Add An Event</button> : null
+        <button style={{marginLeft: "15px"}} onClick={() => navigate('/event/new')} className="add-event-button">Add An Event</button> : null
         }
-        <h4 className="no-upcoming">You Have No Upcoming Events...</h4>
+        <h4 className="no-upcoming" >You Have No Upcoming Events...</h4>
       </div>
     )
   } else {

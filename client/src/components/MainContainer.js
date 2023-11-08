@@ -75,9 +75,14 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
         new_event.team_id = new_event.team.id
         delete new_event.coach
         delete new_event.team
+        
+        fetch(`/coaches/${user.id}`)
+        .then(res => res.json())
+        .then(data => handleUpdateUser(data))
+
         setEvents([...events, new_event])
     }
-
+    
     function handleDeleteEvent(deletedEvent){
         const updatedEvents = events.filter(event => event.id !== deletedEvent.id)
         setEvents(updatedEvents)
@@ -217,6 +222,8 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
             eventsToDisplay = futureEventsCheck? futureEventsPlayer.sort(compareEventsByDate) : user.team.events.sort(compareEventsByDate)
         }
 
+        const homePageEvents = user.is_admin ? futureEventsCoach : futureEventsPlayer
+
       return (
         <div id="pageContainer">
             <div id="delete-account-popup" className="hidden">
@@ -239,7 +246,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                         path="/home" 
                         element={
                             <Home 
-                                events={events.filter(event => event.coach_id === user.id).sort(compareEventsByDate)} 
+                                events={homePageEvents} 
                                 user={user} 
                                 teams={teams}
                                 handleDeleteEvent={handleDeleteEvent} 
