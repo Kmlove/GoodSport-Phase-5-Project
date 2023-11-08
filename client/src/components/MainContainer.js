@@ -221,8 +221,8 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
         } else if (user.is_admin === false){
             eventsToDisplay = futureEventsCheck? futureEventsPlayer.sort(compareEventsByDate) : user.team.events.sort(compareEventsByDate)
         }
-
-        const homePageEvents = user.is_admin ? futureEventsCoach : futureEventsPlayer
+        
+        const homePageEvents = user.is_admin ? events.filter(event => event.coach_id === user.id).sort(compareEventsByDate) : user.team.events.sort(compareEventsByDate)
 
       return (
         <div id="pageContainer">

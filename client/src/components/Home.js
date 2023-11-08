@@ -9,25 +9,25 @@ import dayjs from 'dayjs';
 function Home({events, user, teams, handleDeleteEvent, handleShowSuccessfulDeleteAlert, handleShowErrorDeleteAlert, showSuccessfulDeleteAlert, showErrorDeleteAlert}) {
   const newsStyles = {width: "fit-content", backgroundColor: "#6e41a1", padding: "8px", borderRadius: "5px"}
   
-  // const today = new Date()
-  // const day = today.getDate().toString().length === 1? `0${today.getDate()}` : today.getDate()
-  // const month = (today.getMonth()+1).toString().length === 1? `0${today.getMonth()+1}` : today.getMonth()+1
-  // const todaysDate = `${today.getFullYear()}-${month}-${day}`
-  // const upcomingEvents = events.filter(event => {
-  //   const eventYear = event.date.slice(0,4)
-  //   const currYear = today.getFullYear().toString()
-  //   return eventYear === currYear
-  // }).filter(event => {
-  //   const eventMonth = event.date.slice(5,7)
-  //   const currMonth = todaysDate.slice(5,7)
-  //   return eventMonth === currMonth
-  // }).filter(event => {
-  //   const eventDay = event.date.slice(8,10)
-  //   const currDay = todaysDate.slice(8,10)
-  //   return eventDay >= currDay
-  // })
+  const today = new Date()
+  const day = today.getDate().toString().length === 1? `0${today.getDate()}` : today.getDate()
+  const month = (today.getMonth()+1).toString().length === 1? `0${today.getMonth()+1}` : today.getMonth()+1
+  const todaysDate = `${today.getFullYear()}-${month}-${day}`
+  const upcomingEvents = events.filter(event => {
+    const eventYear = event.date.slice(0,4)
+    const currYear = today.getFullYear().toString()
+    return eventYear === currYear
+  }).filter(event => {
+    const eventMonth = event.date.slice(5,7)
+    const currMonth = todaysDate.slice(5,7)
+    return eventMonth === currMonth
+  }).filter(event => {
+    const eventDay = event.date.slice(8,10)
+    const currDay = todaysDate.slice(8,10)
+    return eventDay >= currDay
+  })
 
-  const homePageEvents = events.slice(0,3)
+  const homePageEvents = upcomingEvents.slice(0,3)
   const [ sportsNewsArticles, setSportsNewsArticles ] = useState([])
   
   const randomIndex = Math.floor(Math.random() * sportsNewsArticles.length)
