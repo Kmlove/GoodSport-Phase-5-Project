@@ -22,6 +22,10 @@
   background: #845bbb;
 }
 
+.past-date {
+  opacity: .4;
+}
+
 body {
   width: 100vw;
   height: 100vh;
@@ -44,6 +48,7 @@ body {
 .right {
   width: 88%;
   overflow-y: scroll;
+  position: relative;
 }
 
 /* Header styles */
