@@ -19,6 +19,12 @@ GoodSport is a sports team schedule management app that will allow users to be a
 - DELETE:
   * Delete an event
   * Delete a user account
+  * 
+## Stretch Goals
+- Tab for workout videos and drills that players can do
+- An interapp message feature
+- Users (Coaches and Players) can RSVP to events
+- Coach can create individual player evaluations that are associated with a appropriate player account and can be viewed and commented on by the player
 
 ## Relationships
 - A `Team` has many `Coach`es through `Event`
@@ -50,12 +56,6 @@ GoodSport is a sports team schedule management app that will allow users to be a
 
 ## Wireframe
 ![GoodSport Landing Page Wireframe](./images/GoodSport%20Wireframe.png)
-
-## Stretch Goals
-- Tab for workout videos and drills that players can do
-- An interapp message feature
-- Users (Coaches and Players) can RSVP to events
-- Coach can create individual player evaluations that are associated with a appropriate player account and can be viewed and commented on by the player
 
 ## API Routes
 - GET '/user'
