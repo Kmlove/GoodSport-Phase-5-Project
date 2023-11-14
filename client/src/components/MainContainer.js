@@ -13,13 +13,13 @@ import Player from "./Player";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
 
 function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
-    const [events, setEvents] = useState([])
-    const [teams, setTeams] = useState([])
+    const [ events, setEvents ] = useState([])
+    const [ teams, setTeams ] = useState([])
     const [ filterScheduleEventsValue, setFilterScheduleEventsValue ] = useState(0)
     const [ futureEventsCheck, setFutureEventsCheck ] = useState(true)
-    const [showSuccessfulDeleteAlert, setShowSuccessfulDeleteAlert] = useState(false)
-    const [showErrorDeleteAlert, setShowErrorDeleteAlert] = useState(false)
-    const [showSuccessfulAddAlert, setShowSuccessfulAddAlert] = useState(false)
+    const [ showSuccessfulDeleteAlert, setShowSuccessfulDeleteAlert ] = useState(false)
+    const [ showErrorDeleteAlert, setShowErrorDeleteAlert ] = useState(false)
+    const [ showSuccessfulAddAlert, setShowSuccessfulAddAlert ] = useState(false)
     const [ deleteError, setDeleteError ] = useState(false)
     const mainContainer = document.querySelector('#mainPageContainer')
     const popup = document.querySelector('#delete-account-popup')
