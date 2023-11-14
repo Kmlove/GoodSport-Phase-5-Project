@@ -1,7 +1,10 @@
 # GoodSport
 
 ## Description
-GoodSport is a sports team management app that will allow users to be added to a team, and view all events (games, practices, meetings, etc..) that are associated with their team. Admin users (coaches and managers) can add, update and delete events. 
+GoodSport is a sports team schedule management app that will allow users to be added to a team, and view all events (games, practices, meetings, etc..) that are associated with their team. Admin users (coaches and managers) can add, update and delete events. 
+
+## GoodSport Demo Video
+[GoodSport Project Presentation](https://youtu.be/6Iu1r8glT7M)
 
 ## CRUD
 - CREATE:
@@ -37,9 +40,8 @@ GoodSport is a sports team management app that will allow users to be added to a
 
 ## Validations
 - Player has a name, age and birthday
-- Player has a parent_name
-- Player has a team
-- Player age falls within team age group
+- Player has a parent_name and unique parent_email
+- Player belongs to a team
 - Coach has a name and club_id
 - Team has a club_id, age_group, and a unique name
 - Event has a team_id, coach_id, type and start_time
@@ -53,6 +55,7 @@ GoodSport is a sports team management app that will allow users to be added to a
 - Tab for workout videos and drills that players can do
 - An interapp message feature
 - Users (Coaches and Players) can RSVP to events
+- Coach can create individual player evaluations that are associated with a appropriate player account and can be viewed and commented on by the player
 
 ## API Routes
 - GET '/user'
@@ -64,6 +67,5 @@ GoodSport is a sports team management app that will allow users to be added to a
 - GET '/event/int:id'
 - PATCH '/event/int:id'
 - DELETE '/event/int:id'
-- POST '/team'
 - GET '/team'
 - GET '/team/int:id'
