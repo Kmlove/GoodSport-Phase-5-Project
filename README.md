@@ -20,7 +20,7 @@ GoodSport is a sports team schedule management app that will allow users to be a
   * Delete an event
   * Delete a user account
   * 
-## Stretch Goals
+## Stretch Goals / Future Features
 - Tab for workout videos and drills that players can do
 - An interapp message feature
 - Users (Coaches and Players) can RSVP to events
