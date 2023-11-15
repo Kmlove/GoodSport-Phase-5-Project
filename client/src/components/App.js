@@ -6,12 +6,12 @@ import MainContainer from "./MainContainer";
 import { LoggedOutContext } from "../context/loggedOut";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
 import sportsBalls from "../IMAGES/photo-sports-balls.jpg"
+import { NEWS_API_KEY } from "../apikeys";
 
 function App() {
   const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)
   const [user, setUser] = useState('')
   const [showServerErrorAlert, setShowServerErrorAlert] = useState(false)
-
   const [loggedOut, setLoggedOut] = useState(false)
   const [deletedAccountAlert, setDeletedAccountAlert] = useState(false)
 
@@ -39,6 +39,11 @@ function App() {
     setShowServerErrorAlert(value)
   }
 
+  const [ sportsNewsArticles, setSportsNewsArticles ] = useState([])
+  
+  const randomIndex = Math.floor(Math.random() * sportsNewsArticles.length)
+  const randomNewsArticle = sportsNewsArticles[randomIndex]
+
   useEffect(() => {
     fetch('/auto_login')
       .then((res) => {
@@ -55,6 +60,12 @@ function App() {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  useEffect(() => {
+    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${NEWS_API_KEY}`)
+    .then(res => res.json())
+    .then(data => setSportsNewsArticles(data.articles))
+  }, [loggedInOrSignedUp])
 
   // useEffect(() => {
   //   if (showServerErrorAlert) {
@@ -76,6 +87,7 @@ function App() {
             handleLoginorSignUp={handleLoginorSignUp} 
             user={user} 
             handleUpdateUser={handleUpdateUser}
+            newsArticle={randomNewsArticle}
           /> 
           :(
             <>

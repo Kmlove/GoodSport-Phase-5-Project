@@ -12,7 +12,7 @@ import Team from "./Team";
 import Player from "./Player";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
 
-function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
+function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle}) {
     const [ events, setEvents ] = useState([])
     const [ teams, setTeams ] = useState([])
     const [ filterScheduleEventsValue, setFilterScheduleEventsValue ] = useState(0)
@@ -254,6 +254,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser}) {
                                 handleShowErrorDeleteAlert={handleShowErrorDeleteAlert}
                                 showSuccessfulDeleteAlert={showSuccessfulDeleteAlert}
                                 showErrorDeleteAlert={showErrorDeleteAlert}
+                                newsArticle={newsArticle}
                             />
                         } 
                     />
