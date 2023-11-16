@@ -1,0 +1,8 @@
+#message-container {
+    border: 1px solid red;
+    width: 75%;
+    max-width: 950px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}

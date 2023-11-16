@@ -11,6 +11,7 @@ import Event from "./Event";
 import Team from "./Team";
 import Player from "./Player";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
+import Messaging from "./Messaging";
 
 function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle}) {
     const [ events, setEvents ] = useState([])
@@ -331,6 +332,11 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
                     <Route
                         path="/players/:id"
                         element={<Player />}
+                    />
+
+                    <Route 
+                        path="/messaging"
+                        element={<Messaging />}
                     />
                 </Routes>
             </div>

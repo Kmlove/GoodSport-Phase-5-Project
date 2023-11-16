@@ -35,6 +35,10 @@ function NavBar({user, handleSetFilterScheduleEventsValue, handleFutureEventsChe
                 <NavLink onClick={() => {
                     handleSetFilterScheduleEventsValue(0)
                     handleFutureEventsCheck(true)
+                }} to="/messaging">Messaging</NavLink>
+                <NavLink onClick={() => {
+                    handleSetFilterScheduleEventsValue(0)
+                    handleFutureEventsCheck(true)
                 }} to="/account">Account</NavLink>
             </nav>
         </div>               
