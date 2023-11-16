@@ -14,7 +14,7 @@ function App() {
   const [showServerErrorAlert, setShowServerErrorAlert] = useState(false)
   const [loggedOut, setLoggedOut] = useState(false)
   const [deletedAccountAlert, setDeletedAccountAlert] = useState(false)
-
+  
   function handleChangeLoggedOutAlert(value){
     setLoggedOut(value)
   }

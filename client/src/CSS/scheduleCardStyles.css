@@ -114,9 +114,10 @@
     width: 60%;
     max-width: 850px;
     text-align: left;
-    position: relative;
     transition: transform 0.2s ease-in-out;
     border-left: 8px solid #845BB3;
+    position: relative;
+    left: 20px;
 }
   
 .scheduleCard p {

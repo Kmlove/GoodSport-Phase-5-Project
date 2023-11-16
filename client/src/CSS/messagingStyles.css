@@ -1,8 +1,113 @@
 #message-container {
-    border: 1px solid red;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    /* padding: 20px; */
+    margin: 0 auto;
+    box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.2);
     width: 75%;
     max-width: 950px;
-    margin: 0 auto;
+    height: 85vh;
     display: flex;
     justify-content: center;
+}
+
+#conversations-container {
+    border-right: 1px solid #ccc;
+    width: 40%;
+    overflow-x: auto;
+}
+
+#conversations-display-container {
+    width: 60%;
+}
+
+.messages-subheaders {
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    color: #845BB3;
+}
+
+#controlled-tab-example {
+    border: 1px solid red;
+}
+
+.block-tabs {
+    display: flex;
+    align-items: center;
+    color: #845BB3;
+    height: 61px;
+    font-weight: bold;
+    font-size: 18px;
+    position: relative;
+}
+
+#font-awesome {
+    position: absolute;
+    right: 15px;
+}
+
+#font-awesome:hover {
+    cursor: pointer;
+}
+
+.tabs {
+    border-bottom: 1px solid #ccc;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    position: relative;
+}
+
+.tabs:hover {
+    cursor: pointer;
+    background-color: #d0bdf4;
+}
+
+.block-tabs .active-tabs {
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid transparent;
+}
+
+.active-tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 1px);
+    height: 5px;
+    background-color: #845BB3;
+    
+}
+
+.active-tabs.contacts::before {
+    border-top-left-radius: 10px;
+}
+
+.block-tabs::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: calc(100% - 263px);
+    height: 1px;
+    border-bottom: 1px solid #ccc;
+}
+
+.content {
+    background-color: #fff;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.active-content {
+    display: block;
 }

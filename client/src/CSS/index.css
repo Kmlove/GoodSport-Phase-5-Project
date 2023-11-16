@@ -41,7 +41,9 @@ body {
 }
 
 #mainPageContainer {
-  height: calc(97vh - 100px);
+  /* height: calc(97vh - 100px); */
+  height: 100vh;
+  padding-bottom: 10px;
   display: flex;
 }
 
