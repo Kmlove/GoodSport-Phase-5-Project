@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
-import "../CSS/messagingStyles.css"
 // In your JavaScript file
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import { Tab, Nav, Tabs } from 'react-bootstrap'
+import React, { useState } from 'react'
+import "../CSS/messagingStyles.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { Tab, Nav, Tabs } from 'react-bootstrap'
+import CoachContacts from './CoachContacts';
+import PlayerContacts from './PlayerContacts'
 
 const CONVERSATIONS_KEY = "conversations"
 const CONTACTS_KEY = "contacts"
 
-function Messaging() {
+function Messaging({user, teams}) {
   const [toggleState, setToggleState] = useState(1);
 
   return (
@@ -34,8 +36,8 @@ function Messaging() {
               </div>
 
               <div className='content-container'>
-                <div className={toggleState === 1? 'content active-content' : 'content'}>
-                  <p>Contacts</p>
+                <div id="contacts" className={toggleState === 1? 'content active-content' : 'content'}>
+                  {user.is_admin? <CoachContacts user={user} teams={teams}/> : <PlayerContacts />}
                 </div>
 
                 <div className={toggleState === 2? 'content active-content' : 'content'}>

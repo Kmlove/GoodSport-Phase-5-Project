@@ -336,7 +336,12 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
 
                     <Route 
                         path="/messaging"
-                        element={<Messaging />}
+                        element={
+                            <Messaging
+                                user={user}
+                                teams={teams}
+                            />
+                        }
                     />
                 </Routes>
             </div>
