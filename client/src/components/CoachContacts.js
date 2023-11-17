@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function CoachContacts({user, teams}) {
+function CoachContacts({user, teams, activePlayer, handleSetActivePlayer}) {
+
+    // const [ activePlayer, setActivePlayer ] = useState("")
 
     const unique_team_ids = []
     for (let i=0; i < user.teams.length; i++){
@@ -19,27 +21,24 @@ function CoachContacts({user, teams}) {
         }
     }
 
-    // Gets team names for the coach
-    const teamContacts = myTeams.map(team => <p className='coach-contact'>{`Team - ${team.team_name}`}</p>)
-    // Gets all the player names associated with the coach
+    // Gets all the player associated with the coach
     const contacts = myTeams.map(team => {
-        return team.players.map(player => player.player_name)
+        return team.players.map(player => player)
     })
-    // Turns an array of arrays of names into a single array with the names as elements
-    const combinedNames = []
+    // Turns an array of nested arrays of player objs into a single array of all the player objs
+    const combinedPlayers = []
     for (const array of contacts){
-        for (const name of array){
-            combinedNames.push(name)
+        for (const player of array){
+            combinedPlayers.push(player)
         }
     }
-
-    // Sorts the names by last name
-    const sortedByLastName =  combinedNames.sort((a, b) => {
-        const nameA = a
+    // Sorts the player objs by last name
+    const sortedByLastName =  combinedPlayers.sort((a, b) => {
+        const nameA = a.player_name
         const nameAArray = nameA.split(" ")
         const nameALastName = nameAArray[nameAArray.length-1]
 
-        const nameB = b
+        const nameB = b.player_name
         const nameBArray = nameB.split(" ")
         const nameBLastName = nameBArray[nameBArray.length-1]
 
@@ -52,7 +51,22 @@ function CoachContacts({user, teams}) {
         return 0;
     })
 
-    const playerContacts = sortedByLastName.map(name => <p className='coach-contact'>{name}</p>)
+    const playerContacts = sortedByLastName.map(player => (
+        <p 
+            key={player.id}
+            className={activePlayer === player.id? 'active-player coach-contact' : 'coach-contact'}
+            onClick={() => handleSetActivePlayer(player.id)}
+        >{player.player_name}</p>
+    ))
+
+    // Gets team names for the coach
+    const teamContacts = myTeams.map(team => (
+        <p 
+            key={team.id}
+            className={activePlayer === team.team_name? 'active-player coach-contact' : 'coach-contact'}
+            onClick={() => handleSetActivePlayer(team.team_name)}
+        ><span style={{fontWeight: "bold"}}>TEAM - </span>{team.team_name}</p>
+    ))
 
   return (
     <>

@@ -13,6 +13,11 @@ const CONTACTS_KEY = "contacts"
 
 function Messaging({user, teams}) {
   const [toggleState, setToggleState] = useState(1);
+  const [ activePlayer, setActivePlayer ] = useState("")
+
+  function handleSetActivePlayer(value){
+    setActivePlayer(value)
+  }
 
   return (
     <div className='right'>
@@ -30,14 +35,26 @@ function Messaging({user, teams}) {
                 <div 
                   className={toggleState === 2? 'tabs active-tabs' : 'tabs'}
                   style={{borderRight:"1px solid #ccc"}}
-                  onClick={() => setToggleState(2)}
+                  onClick={() => {
+                    setToggleState(2)
+                    setActivePlayer("")
+                    document.querySelector('#contacts').scrollTop = 0
+                  }}
                 >Conversations</div>
                 <span className='icon-color' id="font-awesome"><FontAwesomeIcon icon={faPenToSquare} size='lg'/></span>
               </div>
 
               <div className='content-container'>
                 <div id="contacts" className={toggleState === 1? 'content active-content' : 'content'}>
-                  {user.is_admin? <CoachContacts user={user} teams={teams}/> : <PlayerContacts />}
+                  {user.is_admin? 
+                    <CoachContacts 
+                      user={user} 
+                      teams={teams}
+                      handleSetActivePlayer={handleSetActivePlayer}
+                      activePlayer={activePlayer}
+                    /> 
+                    : 
+                    <PlayerContacts />}
                 </div>
 
                 <div className={toggleState === 2? 'content active-content' : 'content'}>
@@ -48,7 +65,7 @@ function Messaging({user, teams}) {
             </div>
 
             <div id="conversations-display-container">
-              <div className='messages-subheaders'>
+              <div className='messages-subheaders' style={{height: "61px"}}>
                 <h3>Conversations Display</h3>
               </div>
             </div>
