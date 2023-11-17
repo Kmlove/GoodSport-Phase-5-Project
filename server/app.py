@@ -218,7 +218,7 @@ api.add_resource(PlayersById, '/players/<int:id>')
 
 class Teams(Resource):
     def get(self):
-        teams = [team.to_dict(rules=('-events', '-players', '-club')) for team in Team.query.all()]
+        teams = [team.to_dict(rules=('-events', '-club')) for team in Team.query.all()]
         return make_response(teams, 200)
     
     def post(self):
@@ -232,7 +232,7 @@ class Teams(Resource):
             )
             db.session.add(new_team)
             db.session.commit()
-            new_team_dict = new_team.to_dict(rules=('-events', '-players', '-club_id'))
+            new_team_dict = new_team.to_dict(rules=('-events', '-club_id'))
             return make_response(new_team_dict, 201)
         except ValueError as error:
             response = jsonify({"Validation Error": [str(error)]})
