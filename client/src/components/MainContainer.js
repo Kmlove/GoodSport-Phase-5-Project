@@ -12,6 +12,7 @@ import Team from "./Team";
 import Player from "./Player";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
 import Messaging from "./Messaging";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle}) {
     const [ events, setEvents ] = useState([])
@@ -26,6 +27,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
     const popup = document.querySelector('#delete-account-popup')
     const navigate = useNavigate()
     const { handleDeleteAccountAlert } = useContext(DeleteAlertContext)
+    const [ lsuser, setUser ] = useLocalStorage("user", user)
 
     useEffect(() => {
         fetch('/events')

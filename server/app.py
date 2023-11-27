@@ -5,6 +5,7 @@ from datetime import datetime
 # Remote library imports
 from flask import request, make_response, jsonify, session
 from flask_restful import Resource, Api
+from flask_socketio import SocketIO, send
 
 # Local imports
 from config import app, db
@@ -13,6 +14,9 @@ from models.club import Club
 from models.event import Event
 from models.player import Player
 from models.team import Team
+
+# Instantiate Flask-SocketIO
+socketio = SocketIO(app)
 
 # Instantiate REST API
 api = Api(app)
@@ -430,6 +434,12 @@ class Logout(Resource):
         session['is_admin'] = None
         return make_response({}, 204)
 api.add_resource(Logout, '/logout')
+
+@socketio.on('message')
+def message(data):
+    print(f"\n\n{data}\n\n")
+    send(data)
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

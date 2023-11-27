@@ -7,16 +7,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import CoachContacts from './CoachContacts';
 import PlayerContacts from './PlayerContacts'
-
-const CONVERSATIONS_KEY = "conversations"
-const CONTACTS_KEY = "contacts"
+import { Input, Form, Button } from 'antd'
 
 function Messaging({user, teams}) {
-  const [toggleState, setToggleState] = useState(1);
+  const { TextArea } = Input
+  const [ toggleState, setToggleState ] = useState(1);
   const [ activePlayer, setActivePlayer ] = useState("")
+  const [ message, setMessage ] = useState("")
 
   function handleSetActivePlayer(value){
     setActivePlayer(value)
+  }
+
+  function handleMessageSend(){
+    console.log(message)
+    console.log(activePlayer)
+
+    //sendMessage(activePlayer, message)
+
+    setMessage("")
   }
 
   return (
@@ -41,7 +50,11 @@ function Messaging({user, teams}) {
                     document.querySelector('#contacts').scrollTop = 0
                   }}
                 >Conversations</div>
-                <span className='icon-color' id="font-awesome"><FontAwesomeIcon icon={faPenToSquare} size='lg'/></span>
+                <span 
+                  className='icon-color' 
+                  id="font-awesome"
+                  onClick={""}
+                ><FontAwesomeIcon icon={faPenToSquare} size='lg'/></span>
               </div>
 
               <div className='content-container'>
@@ -67,6 +80,34 @@ function Messaging({user, teams}) {
             <div id="conversations-display-container">
               <div className='messages-subheaders' style={{height: "61px"}}>
                 <h3>Conversations Display</h3>
+              </div>
+              <div id="convsersation-form-container-div">
+                <div id="conversation">
+                  <p>Convo....</p>
+                </div>
+                <Form id='conversation-form' onFinish={handleMessageSend}>
+                  <Form.Item>
+                    <TextArea 
+                      rows={6} 
+                      placeholder='Write a message...'
+                      style={{resize: 'none'}} 
+                      className='message-form-textarea'
+                      value={message}
+                      onChange={e => setMessage(e.target.value)}
+                    />
+                  </Form.Item>
+
+                  <Form.Item
+                    wrapperCol={{
+                      offset: 8,
+                      span: 16,
+                    }}
+                  >
+                    <Button type="primary" htmlType="submit" className='button' style={{width: "150px"}}>
+                      Send
+                    </Button>
+                  </Form.Item>
+                </Form>
               </div>
             </div>
         </div>

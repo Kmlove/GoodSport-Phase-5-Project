@@ -55,6 +55,8 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
     }
 
     function handleLogoutClick(e){
+      localStorage.removeItem('GoodSport-user')
+
         fetch('/logout', {
           method: "DELETE",
         })
