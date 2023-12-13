@@ -197,8 +197,8 @@ function EventForm({teams, user, addNewEvent, handleShowSuccessfulAddAlert}) {
         </Form.Item>
 
         <Form.Item  wrapperCol={{offset: 10}}>
-          <Button type="primary" htmlType="submit" className='button' style={{width: "125px"}}>
-            Submit
+          <Button type="primary" htmlType="submit" className='button add-event' style={{width: "125px"}}>
+            Add Event
           </Button>
         </Form.Item>
       </Form>

@@ -25,6 +25,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
     const popup = document.querySelector('#delete-account-popup')
     const navigate = useNavigate()
     const { handleDeleteAccountAlert } = useContext(DeleteAlertContext)
+    const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
     useEffect(() => {
         fetch('/events')
@@ -57,6 +58,18 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
             return () => clearTimeout(timer);
         }
     }, [ showSuccessfulDeleteAlert, showErrorDeleteAlert ]);
+
+    useEffect(() => {
+        const handleResize = () => {
+          setViewportWidth(window.innerWidth);
+        };
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     function handleShowSuccessfulAddAlert(value){
         setShowSuccessfulAddAlert(value)
@@ -234,12 +247,17 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
                 </div>
             </div>
 
-            <Header />
+            <Header 
+                viewportWidth={viewportWidth}
+                handleSetFilterScheduleEventsValue={handleSetFilterScheduleEventsValue} 
+                handleFutureEventsCheck={handleFutureEventsCheck} 
+            />
             <div id="mainPageContainer">
                 <NavBar 
                     handleSetFilterScheduleEventsValue={handleSetFilterScheduleEventsValue} 
                     user={user}
                     handleFutureEventsCheck={handleFutureEventsCheck}
+                    viewportWidth={viewportWidth}
                 />
                 <Routes>
                     <Route 

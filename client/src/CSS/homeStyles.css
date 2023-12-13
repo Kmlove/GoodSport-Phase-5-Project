@@ -16,6 +16,7 @@
 }
 
 /* Sports New Styles */
+
 #sports-news-container:not(#news-text) {
     position: relative;
     background-color: #fff;
@@ -77,5 +78,53 @@
     background-color: #a18fbe;
     text-decoration: none;
 }
-  
+
+#home-page-schedule {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 /* Ends Sports New Styles */
+
+/* Responsive styles */
+
+@media screen and (max-width: 1280px){
+
+    #sports-news-container {
+        width: 60% !important;
+        height: 350px !important;
+    }
+
+    .ant-image img {
+        border: 1px solid green;
+        height: 300px !important;
+    }
+
+    #home-page-schedule {
+        position: relative;
+        left: -100px;
+    }
+}
+
+@media screen and (max-width: 430px){
+
+    #news-text {
+        height: 200px;
+    }
+
+    #sports-news-container {
+        width: 80% !important;
+        height: 200px !important;
+    }
+
+    #news-text p:not(#article-title) {
+        display: none;
+    }
+
+    #home-page-schedule {
+        left: 0;
+    }
+
+}

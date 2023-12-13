@@ -108,3 +108,34 @@ strong:hover::after {
     background-color: #D0BDf4 !important;
     text-decoration: none;
 }
+
+@media screen and (max-width: 430px) {
+    .event-details {
+        max-width: none;
+        width: 95%;
+        margin-top: 40px;
+    }
+
+    .form-item {
+        width: 95%;
+    }
+    
+    .value {
+        font-size: 16px;
+    }
+
+    strong {
+        font-size: 1em;
+    }
+
+    .event-delete-button, .event-edit-button {
+        width: 140px;
+        height: 30px;
+        font-size: 1rem;
+    }
+
+    .edit-event-submit-button {
+        position: relative;
+        left: -40px;
+    }
+}

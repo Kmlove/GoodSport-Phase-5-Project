@@ -89,7 +89,7 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
         {showSuccessfulDeleteAlert? <Alert className="alert-top" message="Event Successfully Deleted" type="success" banner showIcon /> : null}
         {showErrorDeleteAlert? <Alert className="alert-top" message="An error occured deleting the event, please try again later!" type="error" banner showIcon /> : null}
         
-        <div>
+        <div id="schedule-card-container">
           <h3 className="schedule-subheader">{futureEventsCheck? "Upcoming Events:" : "All Events:"}</h3>
 
           {events.map(event => (

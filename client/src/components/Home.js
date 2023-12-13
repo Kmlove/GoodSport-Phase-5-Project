@@ -100,22 +100,23 @@ function Home({events, user, teams, handleDeleteEvent, handleShowSuccessfulDelet
   
         {showSuccessfulDeleteAlert? <Alert className="alert-top" message="Event Successfully Deleted" type="success" banner showIcon /> : null}
         {showErrorDeleteAlert? <Alert className="alert-top" message="An error occured deleting the event, please try again later!" type="error" banner showIcon /> : null}
-  
-        {homePageEvents.map(event => (
-          <ScheduleCard 
-            key={event.id}
-            event={event}
-            user={user}
-            teams={teams}
-            handleDeleteEvent={handleDeleteEvent}
-            handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert}
-            handleShowErrorDeleteAlert={handleShowErrorDeleteAlert}
-          />) 
-        )}
+        
+        <div id='home-page-schedule'>
+          {homePageEvents.map(event => (
+            <ScheduleCard 
+              key={event.id}
+              event={event}
+              user={user}
+              teams={teams}
+              handleDeleteEvent={handleDeleteEvent}
+              handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert}
+              handleShowErrorDeleteAlert={handleShowErrorDeleteAlert}
+            />) 
+          )}
+        </div>
       </div>
     )
   }
-  
   
 }
 

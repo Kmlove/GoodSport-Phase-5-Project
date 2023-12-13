@@ -190,3 +190,49 @@
 #ball {
     width: 85px;
 }
+
+.scheduleCard:last-of-type {
+    margin-bottom: 30px;
+}
+
+/* Responsive Styles */
+
+@media screen and (max-width: 1280px){
+    .scheduleCard {
+        position: relative;
+        left: 80px;
+    }
+
+}
+
+@media screen and (max-width: 430px) {
+    #admin-schedule-button-div {
+        gap: 10px;
+    }
+
+    #ball {
+        display: none;
+    }
+
+    .scheduleCard {
+        width: 90%;
+        left: 0;
+        margin-bottom: 15px;
+    }
+
+    .scheduleCard a {
+        width: 45%;
+        font-size: 14px;
+    }
+
+    #schedule-card-container {
+        position: relative;
+        top: 180px;
+        padding-bottom: 5px;
+    }
+
+    button.button.add-event {
+        position: relative;
+        left: -40px;
+    }
+}

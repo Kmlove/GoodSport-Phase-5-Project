@@ -43,6 +43,7 @@ body {
 #mainPageContainer {
   height: calc(97vh - 100px);
   display: flex;
+  margin-top: 110px;
 }
 
 .right {
@@ -51,54 +52,6 @@ body {
   position: relative;
 }
 
-/* Header styles */
-.header {
-  background-color: #fff; 
-  color: #ecf0f1; /* Text color */
-  padding: 20px;
-  text-align: center;
-  border-bottom: 1px solid #ccc;
-  width: 100vw;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  height: 120px;
-  overflow: hidden;
-}
-
-.logo {
-  display: block;
-  width: 200px;
-}
-
-.app-title {
-  font-size: 45px;
-  font-weight: bold;
-  margin: 10px 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.good {
-  color: #845BB3;
-}
-
-.sport {
-  color: #D0BDF4;
-}
-
-/* End Header styles*/
-
-.containerHeaders {
-  border-bottom: 1px solid #ccc;
-  padding: 10px 0px 25px 25px;
-  font-size: 28px;
-  color: #845BB3;
-}
 
 .alert {
   margin-bottom: 20px;
@@ -106,4 +59,26 @@ body {
 
 .alert-top {
   margin-top: 20px;
+}
+
+@media screen and (max-width: 1280px){
+
+  #mainPageContainer {
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 430px){
+
+  #mainPageContainer {
+    margin-top: 0;
+  }
+
+  .right {
+    width: 100vw;
+    position: relative;
+    top: 90px;
+    overflow-x: hidden;
+  }
+
 }
