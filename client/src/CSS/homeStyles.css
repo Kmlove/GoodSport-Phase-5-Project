@@ -98,8 +98,10 @@
     }
 
     .ant-image img {
-        border: 1px solid green;
-        height: 300px !important;
+        height: 320px !important;
+        width: 500px !important;
+        position: relative;
+        left: 0px;
     }
 
     #home-page-schedule {
@@ -109,6 +111,24 @@
 
     #home-page-schedule div {
         width: 75%;
+    }
+}
+
+@media screen and (max-width: 830px){
+    .ant-image img {
+        height: 300px !important;
+        width: 450px !important;
+        position: relative;
+        left: -30px;
+    }
+}
+
+@media screen and (max-width: 770px){
+    .ant-image img {
+        height: 300px !important;
+        width: 420px !important;
+        position: relative;
+        left: -45px;
     }
 }
 
@@ -133,6 +153,14 @@
 
     #home-page-schedule div {
         width: 90%;
+    }
+
+    .ant-image img {
+        height: 200px !important;
+        width: 300px !important;
+        position: relative;
+        left: -110px;
+        top: -20px;
     }
 
 }

@@ -1,7 +1,7 @@
 .navBarContainer {
     border-right: 1px solid #ccc;
     max-width: 300px;
-    width: 13%;
+    width: 14%;
     text-align: center;
     padding-top: 50px;
     height: 100%;
@@ -26,6 +26,7 @@
 .navBarContainer h3 {
     font-size: 25px;
     color: #845BB3;
+    padding: 5px;
 }
   
 .navBar {
@@ -98,12 +99,11 @@
 
     .navBarContainer {
         padding-top: 100px;
-        width: 15%;
+        width: 16%;
     }
 }
 
 @media screen and (max-width: 430px){
-
     .navBar {
         padding-top: 10px;
         padding-bottom: 20px;

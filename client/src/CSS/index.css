@@ -61,15 +61,14 @@ body {
   margin-top: 20px;
 }
 
+/* Responsive Styles */
 @media screen and (max-width: 1280px){
-
   #mainPageContainer {
     height: 100vh;
   }
 }
 
 @media screen and (max-width: 430px){
-
   #mainPageContainer {
     margin-top: 0;
   }
@@ -80,5 +79,4 @@ body {
     top: 90px;
     overflow-x: hidden;
   }
-
 }

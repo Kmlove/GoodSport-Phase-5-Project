@@ -9,11 +9,6 @@
     position: absolute;
     top: 0;
     z-index: 1;
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px; */
-    /* height: 120px; */
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -33,11 +28,11 @@
   
 .logo {
     display: block;
-    width: 200px;
+    width: 180px;
 }
   
 .app-title {
-    font-size: 45px;
+    font-size: 55px;
     font-weight: bold;
     margin: 10px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -71,13 +66,29 @@
 /* End Header styles*/
 
 /* Responsive styles*/
-@media screen and (max-width: 430px){
+@media screen and (max-width: 915px){
+    .logo {
+      width: 140px;
+    }
+}
+
+@media screen and (max-width: 770px){
     .header {
       height: 100px;
     }
+    
+    .logo {
+      width: 125px;
+    }
+    
+    .app-title {
+      font-size: 50px;
+    }
+}
 
+@media screen and (max-width: 430px){
     #header-content-container {
-        gap: 10px;
+        gap: 12px;
     }
     
     .logo {
