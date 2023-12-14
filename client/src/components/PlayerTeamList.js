@@ -20,7 +20,7 @@ function PlayerTeamList({user}) {
         const {age_group, club, gender, players, team_name, coaches} = currTeam
 
         return (
-            <div className="right">
+            <div >
                 <div className="teamsHeaders">
                     <h2 id="my-team-header">My Team</h2>
                     <h3>{team_name} - <span id="age-group">{gender === "F"? `G${age_group}`: age_group}</span></h3>
