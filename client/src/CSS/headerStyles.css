@@ -1,0 +1,146 @@
+/* Header styles */
+.header {
+    background-color: #fff; 
+    color: #ecf0f1; /* Text color */
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    width: 100vw;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#header-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin: 0;
+    height: 120px;
+    overflow: hidden;
+}
+  
+.logo {
+    display: block;
+    width: 180px;
+}
+  
+.app-title {
+    font-size: 55px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+  
+.good {
+    color: #845BB3;
+}
+  
+.sport {
+    color: #D0BDF4;
+}
+  
+.containerHeaders {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0px 25px 25px;
+    font-size: 28px;
+    color: #845BB3;
+    position: relative;
+}
+
+#navBarButton {
+    display: none;
+}
+
+#navBarButton:hover {
+    cursor: pointer;
+    background-color: #D0BDF4;
+}
+
+.header-login {
+  background-color: #fff; 
+  color: #ecf0f1; /* Text color */
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  width: 100vw;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+  
+/* End Header styles*/
+
+/* Responsive styles*/
+@media screen and (max-width: 915px){
+    .logo {
+      width: 140px;
+    }
+}
+
+@media screen and (max-width: 770px){
+    .header {
+      height: 100px;
+    }
+    
+    .logo {
+      width: 125px;
+    }
+    
+    .app-title {
+      font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 430px){
+    #header-content-container {
+        gap: 12px;
+    }
+    
+    .logo {
+      width: 75px;
+    }
+    
+    .app-title {
+      font-size: 35px;
+    }
+  
+    .right {
+      width: 100%;
+    }
+  
+    #navBarButton {
+      display: block;
+      height: 30px;
+      width: 40px;
+      border: none;
+      margin-bottom: 5px;
+      background-color: #fff; 
+    }
+
+    .header-login {
+      gap: 15px;
+      height: 70px;
+    }
+}
+
+@media screen and (max-width: 330px){
+  .logo {
+    width: 55px;
+  }
+
+  .app-title {
+    font-size: 30px;
+  }
+} 

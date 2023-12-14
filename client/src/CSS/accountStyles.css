@@ -100,3 +100,35 @@
     background-color: #D0BDf4;
     text-decoration: none;
 }
+
+/* Responsive Styles */
+@media screen and (max-width: 915px) {
+
+    #coach-account-form {
+        width: 90%;
+    }
+
+    #player-account-form {
+        width: 90%;
+    }
+
+}
+
+
+@media screen and (max-width: 430px) {
+    #account-buttons-container {
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    #coach-account-form button {
+        position: relative;
+        left: -30px;
+    }
+
+    #player-account-form button {
+        position: relative;
+        left: -30px;
+    } 
+
+}

@@ -9,7 +9,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin-left: 15px; */
 
     /* Font styles */
     font-size: 12px;
@@ -27,8 +26,6 @@
     flex-direction: column;
     width: fit-content;
     gap: 10px;
-    /* margin-top: 15px;
-    margin-left: 15px; */
 }
 
 .ant-select-selector {
@@ -190,4 +187,71 @@
 
 #ball {
     width: 85px;
+}
+
+.scheduleCard:last-of-type {
+    margin-bottom: 30px;
+}
+
+/* Responsive Styles */
+
+@media screen and (max-width: 1440px){
+    .scheduleCard {
+        position: relative;
+        left: 100px;
+    }
+}
+
+@media screen and (max-width: 920px){
+    .scheduleCard {
+        position: relative;
+        left: 115px;
+        width: 65%;
+    }
+
+    .scheduleCard a {
+        width: 35%;
+    }
+}
+
+
+@media screen and (max-width: 880px) {
+    #admin-schedule-button-div {
+        gap: 10px;
+    }
+
+    .scheduleCard {
+        width: 90%;
+        left: 0;
+        margin-bottom: 15px;
+    }
+
+    #schedule-card-container {
+        position: relative;
+        top: 180px;
+        padding-bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+
+    #ball {
+        display: none;
+    }
+
+    .scheduleCard a {
+        width: 45%;
+        font-size: 14px;
+    }
+
+    #schedule-card-container {
+        position: relative;
+        top: 180px;
+        padding-bottom: 5px;
+    }
+
+    button.button.add-event {
+        position: relative;
+        left: -40px;
+    }
 }
