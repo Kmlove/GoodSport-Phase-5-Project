@@ -93,7 +93,7 @@
 @media screen and (max-width: 1280px){
 
     #sports-news-container {
-        width: 60% !important;
+        width: 70% !important;
         height: 350px !important;
     }
 
@@ -104,7 +104,11 @@
 
     #home-page-schedule {
         position: relative;
-        left: -100px;
+        left: -80px;
+    }
+
+    #home-page-schedule div {
+        width: 75%;
     }
 }
 
@@ -125,6 +129,10 @@
 
     #home-page-schedule {
         left: 0;
+    }
+
+    #home-page-schedule div {
+        width: 90%;
     }
 
 }

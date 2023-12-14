@@ -144,6 +144,24 @@
 }
 
 /* Responsive Styles */
+@media  screen and (max-width: 1025px) {
+    #playersContainer {
+        width: 92%;
+    }
+}
+
+
+@media  screen and (max-width: 915px) {
+
+    #playersContainer {
+        width: 95%;
+    }
+
+    .coachTeam a {
+        width: 35%;
+    }
+}
+
 @media  screen and (max-width: 430px) {
     .coachTeam a {
         width: 45%;

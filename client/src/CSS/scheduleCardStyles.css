@@ -197,27 +197,50 @@
 
 /* Responsive Styles */
 
-@media screen and (max-width: 1280px){
+@media screen and (max-width: 1440px){
     .scheduleCard {
         position: relative;
-        left: 80px;
+        left: 100px;
     }
 
 }
 
-@media screen and (max-width: 430px) {
-    #admin-schedule-button-div {
-        gap: 10px;
+@media screen and (max-width: 920px){
+    .scheduleCard {
+        position: relative;
+        left: 115px;
+        width: 65%;
     }
 
-    #ball {
-        display: none;
+    .scheduleCard a {
+        width: 35%;
+    }
+}
+
+
+@media screen and (max-width: 880px) {
+    #admin-schedule-button-div {
+        gap: 10px;
     }
 
     .scheduleCard {
         width: 90%;
         left: 0;
         margin-bottom: 15px;
+    }
+
+    #schedule-card-container {
+        position: relative;
+        top: 180px;
+        padding-bottom: 5px;
+    }
+
+}
+
+@media screen and (max-width: 430px) {
+
+    #ball {
+        display: none;
     }
 
     .scheduleCard a {

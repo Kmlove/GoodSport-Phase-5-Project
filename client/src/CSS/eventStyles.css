@@ -109,11 +109,18 @@ strong:hover::after {
     text-decoration: none;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 1000px){
     .event-details {
         max-width: none;
-        width: 95%;
+        width: 90%;
         margin-top: 40px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .event-details {
+        width: 95%;
+        
     }
 
     .form-item {
