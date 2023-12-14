@@ -5,6 +5,10 @@ from sqlalchemy import MetaData
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Define metadata, instantiate db
 convention = {
@@ -19,12 +23,18 @@ metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 
 # Instantiate app and set attributes
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../client/build',
+    template_folder='../client/build'
+)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URI")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
-app.secret_key = b'(\x18\x8a>Z)\xcfeQ\xc4\xcd|Rnw\xf9'
+app.secret_key = os.environ.get("SECRET_KEY")
 
 db.init_app(app)
 

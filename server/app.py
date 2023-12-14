@@ -3,7 +3,7 @@
 from datetime import datetime
 
 # Remote library imports
-from flask import request, make_response, jsonify, session
+from flask import request, make_response, jsonify, session, render_template
 from flask_restful import Resource, Api
 
 # Local imports
@@ -20,8 +20,9 @@ api = Api(app)
 # Views go here!
 
 @app.route('/')
-def index():
-    return '<h1>Project Server</h1>'
+@app.route('/<int:id>')
+def index(id=0):
+    return render_template("index.html")
 
 class Coaches(Resource):
     def get(self):
