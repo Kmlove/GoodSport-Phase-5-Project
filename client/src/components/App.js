@@ -62,7 +62,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${NEWS_API_KEY}`)
+    // fetch(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${NEWS_API_KEY}`)
+    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`)
     .then(res => res.json())
     .then(data => setSportsNewsArticles(data.articles))
   }, [loggedInOrSignedUp])

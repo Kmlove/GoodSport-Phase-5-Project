@@ -51,7 +51,8 @@ function CoachAccount({user, handleUpdateUser, handleServerError, handlePassword
     const formData = new FormData()
     formData.append('file', info.file)
     formData.append('upload_preset', 'bvspu3zv')
-    formData.append('api_key', CLOUDINARY_API_KEY)
+    formData.append('api_key', process.env.REACT_APP_CLOUDINARY_API_KEY)
+    // formData.append('api_key', CLOUDINARY_API_KEY)
 
     // Make a POST request to Cloudinary for image upload
     fetch('https://api.cloudinary.com/v1_1/kmlovecloud/image/upload', {
