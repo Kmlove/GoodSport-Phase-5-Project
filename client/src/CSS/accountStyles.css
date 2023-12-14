@@ -114,7 +114,6 @@
 
 }
 
-
 @media screen and (max-width: 430px) {
     #account-buttons-container {
         justify-content: center;
@@ -131,4 +130,31 @@
         left: -30px;
     } 
 
+}
+
+/* Responsive Styles */
+@media  screen and (max-width: 1025px) {
+    #delete-account-popup {
+        left: 35%;
+    }
+}
+
+@media  screen and (max-width: 770px) {
+    #delete-account-popup {
+        left: 25%;
+    }
+}
+
+@media  screen and (max-width: 425px) {
+    #delete-account-popup {
+        left: 35px;
+        margin-right: 10px;
+    }
+}
+
+@media  screen and (max-width: 375px) {
+    #delete-account-popup {
+        left: 10px;
+        margin-right: 10px;
+    }
 }
