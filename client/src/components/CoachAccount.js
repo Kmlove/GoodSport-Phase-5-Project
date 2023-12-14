@@ -2,7 +2,7 @@ import "../CSS/accountStyles.css"
 import { Form, Input, Button, Upload, Progress } from 'antd';
 import { useState } from "react";
 import { InboxOutlined } from '@ant-design/icons';
-import { CLOUDINARY_API_KEY } from "../apikeys";
+// import { CLOUDINARY_API_KEY } from "../apikeys";
 
 function CoachAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, rightContainer}) {
   // const prefixSelector = (

@@ -6,7 +6,7 @@ import MainContainer from "./MainContainer";
 import { LoggedOutContext } from "../context/loggedOut";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
 import sportsBalls from "../IMAGES/photo-sports-balls.jpg"
-import { NEWS_API_KEY } from "../apikeys";
+// import { NEWS_API_KEY } from "../apikeys";
 
 function App() {
   const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)

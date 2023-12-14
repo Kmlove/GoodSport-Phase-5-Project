@@ -3,7 +3,7 @@ import { Form, Input, Button, DatePicker, InputNumber, Upload, Progress } from '
 import { InboxOutlined } from '@ant-design/icons';
 import { useState } from "react";
 import dayjs from "dayjs";
-import { CLOUDINARY_API_KEY } from "../apikeys";
+// import { CLOUDINARY_API_KEY } from "../apikeys";
 
 function PlayerAccount({user, handleUpdateUser, handleServerError, handlePasswordError, handleSucessfulUpdate, rightContainer}) {
 
