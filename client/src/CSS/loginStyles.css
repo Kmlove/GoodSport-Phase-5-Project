@@ -9,6 +9,8 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    position: relative;
+    top: 130px;
 }
   
 .form {
@@ -78,4 +80,12 @@
 .signup-button:hover {
     background-color: #D0BDf4;
     text-decoration: none;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 430px) {
+    #login {
+        top: 60px;
+        width: 95%;
+    }
 }

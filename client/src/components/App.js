@@ -91,7 +91,7 @@ function App() {
           /> 
           :(
             <>
-              <header className="header">
+              <header className="header-login">
                 <img className="logo" src={sportsBalls} alt="Sports Balls Array" />
                 <h1 className="app-title"><span className="good">Good</span><span className="sport">Sport</span></h1>
                 <img className="logo" src={sportsBalls} alt="Sports Balls Array" />

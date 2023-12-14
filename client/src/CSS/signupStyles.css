@@ -3,13 +3,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 30px auto 20px auto;
+    margin: 30px auto 150px auto;
     max-width: 600px;
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    position: relative;
+    top: 130px;
 }
 
 #signup-player, #signup-coach{
@@ -75,4 +77,21 @@
 
 #switch {
     background-color: #845BB3;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 430px) {
+    
+}
+
+@media screen and (max-width: 430px) {
+    #signups {
+        top: 60px;
+        width: 95%;
+        font-size: 14px;;
+    }
+
+    #signup-player .input, #signup-coach .input  {
+        font-size: 12px;
+    }
 }

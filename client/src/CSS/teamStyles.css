@@ -180,3 +180,10 @@
         width: 95%;
     }
 }
+
+@media  screen and (max-width: 430px) {
+    .coachTeam a {
+        width: 50%;
+        font-size: 12px;
+    }
+}
