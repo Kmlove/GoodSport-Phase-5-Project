@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import MainContainer from "./MainContainer";
@@ -14,6 +14,7 @@ function App() {
   const [showServerErrorAlert, setShowServerErrorAlert] = useState(false)
   const [loggedOut, setLoggedOut] = useState(false)
   const [deletedAccountAlert, setDeletedAccountAlert] = useState(false)
+  const navigate = useNavigate()
 
   function handleChangeLoggedOutAlert(value){
     setLoggedOut(value)
@@ -52,6 +53,7 @@ function App() {
       .then((data) => {
         setUser(data)
         handleLoginorSignUp(true)
+        navigate('/home')
       })
       .catch((error) => console.error(error));
   }, []);
