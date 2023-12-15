@@ -69,9 +69,13 @@
     display: block;
     position: absolute;
     right: 15px;
-    bottom: 15px;
+    bottom: 23px;
     padding: 10px;
     border-radius: 5px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #read-more:hover {
@@ -148,7 +152,18 @@
     }
 }
 
-@media screen and (max-width: 430px){
+@media screen and (max-width: 600px) {
+    #read-more {
+        top: 23px;
+        height: 30px;
+    }
+
+    #article-title {
+        font-size: 19px;
+    }
+}
+
+@media screen and (max-width: 434px){
 
     #news-text {
         height: 200px;
@@ -177,6 +192,14 @@
         position: relative;
         left: -110px;
         top: -20px;
+    }
+
+    #read-more {
+        top: 160px;
+    }
+
+    #article-title {
+        font-size: 18px;
     }
 
 }
