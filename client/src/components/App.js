@@ -39,12 +39,6 @@ function App() {
     setShowServerErrorAlert(value)
   }
 
-  // Needed when not using context for news article data
-  // const [ sportsNewsArticles, setSportsNewsArticles ] = useState([])
-  // console.log(sportsNewsArticles)
-  // const randomIndex = Math.floor(Math.random() * sportsNewsArticles.length)
-  // const randomNewsArticle = sportsNewsArticles[randomIndex]
-
   useEffect(() => {
     fetch('/auto_login')
       .then((res) => {
@@ -61,33 +55,6 @@ function App() {
       })
       .catch((error) => console.error(error));
   }, []);
-
-  // News API but couldn't can only use in development not deployment
-  // useEffect(() => {
-  //   // fetch(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${NEWS_API_KEY}`)
-  //   fetch(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`)
-  //   .then(res => res.json())
-  //   .then(data => setSportsNewsArticles(data.articles))
-  // }, [loggedInOrSignedUp])
-
-  // News API to use in deployment
-  // useEffect(() => {
-  //   fetch(`https://newsdata.io/api/1/news?apikey=${process.env.REACT_APP_NEWS_API_KEY_2}&country=us&language=en&category=sports`)
-  //   .then(res => res.json())
-  //   .then(data => setSportsNewsArticles(data.results))
-  // }, [loggedInOrSignedUp])
-
-  // useEffect(() => {
-  //   if (showServerErrorAlert) {
-  //     // Use a setTimeout to hide the alert after 5 seconds
-  //     const timer = setTimeout(() => {
-  //       setShowServerErrorAlert(false);
-  //     }, 5000); // 5000 milliseconds (5 seconds)
-
-  //     // Clear the timer if the component unmounts
-  //     return () => clearTimeout(timer);
-  //   } 
-  // }, [ showServerErrorAlert ]);
 
   return (
     <DeleteAlertContext.Provider value={{deletedAccountAlert, handleDeleteAccountAlert}}>
