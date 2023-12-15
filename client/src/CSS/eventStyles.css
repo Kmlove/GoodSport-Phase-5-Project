@@ -5,7 +5,6 @@
     padding: 20px;
     margin: 20px auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: 'Cursive', cursive; /* Use a custom or Google Font here */
     max-width: 75%;
     height: fit-content;
 }
@@ -22,9 +21,9 @@
 }
   
 .value{
-    font-size: 20px;
+    font-size: 18px;
     color: #D0BDF4;
-    font-family: 'Pacifico', cursive; /* Another custom or Google Font for exciting text */
+    font-family: Georgia, 'Times New Roman', Times, serif; /* Another custom or Google Font for exciting text */
     letter-spacing: 1px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -70,7 +69,7 @@ strong:hover::after {
 }
   
 .event-delete-button, .event-edit-button {
-    width: 175px;
+    width: 165px;
     height: 30px;
     font-weight: bold;
     color: #fff;
@@ -79,7 +78,10 @@ strong:hover::after {
     border: none;
     border-radius: 8px;
     transition: all ease-in-out 0.2s;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
   
 .event-delete-button:hover, .event-edit-button:hover {
@@ -113,6 +115,21 @@ strong:hover::after {
     }
 }
 
+@media screen and (max-width: 8000px){
+    .value {
+        font-size: 16px;
+    }
+    
+    strong {
+        font-size: 1.1em;
+    }
+
+    .event-delete-button, .event-edit-button {
+        width: 155px;
+        font-size: 1.1rem;
+    }
+}
+
 @media screen and (max-width: 430px) {
     .event-details {
         width: 95%;
@@ -123,7 +140,7 @@ strong:hover::after {
     }
     
     .value {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     strong {
@@ -132,7 +149,6 @@ strong:hover::after {
 
     .event-delete-button, .event-edit-button {
         width: 140px;
-        height: 30px;
         font-size: 1rem;
     }
 
