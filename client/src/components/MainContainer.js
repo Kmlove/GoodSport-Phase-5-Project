@@ -261,6 +261,22 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
                 />
                 <Routes>
                     <Route 
+                        path="/" 
+                        element={
+                            <Home 
+                                events={homePageEvents} 
+                                user={user} 
+                                teams={teams}
+                                handleDeleteEvent={handleDeleteEvent} 
+                                handleShowSuccessfulDeleteAlert={handleShowSuccessfulDeleteAlert}
+                                handleShowErrorDeleteAlert={handleShowErrorDeleteAlert}
+                                showSuccessfulDeleteAlert={showSuccessfulDeleteAlert}
+                                showErrorDeleteAlert={showErrorDeleteAlert}
+                                newsArticle={newsArticle}
+                            />
+                        } 
+                    />
+                    <Route 
                         path="/home" 
                         element={
                             <Home 
