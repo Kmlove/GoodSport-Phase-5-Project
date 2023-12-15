@@ -277,7 +277,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
                         } 
                     />
                     <Route 
-                        path="/teams" 
+                        path="/team" 
                         element={
                             <TeamsList 
                                 user={user}
@@ -343,11 +343,11 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
                         } 
                     />
                     <Route
-                        path="/teams/:id"
+                        path="/team/:id"
                         element={<Team />}
                     />
                     <Route
-                        path="/players/:id"
+                        path="/player/:id"
                         element={<Player />}
                     />
                 </Routes>

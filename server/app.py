@@ -21,6 +21,13 @@ api = Api(app)
 
 @app.route('/')
 @app.route('/<int:id>')
+@app.route('/home')
+@app.route('/team')
+@app.route('/team/<int:id>')
+@app.route('/schedule')
+@app.route('/account')
+@app.route('/event/new')
+@app.route('/event/<int:id>')
 def index(id=0):
     return render_template("index.html")
 

@@ -8,7 +8,7 @@ function TeamListCard({team}) {
       <div className="coachTeam">
         <p><strong>Team Name:</strong> <span className="value">{team_name}</span></p>
         <p><strong>Age Group:</strong> <span className="value">{gender === "F"? `G${age_group}` : age_group}</span></p>
-        <Link to={`/teams/${id}`}>See more...</Link>
+        <Link to={`/team/${id}`}>See more...</Link>
       </div>
   )
 }

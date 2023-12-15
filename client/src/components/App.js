@@ -53,7 +53,7 @@ function App() {
       .then((data) => {
         setUser(data)
         handleLoginorSignUp(true)
-        navigate('/home')
+        // navigate('/home')
       })
       .catch((error) => console.error(error));
   }, []);

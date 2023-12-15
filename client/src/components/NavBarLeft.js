@@ -27,7 +27,7 @@ function NavBarLeft({user, handleSetFilterScheduleEventsValue, handleFutureEvent
                 <NavLink onClick={() => {
                     handleSetFilterScheduleEventsValue(0)
                     handleFutureEventsCheck(true)
-                }} to="/teams">Teams</NavLink>
+                }} to="/team">Teams</NavLink>
                 <NavLink onClick={() => {
                     handleSetFilterScheduleEventsValue(0)
                     handleFutureEventsCheck(true)

@@ -31,7 +31,7 @@ function NavBarSmallScreen({user, handleSetFilterScheduleEventsValue, handleFutu
                     handleSetFilterScheduleEventsValue(0)
                     handleFutureEventsCheck(true)
                     handleCloseNavBar()
-                }} to="/teams">Teams</NavLink>
+                }} to="/team">Teams</NavLink>
                 <NavLink onClick={() => {
                     handleSetFilterScheduleEventsValue(0)
                     handleFutureEventsCheck(true)
