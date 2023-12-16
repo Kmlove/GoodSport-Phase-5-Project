@@ -15,6 +15,12 @@ function App() {
   const [loggedOut, setLoggedOut] = useState(false)
   const [deletedAccountAlert, setDeletedAccountAlert] = useState(false)
 
+  // Needed when not using context for news article data
+  // const [ sportsNewsArticles, setSportsNewsArticles ] = useState([])
+  // console.log(sportsNewsArticles)
+  // const randomIndex = Math.floor(Math.random() * sportsNewsArticles.length)
+  // const randomNewsArticle = sportsNewsArticles[randomIndex]
+
   function handleChangeLoggedOutAlert(value){
     setLoggedOut(value)
   }
@@ -55,6 +61,21 @@ function App() {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  // News API but couldn't can only use in development not deployment
+  // useEffect(() => {
+  //   // fetch(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${NEWS_API_KEY}`)
+  //   fetch(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`)
+  //   .then(res => res.json())
+  //   .then(data => setSportsNewsArticles(data.articles))
+  // }, [loggedInOrSignedUp])
+
+  // News API to use in deployment if not using news context
+  // useEffect(() => {
+  //   fetch(`https://newsdata.io/api/1/news?apikey=${process.env.REACT_APP_NEWS_API_KEY_2}&country=us&language=en&category=sports`)
+  //   .then(res => res.json())
+  //   .then(data => setSportsNewsArticles(data.results))
+  // }, [loggedInOrSignedUp])
 
   return (
     <DeleteAlertContext.Provider value={{deletedAccountAlert, handleDeleteAccountAlert}}>
