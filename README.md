@@ -3,6 +3,9 @@
 ## Description
 GoodSport is a sports team schedule management app that will allow users to be added to a team, and view all events (games, practices, meetings, etc..) that are associated with their team. Admin users (coaches and managers) can add, update and delete events. 
 
+## GoodSport Live Site
+[GoodSport Live Site](https://goodsport-app.onrender.com)
+
 ## GoodSport Demo Video
 [GoodSport Project Presentation](https://youtu.be/6Iu1r8glT7M)
 
@@ -19,7 +22,7 @@ GoodSport is a sports team schedule management app that will allow users to be a
 - DELETE:
   * Delete an event
   * Delete a user account
-  * 
+
 ## Stretch Goals / Future Features
 - Tab for workout videos and drills that players can do
 - An interapp message feature
@@ -58,14 +61,22 @@ GoodSport is a sports team schedule management app that will allow users to be a
 ![GoodSport Landing Page Wireframe](./images/GoodSport%20Wireframe.png)
 
 ## API Routes
-- GET '/user'
-- GET '/user/int:id'
-- PATCH '/user/int:id'
-- DELETE '/user/int:id'
-- POST '/event'
-- GET '/event'
-- GET '/event/int:id'
-- PATCH '/event/int:id'
-- DELETE '/event/int:id'
-- GET '/team'
-- GET '/team/int:id'
+- GET '/coaches'
+- POST '/coaches'
+- GET '/coaches/int:id'
+- PATCH '/coaches/int:id'
+- DELETE '/coaches/int:id'
+- GET '/players'
+- POST '/players'
+- GET '/players/int:id'
+- PATCH '/players/int:id'
+- DELETE '/players/int:id'
+- POST '/events'
+- GET '/events'
+- GET '/events/int:id'
+- PATCH '/events/int:id'
+- DELETE '/events/int:id'
+- GET '/teams'
+- GET '/teams/int:id'
+- GET '/clubs'
+- GET '/clubs/int:id'
