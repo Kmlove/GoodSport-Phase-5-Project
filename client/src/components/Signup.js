@@ -4,7 +4,7 @@ import SignupPlayer from "./SignupPlayer"
 import { Switch } from 'antd';
 import "../CSS/signupStyles.css"
 
-function Signup({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert}) {
+function Signup({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert, toast}) {
   const [isPlayer, setIsPlayer] = useState(true)
   const [clubs, setClubs] = useState([])
 
@@ -13,6 +13,20 @@ function Signup({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handl
     .then(res => res.json())
     .then(clubs => setClubs(clubs))
   }, [])
+
+  function handleDisplayToast(){
+    const toast = document.querySelector('.Toastify__toast-container')
+    if(toast){
+      document.querySelector('.Toastify__toast-container').style.display='flex'
+    }
+  }
+
+  function handleHideToast(){
+    const toast = document.querySelector('.Toastify__toast-container')
+    if(toast){
+      document.querySelector('.Toastify__toast-container').style.display='none'
+    }
+  }
 
   return (
     <div id="signups">
@@ -40,6 +54,8 @@ function Signup({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handl
           clubs={clubs}
           showServerErrorAlert={showServerErrorAlert}
           handleShowServerErrorAlert={handleShowServerErrorAlert}
+          handleDisplayToast={handleDisplayToast}
+          handleHideToast={handleHideToast}
         />
         :
         <SignupPlayer
@@ -48,6 +64,8 @@ function Signup({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handl
           clubs={clubs}
           showServerErrorAlert={showServerErrorAlert}
           handleShowServerErrorAlert={handleShowServerErrorAlert}
+          handleDisplayToast={handleDisplayToast}
+          handleHideToast={handleHideToast}
         /> 
       }
     </div>

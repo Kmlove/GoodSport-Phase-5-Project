@@ -15,32 +15,32 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
     const { handleChangeLoggedOutAlert } = useContext(LoggedOutContext)
 
     useEffect(() => {
-        if (successfulUpdate) {
-          // Use a setTimeout to hide the alert after 3 seconds
-          const timer = setTimeout(() => {
-            setSuccessfulUpdate(false);
-          }, 3000); // 3000 milliseconds (3 seconds)
-    
-          // Clear the timer if the component unmounts
-          return () => clearTimeout(timer);
-        } else if (passwordError) {
-          // Use a setTimeout to hide the alert after 6 seconds
-          const timer = setTimeout(() => {
-            setPasswordError(false);
-          }, 6000); // 6000 milliseconds (6 seconds)
-    
-          // Clear the timer if the component unmounts
-          return () => clearTimeout(timer);
-        } else if (serverError) {
-          // Use a setTimeout to hide the alert after 6 seconds
-          const timer = setTimeout(() => {
-            setServerError(false);
-          }, 6000); // 6000 milliseconds (6 seconds)
-    
-          // Clear the timer if the component unmounts
-          return () => clearTimeout(timer);
-        }
-      }, [successfulUpdate, passwordError, serverError ]);
+      if (successfulUpdate) {
+        // Use a setTimeout to hide the alert after 3 seconds
+        const timer = setTimeout(() => {
+          setSuccessfulUpdate(false);
+        }, 3000); // 3000 milliseconds (3 seconds)
+  
+        // Clear the timer if the component unmounts
+        return () => clearTimeout(timer);
+      } else if (passwordError) {
+        // Use a setTimeout to hide the alert after 6 seconds
+        const timer = setTimeout(() => {
+          setPasswordError(false);
+        }, 6000); // 6000 milliseconds (6 seconds)
+  
+        // Clear the timer if the component unmounts
+        return () => clearTimeout(timer);
+      } else if (serverError) {
+        // Use a setTimeout to hide the alert after 6 seconds
+        const timer = setTimeout(() => {
+          setServerError(false);
+        }, 6000); // 6000 milliseconds (6 seconds)
+  
+        // Clear the timer if the component unmounts
+        return () => clearTimeout(timer);
+      }
+    }, [successfulUpdate, passwordError, serverError ]);
 
     function handleSucessfulUpdate(value){
         setSuccessfulUpdate(value)
@@ -54,21 +54,30 @@ function Account({handleLoginorSignUp, user, handleUpdateUser, mainContainer, po
         setServerError(value)
     }
 
+    function handleToast(){
+      const toast = document.querySelector('.Toastify__toast-container')
+      if(toast){
+        toast.style.display='flex'
+        toast.style.flexDirection = 'column';
+      }
+    }
+
     function handleLogoutClick(e){
-        fetch('/logout', {
-          method: "DELETE",
-        })
-        .then(() => {
-          handleChangeLoggedOutAlert(true)
-          handleLoginorSignUp(false)
-          navigate('/')
-        })
-      }
+      fetch('/logout', {
+        method: "DELETE",
+      })
+      .then(() => {
+        handleChangeLoggedOutAlert(true)
+        handleLoginorSignUp(false)
+        handleToast()
+        navigate('/')
+      })
+    }
     
-      function handleDeleteAccount(e){
-        mainContainer.classList.add("blur")
-        popup.classList.remove("hidden")
-      }
+    function handleDeleteAccount(e){
+      mainContainer.classList.add("blur")
+      popup.classList.remove("hidden")
+    }
 
   return (
     <div className="right">

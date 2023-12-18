@@ -5,8 +5,12 @@ import Login from "./Login";
 import MainContainer from "./MainContainer";
 import { LoggedOutContext } from "../context/loggedOut";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
+import { DemoCoachLoginComponent, DemoPlayerLoginComponent } from "./DemoComponents";
 import sportsBalls from "../IMAGES/photo-sports-balls.jpg"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 // import { NEWS_API_KEY } from "../apikeys";
+
 
 function App() {
   const [loggedInOrSignedUp, setLoggedInOrSignedUp] = useState(false)
@@ -45,6 +49,17 @@ function App() {
     setShowServerErrorAlert(value)
   }
 
+  function loginDetails() {
+    toast.info(<DemoCoachLoginComponent />, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: false
+    })
+    toast.info(<DemoPlayerLoginComponent />, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: false
+    })
+}
+
   useEffect(() => {
     fetch('/auto_login')
       .then((res) => {
@@ -60,6 +75,8 @@ function App() {
         handleLoginorSignUp(true)
       })
       .catch((error) => console.error(error));
+
+    loginDetails()
   }, []);
 
   // News API but couldn't can only use in development not deployment
@@ -104,6 +121,7 @@ function App() {
                       handleSetUser={handleSetUser}
                       showServerErrorAlert={showServerErrorAlert}
                       handleShowServerErrorAlert={handleShowServerErrorAlert}
+                      toast={toast}
                     />
                   } 
                 />
@@ -115,13 +133,14 @@ function App() {
                       handleSetUser={handleSetUser}
                       showServerErrorAlert={showServerErrorAlert}
                       handleShowServerErrorAlert={handleShowServerErrorAlert}
+                      toast={toast}
                     />
                   } 
                 />
               </Routes>
             </>
           )}  
-
+        <ToastContainer />
       </LoggedOutContext.Provider>
     </DeleteAlertContext.Provider >
   );

@@ -5,7 +5,7 @@ import "../CSS/loginStyles.css"
 import { LoggedOutContext } from "../context/loggedOut";
 import { DeleteAlertContext } from "../context/deleteAccountAlert";
 
-function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert}) {
+function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert, toast}) {
   const navigate = useNavigate()
   const [form] = Form.useForm()
   const initialValue = {
@@ -17,6 +17,13 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
   const { loggedOut, handleChangeLoggedOutAlert } = useContext(LoggedOutContext)
   const { deletedAccountAlert, handleDeleteAccountAlert } = useContext(DeleteAlertContext)
 
+
+  function handleToast(){
+    const toast = document.querySelector('.Toastify__toast-container')
+    if(toast){
+      toast.style.display='none'
+    }
+  }
 
   function handleChange(e){
     const {name, value} = e.target
@@ -59,6 +66,7 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
       handleShowServerErrorAlert(false)
       handleSetUser(data)
       handleLoginorSignUp(true)
+      handleToast()
       navigate('/home')
     })
     .catch(err => console.error(err))
@@ -148,6 +156,7 @@ function Login({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handle
             handleChangeLoggedOutAlert(false)
             handleDeleteAccountAlert(false)
             handleShowServerErrorAlert(false)
+            handleToast()
             navigate('/signup')
           }} 
           className="signup-button"

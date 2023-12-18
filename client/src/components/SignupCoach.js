@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Form, Input, Button, Select, Alert } from 'antd';
 
-function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerErrorAlert, handleShowServerErrorAlert}) {
+function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerErrorAlert, handleShowServerErrorAlert, handleDisplayToast, handleHideToast}) {
   const { Option } = Select
   const initialValue = {
     club_id: "",
@@ -68,6 +68,7 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
     .then(data => {
       handleSetUser(data)
       handleLoginorSignUp(true)
+      handleHideToast()
       navigate('/home')
     })
     .catch(err => console.error("Error: ", err))
@@ -266,6 +267,7 @@ function SignupCoach({handleSetUser, handleLoginorSignUp, clubs, showServerError
         <button 
           onClick={() => {
             handleShowServerErrorAlert(false)
+            handleDisplayToast()
             navigate('/')
           }} 
           className="login-button"

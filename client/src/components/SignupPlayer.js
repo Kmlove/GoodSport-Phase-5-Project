@@ -3,7 +3,7 @@ import { Cascader, Form, Input, Button, Select, DatePicker, Alert } from 'antd';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 
-function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert}) {
+function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErrorAlert, handleShowServerErrorAlert, handleDisplayToast, handleHideToast}) {
   const initialValue = {
     team_id: "",
     birthday: "",
@@ -104,6 +104,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
     .then(data => {
       handleSetUser(data)
       handleLoginorSignUp(true)
+      handleHideToast()
       navigate('/home')
     })
     .catch(err => console.error("Error: ", err))
@@ -377,6 +378,7 @@ function SignupPlayer({clubs, handleLoginorSignUp, handleSetUser, showServerErro
         <button 
           onClick={() => {
             handleShowServerErrorAlert(false)
+            handleDisplayToast()
             navigate('/')
           }} 
           className='login-button'
