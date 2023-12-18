@@ -21,6 +21,7 @@ api = Api(app)
 
 @app.route('/')
 @app.route('/<int:id>')
+@app.route('/signup')
 @app.route('/home')
 @app.route('/team')
 @app.route('/team/<int:id>')
