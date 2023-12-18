@@ -31,7 +31,7 @@
         font-size: 14px;
         gap: 10px;
         position: relative;
-        bottom: 60px !important;
+        bottom: 55px !important;
         left: 10px !important;
     }
 }
@@ -45,10 +45,14 @@
 @media screen and (max-width: 375px) {
     .Toastify__toast-container {
         width: 300px !important;
-        height: 250px;
+        height: 230px;
         font-size: 12px;
         gap: 5px;
-        top: 448px !important; /* Adjust the top position as needed */
+        bottom: 2px !important;
+    }
+
+    .Toastify__toast-container div {
+        padding-top: 0;
     }
     
     #custom-toast p:last-of-type {

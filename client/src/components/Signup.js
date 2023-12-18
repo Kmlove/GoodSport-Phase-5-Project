@@ -17,14 +17,15 @@ function Signup({handleLoginorSignUp, handleSetUser, showServerErrorAlert, handl
   function handleDisplayToast(){
     const toast = document.querySelector('.Toastify__toast-container')
     if(toast){
-      document.querySelector('.Toastify__toast-container').style.display='flex'
+      toast.style.display='flex'
+      toast.style.flexDirection = 'column';
     }
   }
 
   function handleHideToast(){
     const toast = document.querySelector('.Toastify__toast-container')
     if(toast){
-      document.querySelector('.Toastify__toast-container').style.display='none'
+      toast.style.display='none'
     }
   }
 
