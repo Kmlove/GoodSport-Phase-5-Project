@@ -484,10 +484,10 @@ if __name__ == '__main__':
     with app.app_context():
         print("Starting seed...")
         # Seed code goes here!
-        Team.query.delete()
         Event.query.delete()
-        Coach.query.delete()
         Player.query.delete()
+        Team.query.delete()
+        Coach.query.delete()
         Club.query.delete()
 
         print('Seeding clubs...')
