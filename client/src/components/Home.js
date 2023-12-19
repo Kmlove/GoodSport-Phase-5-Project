@@ -18,15 +18,27 @@ function Home({events, user, teams, handleDeleteEvent, handleShowSuccessfulDelet
   const upcomingEvents = events.filter(event => {
     const eventYear = event.date.slice(0,4)
     const currYear = today.getFullYear().toString()
-    return eventYear === currYear
+    return eventYear >= currYear
   }).filter(event => {
-    const eventMonth = event.date.slice(5,7)
-    const currMonth = todaysDate.slice(5,7)
-    return eventMonth === currMonth
+    const eventYear = event.date.slice(0,4)
+    const currYear = today.getFullYear().toString()
+    if(eventYear > currYear){
+      return eventYear > currYear
+    } else {
+      const eventMonth = event.date.slice(5,7)
+      const currMonth = todaysDate.slice(5,7)
+      return eventMonth >= currMonth
+    }
   }).filter(event => {
-    const eventDay = event.date.slice(8,10)
-    const currDay = todaysDate.slice(8,10)
-    return eventDay >= currDay
+    const eventYear = event.date.slice(0,4)
+    const currYear = today.getFullYear().toString()
+    if(eventYear > currYear){
+      return eventYear > currYear
+    } else {
+      const eventDay = event.date.slice(8,10)
+      const currDay = todaysDate.slice(8,10)
+      return eventDay >= currDay
+    }
   })
 
   const homePageEvents = upcomingEvents.slice(0,3)
