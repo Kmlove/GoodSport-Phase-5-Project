@@ -1,9 +1,9 @@
 import CoachTeamList from "./CoachTeamList";
 import PlayerTeamList from "./PlayerTeamList";
 
-function TeamsList({user, teams, events}) {
+function TeamsList({ user, teams }) {
 
-  if (user.is_admin === true && events.length === 0){
+  if (user.is_admin === true && user.teams.length === 0){
     return (
         <div className="right">
             <h2 className="containerHeaders">My Teams</h2>
@@ -13,7 +13,7 @@ function TeamsList({user, teams, events}) {
   } else {
     return (
       <div className="right">
-        {user.is_admin? <CoachTeamList user={user} teams={teams} events={events}/> : <PlayerTeamList user={user}/>}
+        {user.is_admin? <CoachTeamList user={user} teams={teams} /> : <PlayerTeamList user={user}/>}
       </div>
     )
   }

@@ -50,7 +50,7 @@ function Home({events, user, teams, handleDeleteEvent, handleShowSuccessfulDelet
         <h3>Loading...</h3>
       </div>
     )
-  } else if (events.length === 0) {
+  } else if (events.length === 0 || homePageEvents.length === 0) {
     const formattedDate = dayjs(newsArticle.pubDate.slice(0,10)).format('MM/DD/YYYY')
 
     return (
@@ -85,7 +85,7 @@ function Home({events, user, teams, handleDeleteEvent, handleShowSuccessfulDelet
     )
   } else {
     const formattedDate = dayjs(newsArticle.pubDate.slice(0,10)).format('MM/DD/YYYY')
-
+    
     return (
       <div className="right">
         <h2 className="containerHeaders">Home</h2>

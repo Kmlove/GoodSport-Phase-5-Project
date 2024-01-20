@@ -1,5 +1,5 @@
 import ScheduleCard from "./ScheduleCard";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import React from 'react';
 import { Alert, Select, Checkbox } from 'antd';
 
@@ -72,7 +72,7 @@ function Schedule({events, user, teams, handleDeleteEvent, handleShowSuccessfulD
             </div>
           </div>
         ) : null}
-        <h4 className="no-upcoming" style={user.is_admin? {position: "relative", top: "220px"} : {}}>You Have No Upcoming Events...</h4>
+        <h4 className="no-upcoming" style={user.is_admin? {position: "relative", top: "220px"} : {position: "relative", top: "80px"}}>You Have No Upcoming Events...</h4>
       </div>
     )
   } else {

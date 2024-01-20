@@ -10,12 +10,14 @@ function ScheduleCard({event, user, teams, handleDeleteEvent, handleShowSuccessf
   const formattedDate = dayjs(date).format('MM-DD-YYYY')
 
   const today = new Date();
-  const currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
-  const currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+  let currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
+  let currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
   const currYear = today.getFullYear();
   const eventYear = parseInt(date.slice(0, 4), 10); // Convert to an integer
   const eventMonth = parseInt(date.slice(5, 7), 10); // Convert to an integer
-  const eventDay = date.slice(8, 10);
+  const eventDay = parseInt(event.date.slice(8, 10), 10); // Convert to an integer
+  currDay = typeof(currDay) === 'number'? currDay : parseInt(currDay, 10)
+  currMonth = typeof(currMonth) === 'number'? currMonth : parseInt(currMonth, 10)
 
   let futureDate;
   if (eventYear > currYear || (eventYear === currYear && eventMonth > currMonth)) {

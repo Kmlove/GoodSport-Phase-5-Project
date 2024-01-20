@@ -1,7 +1,8 @@
 import TeamListCard from "./TeamListCard"
 
-function CoachTeamList({user, teams, events}) {
-    const team_ids = events.map(event => event.team_id)
+function CoachTeamList({ user, teams }) {
+
+    const team_ids = user.teams.map(team => team.id)
     const unique_team_ids = []
     for (let i=0; i < team_ids.length; i++){
         const num = team_ids[i]
@@ -18,6 +19,7 @@ function CoachTeamList({user, teams, events}) {
             }
         }
     }
+
   return (
     <>
         <h2 className="containerHeaders">My Teams</h2>

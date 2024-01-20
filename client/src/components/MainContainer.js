@@ -187,12 +187,14 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
         if(futureEventsCheck && user.is_admin){
             futureEventsCoach = events.filter(event => {
                 const today = new Date();
-                const currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
-                const currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+                let currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
+                let currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
                 const currYear = today.getFullYear();
                 const eventYear = parseInt(event.date.slice(0, 4), 10); // Convert to an integer
                 const eventMonth = parseInt(event.date.slice(5, 7), 10); // Convert to an integer
-                const eventDay = event.date.slice(8, 10);
+                const eventDay = parseInt(event.date.slice(8, 10), 10); // Convert to an integer
+                currDay = typeof(currDay) === 'number'? currDay : parseInt(currDay, 10)
+                currMonth = typeof(currMonth) === 'number'? currMonth : parseInt(currMonth, 10)
               
                 if (eventYear > currYear || (eventYear === currYear && eventMonth > currMonth)) {
                   return true;
@@ -207,13 +209,15 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
         if(futureEventsCheck && user.is_admin === false){
             futureEventsPlayer = user.team.events.filter(event => {
                 const today = new Date();
-                const currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
-                const currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+                let currDay = today.getDate().toString().length === 1 ? `0${today.getDate()}` : today.getDate();
+                let currMonth = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
                 const currYear = today.getFullYear();
                 const eventYear = parseInt(event.date.slice(0, 4), 10); // Convert to an integer
                 const eventMonth = parseInt(event.date.slice(5, 7), 10); // Convert to an integer
-                const eventDay = event.date.slice(8, 10);
-              
+                const eventDay = parseInt(event.date.slice(8, 10), 10);
+                currDay = typeof(currDay) === 'number'? currDay : parseInt(currDay, 10)
+                currMonth = typeof(currMonth) === 'number'? currMonth : parseInt(currMonth, 10)
+                
                 if (eventYear > currYear || (eventYear === currYear && eventMonth > currMonth)) {
                   return true;
                 } else if (eventYear === currYear && eventMonth === currMonth && eventDay >= currDay) {
@@ -298,7 +302,6 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
                             <TeamsList 
                                 user={user}
                                 teams={teams}
-                                events={eventsToDisplay} 
                             />
                         } 
                     />
