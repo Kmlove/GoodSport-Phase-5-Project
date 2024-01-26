@@ -20,6 +20,36 @@ headshots_male_players = ["https://4.bp.blogspot.com/-NOYppoNXnoA/Vl0BnGtXEFI/AA
 headshots_female_coaches = ["https://images.squarespace-cdn.com/content/v1/5f4506ee3afb2b7624880125/1656426869152-0A0FYQ2BFKVIWA8PJOFA/working-mom-role.jpg", "https://beruckstudios.com/wp-content/uploads/bb-plugin/cache/CFO-Headshot-portrait.jpg"]
 headshots_male_coaches = ["https://i.pinimg.com/236x/e8/7e/a5/e87ea5f1565b458bb866112909f1a62e.jpg", "https://images.squarespace-cdn.com/content/v1/624f4bb135fbf60489e1bccf/c97c249c-eef3-402f-bacb-de2e52e2d8be/Jay+Ellis+actor+headshotsjpgweb.jpg"]
 
+def create_event_times_pm():
+    time1 = fake.random_int(min=1, max=7)
+    time1_mins = fake.random_int(min=0, max=59)
+    new_time1 = f"{time1}:{f'0{time1_mins}' if time1_mins < 10 else time1_mins} pm"
+
+    time2_mins = fake.random_int(min=0, max=59)
+    while True: 
+        time2 = fake.random_int(min=1, max=9)
+        if time2 > time1 and (time2-time1) <= 3:
+            break
+    
+    new_time2 = f"{time2}:{f'0{time2_mins}' if time2_mins < 10 else time2_mins} pm"
+
+    return f'{new_time1} - {new_time2}'
+
+def create_event_times_am():
+    time1 = fake.random_int(min=8, max=10)
+    time1_mins = fake.random_int(min=0, max=59)
+    new_time1 = f"{time1}:{f'0{time1_mins}' if time1_mins < 10 else time1_mins} am"
+
+    time2_mins = fake.random_int(min=0, max=59)
+    while True: 
+        time2 = fake.random_int(min=9, max=11)
+        if time2 > time1 and (time2-time1) <= 3:
+            break
+    
+    new_time2 = f"{time2}:{f'0{time2_mins}' if time2_mins < 10 else time2_mins} am"
+
+    return f'{new_time1} - {new_time2}'
+
 def create_clubs():
     clubs = []
 
@@ -325,114 +355,84 @@ def create_events(teams, coaches):
     events = []
 
     for _ in range(10):
-        time1 = fake.time()
-        new_time1 = time1[:-3] + " pm"
-
-        time2 = fake.time()
-        new_time2 = time2[:-3] + " pm"
 
         event = Event(
             team = teams[0],
             coach = coaches[0],
             event_type = rc(events_types),
             # date = fake.future_date(),
-            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2024, 2, 1)),
-            event_time = new_time1 + " - " + new_time2,
+            date = fake.date_between_dates(date_start=datetime(2023, 12, 1), date_end=datetime(2024, 4, 1)),
+            event_time = create_event_times_pm(),
             notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(10):
-        time1 = fake.time()
-        new_time1 = time1[:-3] + " pm"
-
-        time2 = fake.time()
-        new_time2 = time2[:-3] + " pm"
 
         event = Event(
             team = teams[0],
             coach = coaches[3],
             event_type = rc(events_types),
             # date = fake.future_date(),
-            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2024, 2, 1)),
-            event_time = new_time1 + " - " + new_time2,
+            date = fake.date_between_dates(date_start=datetime(2023, 12, 1), date_end=datetime(2024, 4, 1)),
+            event_time = create_event_times_am(),
             notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(10):
-        time1 = fake.time()
-        new_time1 = time1[:-3] + " pm"
-
-        time2 = fake.time()
-        new_time2 = time2[:-3] + " pm"
 
         event = Event(
             team = teams[4],
             coach = coaches[3],
             event_type = rc(events_types),
             # date = fake.future_date(),
-            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2024, 2, 1)),
-            event_time = new_time1 + " - " + new_time2,
+            date = fake.date_between_dates(date_start=datetime(2023, 12, 1), date_end=datetime(2024, 4, 1)),
+            event_time = create_event_times_pm(),
             notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(6):
-        time1 = fake.time()
-        new_time1 = time1[:-3] + " pm"
-
-        time2 = fake.time()
-        new_time2 = time2[:-3] + " pm"
 
         event = Event(
             team = teams[1],
             coach = coaches[1],
             event_type = rc(events_types),
             # date = fake.future_date(),
-            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2024, 2, 1)),
-            event_time = new_time1 + " - " + new_time2,
+            date = fake.date_between_dates(date_start=datetime(2023, 12, 1), date_end=datetime(2024, 4, 1)),
+            event_time = create_event_times_am(),
             notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(6):
-        time1 = fake.time()
-        new_time1 = time1[:-3] + " pm"
-
-        time2 = fake.time()
-        new_time2 = time2[:-3] + " pm"
 
         event = Event(
             team = teams[1],
             coach = coaches[2],
             event_type = rc(events_types),
             # date = fake.future_date(),
-            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2024, 2, 1)),
-            event_time = new_time1 + " - " + new_time2,
+            date = fake.date_between_dates(date_start=datetime(2023, 12, 1), date_end=datetime(2024, 4, 1)),
+            event_time = create_event_times_pm(),
             notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(6):
-        time1 = fake.time()
-        new_time1 = time1[:-3] + " pm"
-
-        time2 = fake.time()
-        new_time2 = time2[:-3] + " pm"
 
         event = Event(
             team = teams[2],
             coach = coaches[4],
             event_type = rc(events_types),
             # date = fake.future_date(),
-            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2024, 2, 1)),
-            event_time = new_time1 + " - " + new_time2,
+            date = fake.date_between_dates(date_start=datetime(2023, 12, 1), date_end=datetime(2024, 4, 1)),
+            event_time = create_event_times_am(),
             notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
@@ -440,38 +440,28 @@ def create_events(teams, coaches):
 
 
     for _ in range(6):
-        time1 = fake.time()
-        new_time1 = time1[:-3] + " pm"
-
-        time2 = fake.time()
-        new_time2 = time2[:-3] + " pm"
 
         event = Event(
             team = teams[2],
             coach = coaches[6],
             event_type = rc(events_types),
             # date = fake.future_date(),
-            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2024, 2, 1)),
-            event_time = new_time1 + " - " + new_time2,
+            date = fake.date_between_dates(date_start=datetime(2023, 12, 1), date_end=datetime(2024, 4, 1)),
+            event_time = create_event_times_pm(),
             notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
         events.append(event)
 
     for _ in range(12):
-        time1 = fake.time()
-        new_time1 = time1[:-3] + " pm"
-
-        time2 = fake.time()
-        new_time2 = time2[:-3] + " pm"
 
         event = Event(
             team = teams[3],
             coach = coaches[8],
             event_type = rc(events_types),
             # date = fake.future_date(),
-            date = fake.date_between_dates(date_start=datetime(2023, 10, 1), date_end=datetime(2024, 2, 1)),
-            event_time = new_time1 + " - " + new_time2,
+            date = fake.date_between_dates(date_start=datetime(2023, 12, 1), date_end=datetime(2024, 4, 1)),
+            event_time = create_event_times_am(),
             notes = fake.sentence(nb_words=10),
             location = fake.address()
         )
