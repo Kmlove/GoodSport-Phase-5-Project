@@ -38,6 +38,7 @@ body {
 
 #pageContainer {
   margin: 0;
+  overflow: hidden;
 }
 
 #mainPageContainer {
@@ -50,6 +51,7 @@ body {
   width: 88%;
   overflow-y: scroll;
   position: relative;
+  padding-bottom: 100px;
 }
 
 .alert {
