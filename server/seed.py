@@ -381,11 +381,10 @@ def create_events(teams, coaches):
             coach=coaches[0],
             event_type=rc(events_types),
             # date = fake.future_date(),
-            date=fake.date_between_dates(date_start=datetime(
-                2024, 4, 1), date_end=datetime(2024, 9, 1)),
-            event_time=create_event_times_pm(),
-            notes=fake.sentence(nb_words=10),
-            location=fake.address()
+            date = fake.date_between_dates(date_start=datetime(2025, 1, 1), date_end=datetime(2025, 12, 31)),
+            event_time = create_event_times_pm(),
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
         )
         events.append(event)
 
@@ -396,11 +395,10 @@ def create_events(teams, coaches):
             coach=coaches[3],
             event_type=rc(events_types),
             # date = fake.future_date(),
-            date=fake.date_between_dates(date_start=datetime(
-                2024, 4, 1), date_end=datetime(2024, 9, 1)),
-            event_time=create_event_times_am(),
-            notes=fake.sentence(nb_words=10),
-            location=fake.address()
+            date = fake.date_between_dates(date_start=datetime(2025, 1, 1), date_end=datetime(2025, 12, 31)),
+            event_time = create_event_times_am(),
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
         )
         events.append(event)
 
@@ -411,11 +409,10 @@ def create_events(teams, coaches):
             coach=coaches[3],
             event_type=rc(events_types),
             # date = fake.future_date(),
-            date=fake.date_between_dates(date_start=datetime(
-                2024, 4, 1), date_end=datetime(2024, 9, 1)),
-            event_time=create_event_times_pm(),
-            notes=fake.sentence(nb_words=10),
-            location=fake.address()
+            date = fake.date_between_dates(date_start=datetime(2025, 1, 1), date_end=datetime(2025, 12, 31)),
+            event_time = create_event_times_pm(),
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
         )
         events.append(event)
 
@@ -426,11 +423,10 @@ def create_events(teams, coaches):
             coach=coaches[1],
             event_type=rc(events_types),
             # date = fake.future_date(),
-            date=fake.date_between_dates(date_start=datetime(
-                2024, 4, 1), date_end=datetime(2024, 9, 1)),
-            event_time=create_event_times_am(),
-            notes=fake.sentence(nb_words=10),
-            location=fake.address()
+            date = fake.date_between_dates(date_start=datetime(2025, 1, 1), date_end=datetime(2025, 12, 31)),
+            event_time = create_event_times_am(),
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
         )
         events.append(event)
 
@@ -441,11 +437,10 @@ def create_events(teams, coaches):
             coach=coaches[2],
             event_type=rc(events_types),
             # date = fake.future_date(),
-            date=fake.date_between_dates(date_start=datetime(
-                2024, 4, 1), date_end=datetime(2024, 9, 1)),
-            event_time=create_event_times_pm(),
-            notes=fake.sentence(nb_words=10),
-            location=fake.address()
+            date = fake.date_between_dates(date_start=datetime(2025, 1, 1), date_end=datetime(2025, 12, 31)),
+            event_time = create_event_times_pm(),
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
         )
         events.append(event)
 
@@ -456,11 +451,10 @@ def create_events(teams, coaches):
             coach=coaches[4],
             event_type=rc(events_types),
             # date = fake.future_date(),
-            date=fake.date_between_dates(date_start=datetime(
-                2024, 4, 1), date_end=datetime(2024, 9, 1)),
-            event_time=create_event_times_am(),
-            notes=fake.sentence(nb_words=10),
-            location=fake.address()
+            date = fake.date_between_dates(date_start=datetime(2025, 1, 1), date_end=datetime(2025, 12, 31)),
+            event_time = create_event_times_am(),
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
         )
         events.append(event)
 
@@ -471,11 +465,10 @@ def create_events(teams, coaches):
             coach=coaches[6],
             event_type=rc(events_types),
             # date = fake.future_date(),
-            date=fake.date_between_dates(date_start=datetime(
-                2024, 4, 1), date_end=datetime(2024, 9, 1)),
-            event_time=create_event_times_pm(),
-            notes=fake.sentence(nb_words=10),
-            location=fake.address()
+            date = fake.date_between_dates(date_start=datetime(2025, 1, 1), date_end=datetime(2025, 12, 31)),
+            event_time = create_event_times_pm(),
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
         )
         events.append(event)
 
@@ -486,11 +479,10 @@ def create_events(teams, coaches):
             coach=coaches[8],
             event_type=rc(events_types),
             # date = fake.future_date(),
-            date=fake.date_between_dates(date_start=datetime(
-                2024, 4, 1), date_end=datetime(2024, 9, 1)),
-            event_time=create_event_times_am(),
-            notes=fake.sentence(nb_words=10),
-            location=fake.address()
+            date = fake.date_between_dates(date_start=datetime(2025, 1, 1), date_end=datetime(2025, 12, 31)),
+            event_time = create_event_times_am(),
+            notes = fake.sentence(nb_words=10),
+            location = fake.address()
         )
         events.append(event)
 
