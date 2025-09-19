@@ -17,6 +17,7 @@ function Event({handleDeleteEvent, handleUpdateEvent, user, handleShowSuccessful
       fetch(`/events/${id}`)
       .then(res => res.json())
       .then(data => setCurEvent(data))
+      .catch(error => console.error(`There was an error fetching event at id: ${id}: ${error}`))
   }, [id])
 
   useEffect(() => {

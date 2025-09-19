@@ -31,12 +31,14 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
         fetch('/events')
         .then(res => res.json())
         .then(events => setEvents(events))
+        .catch(error => console.error(`There was an error fetching events: ${error}`))
     }, [])
 
     useEffect(() => {
         fetch('/teams')
         .then(res => res.json())
         .then(teams => setTeams(teams))
+        .catch(error => console.error(`There was an error fetching teams: ${error}`))
     }, [])
 
     useEffect(() => {
@@ -92,6 +94,7 @@ function MainContainer({handleLoginorSignUp, user, handleUpdateUser, newsArticle
         fetch(`/coaches/${user.id}`)
         .then(res => res.json())
         .then(data => handleUpdateUser(data))
+        .catch(error => `There was an error fetching coach at user id: ${user.id}: ${error}`)
 
         setEvents([...events, new_event])
     }
